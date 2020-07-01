@@ -39,7 +39,6 @@ a {
 .hr {
     width: 0;
     height: 5px;
-    margin-top: 150px;
     background: $bg-grad-1;
 }
 
@@ -108,6 +107,19 @@ a {
     visibility: hidden;
 }
 
+.current-row {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 125px;
+    width: 100%;
+    .current-row-header {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+}
+
 .main-text-row {
     height: 400px;
 }
@@ -152,6 +164,7 @@ a {
 .main-pic-wrapper {
     width: 10rem;
     height: 7.5rem;
+    margin-bottom: 50px;
     &>img{
         margin: 10px;
     }
