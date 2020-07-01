@@ -25,11 +25,15 @@ export const Home = ({ post }): JSX.Element => {
     .to(".loading-animator", {duration: 2, visibility: "visible", backgroundColor: "#d9d9d9", x: 2000})
     .to(".loading-animator", {duration: 2, backgroundColor: "#f5f5f5", width: "300vw",  x: -2500}, "-=0.75")
     .to(".loading-animator", {duration: 0, display: "none"})
-    .to(".sider", {duration: 2, visibility: "visible", height: "100vh", ease: "bounce.out",}, "-=1")
-    .from(".sider-section",{duration: 0.25, x: -500, stagger: 0.5}, "-=1")
-    .to(".hr", {duration: 2, visibility: "visible", width: "100%", ease: "bounce.out",}, "-=1")
+    .to(".sider", {duration: 1.5, visibility: "visible", height: "100vh", ease: "bounce.out",}, "-=1")
+    .from(".sider-section",{duration: 0.25, x: -500, stagger: 0.1, ease: "back.out(2)"}, "-=1")
+    .from(".sider-btn",{duration: 0.25, transform: "rotateY(180deg)", stagger: 0.05},"-=0.25")
+    .from(".sider-divider", {duration: 0.5, y: -1000, stagger: 0.5, ease: "elastic.out(1,0.30)"})
+    .to(".hr", {duration: 2, visibility: "visible", width: "100%", ease: "bounce.out",}, "-=1.5")
+    .to(".current-row-items", { duration: 0, visibility: "visible", opacity:0})
+    .from(".current-row-items", { duration: 1, opacity: 1, y: -50, stagger: 0.5}, "-=0.5")
     .to(".main-pic-wrapper", {duration: 0.5, visibility: "visible"}, "-=1")
-    .from(".main-pic-wrapper", {duration: 2, rotate: 1080, x: -2000, stagger: 1.25, ease: "bounce.out",}, "-=1.5")
+    .from(".main-pic-wrapper", {duration: 2, opacity: 0, rotate: 1080, x: -2000, stagger: 1, ease: "elastic.out(1,0.30)",}, "-=1")
     .to(".main-pic-wrapper", {duration: 0.25, rotate: -2160, stagger: 0.05,}, "-=0.25")
     .to(".home-page ", {visibility: "visible"})
     tl_2
@@ -66,7 +70,7 @@ export const Home = ({ post }): JSX.Element => {
                     </div>
                   )}
                 </div>
-                  <hr/>
+                  <hr className="sider-divider"/>
                 <div className="sider-section">
                   {["Design", "Front-end", "Microservices", "API", "Database"].map(e => 
                     <div className="sider-btn" key={e}>
@@ -74,7 +78,7 @@ export const Home = ({ post }): JSX.Element => {
                     </div>
                   )}
                 </div>
-                  <hr/>
+                  <hr className="sider-divider"/>
                 <div className="sider-section">
                   {["Functionality", "Usability", "Interface", "Performance", "Security"].map(e => 
                     <div className="sider-btn" key={e}>
@@ -87,7 +91,18 @@ export const Home = ({ post }): JSX.Element => {
             
             <Col md={10} className="">
               <Container fluid>
-                <Row>
+                <Row className="pb-5">
+                  <div className="current-row">
+                    <div className="current-row-header current-row-items">
+                      currently working on
+                    </div> 
+                    <div className="current-row-items">
+                      <a href="#">insight | Financial Research Platform</a>
+                    </div>
+                  </div>
+                </Row>
+
+                <Row className="pb-5">
                   <div className="hr"></div>
                 </Row>
 
@@ -97,19 +112,23 @@ export const Home = ({ post }): JSX.Element => {
                   </Col>
                 </Row>
 
-                <Row className="px-5 pb-5">
-                  <div className="main-pic-wrapper pb-3" ref={div => mainPics = div}>
-                    <img src="/svg/21.svg" alt="tech-pics" />
-                  </div>
-                  <div className="main-pic-wrapper pb-3" ref={div => mainPics = div}>
-                    <img src="/svg/30.svg" alt="tech-pics" />
-                  </div>
-                  <div className="main-pic-wrapper pb-3" ref={div => mainPics = div}>
-                    <img src="/svg/28.svg" alt="tech-pics" />
-                  </div>
-                  <div className="main-pic-wrapper pb-3" ref={div => mainPics = div}>
-                    <img src="/svg/33.svg" alt="tech-pics" />
-                  </div>
+                <Row className="pb-5">
+                  <Container fluid>
+                    <Row className="px-5">
+                      <div className="main-pic-wrapper" ref={div => mainPics = div}>
+                        <img src="/svg/21.svg" alt="tech-pics" />
+                      </div>
+                      <div className="main-pic-wrapper" ref={div => mainPics = div}>
+                        <img src="/svg/30.svg" alt="tech-pics" />
+                      </div>
+                      <div className="main-pic-wrapper" ref={div => mainPics = div}>
+                        <img src="/svg/28.svg" alt="tech-pics" />
+                      </div>
+                      <div className="main-pic-wrapper" ref={div => mainPics = div}>
+                        <img src="/svg/33.svg" alt="tech-pics" />
+                      </div>
+                    </Row>
+                  </Container>
                 </Row>
               </Container>
               <div style={{height: "500px"}}>last</div>
