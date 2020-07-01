@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="372.5" height="364" viewBox="0 0 372.5 364">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #707070;
+        font-size: 288px;
+        font-family: HelveticaNeue, Helvetica Neue;
+      }
+
+      .cls-2 {
+        fill: #fbff90;
+      }
+
+      .cls-3 {
+        fill: #a8ffd4;
+      }
+
+      .cls-4 {
+        fill: #feb4b4;
+        font-size: 66px;
+        font-family: Courier;
+      }
+    </style>
+  </defs>
+  <g id="Group_1" data-name="Group 1" transform="translate(-545 -348.5)">
+    <text id="_" data-name="{" class="cls-1" transform="translate(643.5 348.5) rotate(90)"><tspan x="0" y="0">{</tspan></text>
+    <text id="_2" data-name="}" class="cls-1" transform="translate(643.5 616.5) rotate(90)"><tspan x="0" y="0">}</tspan></text>
+    <rect id="Rectangle_2" data-name="Rectangle 2" class="cls-2" width="353" height="37" rx="10" transform="translate(546 454)"/>
+    <rect id="Rectangle_3" data-name="Rectangle 3" class="cls-3" width="353" height="37" rx="10" transform="translate(546 569)"/>
+    <text id="_010101010" data-name="010101010" class="cls-4" transform="translate(545 551)"><tspan x="0" y="0">010101010</tspan></text>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 {
-  "name": "with-typescript-eslint-jest",
-  "author": "@erikdstock",
+  "name": "portfolio-app",
+  "author": "Owusu K",
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
@@ -26,9 +26,13 @@
     ]
   },
   "dependencies": {
+    "bootstrap": "^4.5.0",
+    "gsap": "^3.3.4",
     "next": "latest",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^16.13.1",
+    "sass": "^1.26.9"
   },
   "devDependencies": {
     "@testing-library/react": "^10.0.1",
