@@ -32,6 +32,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "sass": "^1.26.9"
   },
   "devDependencies": {
