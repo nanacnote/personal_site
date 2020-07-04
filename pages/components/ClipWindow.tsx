@@ -90,7 +90,7 @@ return (
 
             <div className="clip-window-text">
                 <span style={{color: "#ff4d4f"}}>&#10084;</span><br/>
-                <span>
+                <span style={{color: "#bfbfbf"}}>
                     tech i like
                 </span>
             </div>
