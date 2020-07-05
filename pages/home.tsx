@@ -1,9 +1,10 @@
+import { GetStaticProps } from 'next';
 import { useEffect, useState } from "react";
 import { Footer, useBreakPoint } from "./components";
 import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { Container, Row, Col, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Spinner } from 'react-bootstrap';
 import CountUp from 'react-countup';
 import {
   FaAlignJustify,
@@ -27,6 +28,16 @@ import {
   FaSmile,
   FaSmileWink,
 } from 'react-icons/fa';
+
+// typings declaration
+type Tdata = {
+    modalData: {
+        src: string | undefined ,
+        title: string | undefined,
+        header: string | undefined,
+        body: string | undefined,
+    }
+} 
 
 export const Home = ({ post }): JSX.Element => {
 
@@ -62,52 +73,90 @@ export const Home = ({ post }): JSX.Element => {
   const tl_textVid = gsap.timeline();
 
   //instantiate useBreakPoint hook
-    const cur_viewport = useBreakPoint()
+    const [ cur_viewport, cur_viewportSize ] = useBreakPoint()
 
   //all useState hooks below
   //controls state of sider in small media
-  const [siderState, setsiderState] = useState(false)
-  const [ siderShowHideIcon, setsiderShowHideIcon] = useState(<FaAlignJustify/>)
-  //controls the loading transition animation
-  const [ landingTransition, setlandingTransition] = useState(true)
+  const [ siderState, setsiderState ] = useState(false)
+  const [ siderShowHideIcon, setsiderShowHideIcon ] = useState(<FaAlignJustify/>)
+  //controls the loading transition and intro animation state false for ongoing true for done
+  const [ landingTransition, setlandingTransition ] = useState(true)
+  //controls modal popup
+  const [ modalShow, setmodalShow ] = useState(false);
+  const [ modalContent, setmodalContent ] = useState<Tdata["modalData"]>({
+    src: undefined,
+    title: undefined,
+    header: undefined,
+    body: undefined,
+  })
+  const [ iframeStatus, setiframeStatus ] = useState(<Spinner animation="border" role="status" variant="primary"/>)
 
-  const themeChanger = (event)=> {
+  //function to handle theme changer on click of a theme
+  const themeChanger = (event: any)=> {
     const themeProvider = document.querySelector(".theme-provider")
     themeProvider.className = `theme-provider theme-${event.target.innerText.toLowerCase()}`
+  }
+
+  //function to handle modal iframe
+  const modalIframeHandler =  (arg: Tdata["modalData"])=> {
+    setmodalContent(arg)
+    setmodalShow(true)
   }
 
     // useEffect for other activities on page other than gsap
   useEffect(() => {
       siderState? setsiderShowHideIcon(<FaTimes/>) : setsiderShowHideIcon(<FaAlignJustify/>)
-
+      window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [siderState])
 
+    //scroll gsap activity class
+  const scrollHelper = {
+    parentWidth: (arg: string): number=> {
+        return (
+            (document.querySelector(arg) as HTMLElement)?.offsetWidth / 2
+        )
+    }
+  }
   // gsap scrolltrigger config
   useEffect(() => {
-    // gsap.to(".main-pic-wrapper",{
-    //     scrollTrigger: {
-    //       trigger: ".main-pic-wrapper",
-    //       // markers: true,
-    //       start: "top center",
-    //       toggleActions: "restart none none restart"
-    //     },
-    //     duration: 5, 
-    //     x: 1000
-    //   })
-  }, [landingTransition])
+      // instantiate timeline
+    const tl_scrollViews = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".grad-hr",
+            markers: true,
+            scrub: 3,
+            start: "top top",
+          //   endTrigger: ".main-pic-wrapper",
+          //   end: "bottom top",
+            end: "+=450",
+            toggleActions: "restart complete reverse reverse"
+        }
+    });
+
+    tl_scrollViews
+    .to(".main-pic-wrapper",{duration: 1, x: scrollHelper.parentWidth(".home-page-right"), stagger: -0.025})
+    .to(".main-numbers-col", {duration: 0.05, yPercent: -100, stagger: -0.025 }, "-=1")
+    .to(".main-pic-header, .main-numbers-header", {duration: 0.05, opacity: 0,},"-=1")
+
+    // , onComplete: setintroTransition, onCompleteParams: [true]
+  }, [landingTransition, cur_viewportSize])
 
   // gsap text video
   useEffect(() => {
     tl_textVid
     .to(".grad-hr", {duration: 2, width: "100%", ease: "bounce.out",}, "+=2.5")
     .to(".main-text-row", {duration: 2, height:"350px", width: "100%", paddingTop: "10px", ease: "bounce.out"}, "-=3")
-    .to(".current-col, .theme-col", { duration: 0, opacity: 1}, "-=1")
-    .from(".current-col-items, .theme-col-items", { duration: 1, opacity: 0, y: -20, stagger: 0.5}, "-=1")
-    .from(".main-pic-wrapper", {duration: 2, opacity: 0, rotate: 1080, x: -2000, stagger: 0.5, ease: "elastic.out(1,0.30)"},"-=1")
-    .to(".main-pic-wrapper", {duration: 0.25, rotate: 2160, stagger: 0.05,}, "-=0.25")
-    .to(".main-pic-header, .main-numbers-header", { duration: 1, opacity: 1})
+    .to(".current-col, .theme-col", { duration: 1, opacity: 1}, "-=1")
+    .from(".current-col-items, .theme-col-items", { duration: 0.75, opacity: 0, y: -20, stagger: 0.25}, "-=1")
+    .set(".main-pic-numbers", {display: "flex"})
+    .to(".main-pic-header , .main-numbers-header", { duration: 1, opacity: 1}, "-=0.75")
+    .from(".main-numbers-wrapper", {duration: 1.5, opacity: 0, y: 100}, "-=1")
+    .from(".main-pic-wrapper", {duration: 1.5, opacity: 0, rotation: 1080, x: -500, stagger: 0.5, ease: "elastic.out(1,0.30)"},"-=1")
+    .to(".main-pic-wrapper", {duration: 0.25, rotation: 2160, stagger: 0.05}, "-=0.25")
     .from(".main-pic-header, .main-numbers-header", { duration: 1, y: -20}, "-=1")
     .set(".main-text-1",{width: "100%", height: "100%"}, "-=1")
+    //set rest of page display to block at thispoint
+    .set(".home-page-right-bottom", {display: "block"})
     .set(".t-01", {y: "-500%", display: "inline", fontSize: "1rem", opacity: 0})
     .to(".t-01", {duration: 2, y:"0%", fontSize: "3rem", opacity: 1, ease: "bounce.out"})
     .to(".t-01", {duration: 0.25, transform: "rotate(15deg)", ease: "elastic.out(1,0.30)"})
@@ -138,15 +187,14 @@ export const Home = ({ post }): JSX.Element => {
     .to(".t-07", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "bolder", fontSize: "3vmax", top: "45%", left: "7.5%", color: "#1C1CF0", ease: "back.out(4)"})
     .to(".t-08", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "900", fontSize: "3vmax", top: "60%", left: "55%", color: "#292421", borderTop: "solid 7.5px #FFE135", ease: "elastic.out(1,0.30)"})
     .to(".t-09", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "600", fontSize: "6vmax", bottom: "10%", left: "10%", color: "#FFE135", borderBottom: "solid 7.5px #434343", ease: "none"})
-    .to(".t-10", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "300", fontSize: "3vmax", top: "15%", right: "5%", color: "#292421"})
+    .to(".t-10", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "300", fontSize: "3vmax", top: "15%", right: "2.5%", color: "#292421"})
     .to(".t-10", {transform:"rotate(90deg)", top:"25%", fontSize: "2vmax", ease: "bounce.out"})
     .to(".t-11", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "900", fontSize: "2vmax", top: "30%", left: "55%", color: "#292421", ease: "elastic.out(1,0.30)"})
-    .to(".t-12", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "lighter", fontSize: "3vmax", top: "40%", left: "57.5%", color: "#292421", ease: "elastic.out(1,0.30)"})
+    .to(".t-12", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "lighter", fontSize: "3vmax", top: "45%", left: "57.5%", color: "#292421", ease: "elastic.out(1,0.30)"})
     .to(".t-a", {duration: 2, opacity: 0}, "+=3")
     .set(".t-a", {display: "none"})
     .set(".main-text-1, .main-text-2, .main-text-3", {border: "none", width: "auto", height: "auto", opacity: 1, x: 0, y: 0})
     .set(".app-intro", {display: "inline"})
-    // .set(".app-intro", display: "inline")
   }, [landingTransition])
 
   // gsap landing animations
@@ -181,7 +229,7 @@ export const Home = ({ post }): JSX.Element => {
                     { cur_viewport?
                     siderState ?
                     <Col xs={12}>
-                        <div className="siderShowHide" children={<button onClick={()=> setsiderState(!siderState)}>{siderShowHideIcon}</button>}/>
+                        <div className="siderShowHide" children={ <button onClick={ ()=> setsiderState(!siderState) }>{siderShowHideIcon}</button>}/>
                         <div className="sider">
                             <div className="sider-container">
                                 {siderLinks.map((e,i) =>
@@ -258,7 +306,7 @@ export const Home = ({ post }): JSX.Element => {
                                             <span>currently working on</span>
                                         </div> 
                                         <div className="current-col-items current-col-link">
-                                            <span className="clickable-item position-relative" onMouseEnter={()=>"currentWindow"}>insight | Financial Research Platform</span>
+                                            <span className="clickable-item position-relative" onClick={()=>modalIframeHandler(post[0])}>insight | Financial Research Platform</span>
                                         </div>
                                     </div>
                                 </Col>
@@ -284,7 +332,7 @@ export const Home = ({ post }): JSX.Element => {
                                             <span className="t-a t-08 h1">THINKERING</span>
                                             <span className="t-a t-09 h1">Big Data</span>
                                             <span className="t-a t-10 h1">LEARNING</span>
-                                            <span className="t-a t-11 h1">MODELING</span>
+                                            <span className="t-a t-11 h1"><h6>FINANCIAL</h6><span>MODELING</span></span>
                                             <span className="t-a t-12 h1">mathematics</span>
                                         </div>
                                         <div className="main-text-3">
@@ -346,8 +394,43 @@ export const Home = ({ post }): JSX.Element => {
                                 </Container>
                             </Row>
                         </Container>
-                                   
-                        <div style={{width: "100%", height: "700px", backgroundColor: "transparent"}}></div>
+
+                        {/* container for second part of right handside of page */}
+                        <Container fluid className="home-page-right-bottom">
+                            <Row className="pb-5">
+                                <Container fluid>
+                                    <div style={{width: "100%", height: "45vh", backgroundColor: "grey"}} />
+                                    <div style={{width: "100%", height: "45vh", backgroundColor: "brown"}} />
+                                </Container>
+                            </Row>
+                        </Container>
+
+                        {/* modal for showing iframe when currently working on is clicked */}
+                        <Container fluid className="iframe-modal">
+                            <Modal
+                                size="xl"
+                                show={modalShow}
+                                onHide={() => {setmodalShow(false); setiframeStatus(<Spinner animation="border" role="status" variant="primary"/>)}}
+                                aria-labelledby="modal-for-current"
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="example-custom-modal-styling-title">
+                                        {modalContent.header}
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                <div>
+                                    {modalContent.body?.split("%").map(e => <p>{e}</p>)}
+                                </div>
+                                <div className="d-flex justify-content-center align-items-center">
+                                    <div className="position-absolute">{iframeStatus}</div>
+                                    <iframe src={modalContent.src} title={modalContent.title} onLoad={()=> setiframeStatus(null)}/>
+                                </div>
+                                </Modal.Body>
+                            </Modal>
+                        </Container>
+
+                        {/* container for footer of page */}
                         <Container fluid className="home-page-right-footer">
                             <Footer/>
                         </Container>
@@ -361,6 +444,24 @@ export const Home = ({ post }): JSX.Element => {
 }
 
 export default Home
+
+
+export const getStaticProps: GetStaticProps = async () => {
+    const post: Array<{[key: string]: string}> = [
+        {
+            src: "https://insight-client.herokuapp.com/",
+            title: "insight",
+            header: "insight | Financial Research Platform",
+            body: `This is an open source project with a goal to consolidate equity research for all publicly traded companies. This consolidation will allow for more complex analysis to be layered on top of the structured data. % In later iterations portfolio optimisation and sentimental analysis tools will be implemented to allow for prudent investment.`,
+        }
+    ]
+  
+    return {
+      props: {
+        post
+      },
+    }
+  }
 
 
   // &#128170;&#129327;&#9939;&#128200;&#129516;&#128218;&#128071;&#129300;

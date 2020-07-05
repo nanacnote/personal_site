@@ -86,7 +86,11 @@ body {
             }
         }
     }
-    
+
+    iframe {
+        width: 100%;
+        height: 60vh;
+    }
     //_______________________
     // welcome pages
     .welcome-page{
@@ -241,77 +245,84 @@ body {
             }
         }
         
-        .current-col, .theme-col {
-            display: flex;
-            align-items: flex-end;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 125px;
-            opacity: 0;
-            .current-col-header, .theme-col-header {
-                font-size: 1.25rem;
-                margin-bottom: 5px;
-            }
-        }
-        .theme-col {
-            align-items: flex-start;
-        }
-        
-        .grad-hr {
-            width: 0;
-            height: 5px;
-            background: map.get($arg, "$bg-grad-1");
-        }
-        
-        .main-text-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: map.get($arg, "$bg-animation");
-            .main-text-1, .main-text-2, .main-text-3 {
-                text-align: center;
-                display: inline-flex;
+        .home-page-right-top{
+
+            .current-col, .theme-col {
+                display: flex;
+                align-items: flex-end;
                 flex-direction: column;
+                justify-content: flex-end;
+                min-height: 125px;
+                opacity: 0;
+                .current-col-header, .theme-col-header {
+                    font-size: 1.25rem;
+                    margin-bottom: 5px;
+                }
+            }
+            .theme-col {
+                align-items: flex-start;
+            }
+            
+            .grad-hr {
+                width: 0;
+                height: 5px;
+                background: map.get($arg, "$bg-grad-1");
+            }
+            
+            .main-text-row {
+                display: flex;
                 justify-content: center;
                 align-items: center;
-                overflow: hidden;
-                .t-a {
-                    display: none;
-                    .main-text-heart {
-                        color: lightpink;
-                        font-size: 1rem;
+                background-color: map.get($arg, "$bg-animation");
+                .main-text-1, .main-text-2, .main-text-3 {
+                    text-align: center;
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    .t-a {
+                        display: none;
+                        .main-text-heart {
+                            color: lightpink;
+                            font-size: 1rem;
+                        }
+                    }
+                    .app-a {
+                        display: none;
                     }
                 }
-                .app-a {
-                    display: none;
-                }
             }
-        }
-        
-        .main-pic-numbers {
-            .main-pic-header, .main-numbers-header{
-                opacity: 0;
-                margin: 10px;
-                font-size: 1.25rem;
-            }
-            .main-pic-col, .main-numbers-col {
-                .main-numbers-wrapper{
-                    margin: 10px 20px 10px 10px;
+            .main-pic-numbers {
+                display: none;
+                .main-pic-header, .main-numbers-header{
+                    opacity: 0;
+                    margin: 10px;
+                    font-size: 1.25rem;
                 }
-                .main-pic-wrapper {
-                    width: 7.5rem;
-                    height: 5rem;
-                    margin-bottom: 50px;
-                    &>img{
-                        margin: 10px;
-                        &:hover {
-                            cursor: pointer;
-                            margin: 11.5px;
-                            transition: margin 500 ease-out;
+                .main-pic-col, .main-numbers-col {
+                    .main-numbers-wrapper{
+                        margin: 10px 20px 10px 10px;
+                    }
+                    .main-pic-wrapper {
+                        width: 7.5rem;
+                        height: 5rem;
+                        margin-bottom: 50px;
+                        &>img{
+                            margin: 10px;
+                            &:hover {
+                                cursor: pointer;
+                                margin: 11.5px;
+                                transition: margin 500 ease-out;
+                            }
                         }
                     }
                 }
             }
+        }
+        .home-page-right-bottom {
+            display: none;
+            border: solid 1px red;
         }
     }
 }
