@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
-import { Footer, useBreakPoint } from './components'
+import { Footer, useBreakPoint } from '../components'
 import * as _sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
