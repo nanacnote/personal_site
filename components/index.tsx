@@ -1,5 +1,5 @@
 // hooks
-export { useBreakPoint } from '../../hooks/BreakPoint'
+export { useBreakPoint } from '../hooks/BreakPoint'
 
 // inpage components
 export { default as ClipWindow} from './ClipWindow' 
