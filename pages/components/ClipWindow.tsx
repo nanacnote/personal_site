@@ -104,7 +104,7 @@ return (
             </div>
         </div>
         <div className="enter-site">
-            <Link href="/home"><a>Enter</a></Link>
+            <Link href="/front"><a>Enter</a></Link>
         </div>
     </div>
 )
