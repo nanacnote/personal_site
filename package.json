@@ -3,6 +3,10 @@
   "author": "Owusu K",
   "license": "MIT",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.2.0",
+    "npm": "6.14.4"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +15,8 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "postinstall": "next build"
   },
   "husky": {
     "hooks": {
