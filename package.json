@@ -15,8 +15,7 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test",
-    "postinstall": "next build"
+    "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "husky": {
     "hooks": {
