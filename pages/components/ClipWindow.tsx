@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 
 export const ClipWindow = (): JSX.Element => {
-    let clipWindow: HTMLElement;
+
+    //ref for the window div that plays the gsap animation
+    let clipWindowRef: HTMLElement;
 
     const numRangeArray = (arg: number)=>{
         let tmp: Array<number> = [];
@@ -15,10 +17,10 @@ export const ClipWindow = (): JSX.Element => {
 
     useEffect(() => {
         const tl = gsap.timeline();
-        // clipWindow.onmouseenter = function() {
+        // clipWindowRef.onmouseenter = function() {
         //     tl.pause();
         // }
-        // clipWindow.onmouseleave = function() {
+        // clipWindowRef.onmouseleave = function() {
         //     tl.play();
         // }
         tl.to(".pen-tip", {opacity: 1, duration: 0.5})
@@ -55,9 +57,9 @@ export const ClipWindow = (): JSX.Element => {
         tl.to(".pen-tip", {rotation: 360, duration: 0.5})
         tl.to(".pen-tip", {width: "5px", height: "5px", rotation: -360, opacity: 0, duration: 0.5}, "-=0.5")
         // draw white window background
-        tl.to(clipWindow, {width: "0px", height: "0px", duration: 0})
-        tl.to(clipWindow, {backgroundColor: "white", duration: 0})
-        tl.to(clipWindow, {width: "250px", height: "200px", ease: "bounce.out", duration: 1})
+        tl.to(clipWindowRef, {width: "0px", height: "0px", duration: 0})
+        tl.to(clipWindowRef, {backgroundColor: "white", duration: 0})
+        tl.to(clipWindowRef, {width: "250px", height: "200px", ease: "bounce.out", duration: 1})
         // svg animation container div prep section
         tl.to(".clip-window-svg", {display: "flex", duration: 0.5})
         // text on top of svg
@@ -74,7 +76,7 @@ export const ClipWindow = (): JSX.Element => {
             .to(`.svg-logo-${e}`, {x: -200, opacity: 0, display:"none", duration: 0.5})
         )
         tl.to(".clip-window-text", {opacity: 0, duration: 0.5})
-        tl.to(clipWindow, {width: "0px", height: "0px", ease: "bounce.out", duration: 1})
+        tl.to(clipWindowRef, {width: "0px", height: "0px", ease: "bounce.out", duration: 1})
 
 
         return () => {
@@ -84,7 +86,7 @@ export const ClipWindow = (): JSX.Element => {
 
 return (
     <div className="clip-window-container">
-        <div className="clip-window" ref={div => clipWindow = div}>
+        <div className="clip-window" ref={div => clipWindowRef = div}>
             
             <div className="pen-tip" />
 
@@ -102,7 +104,7 @@ return (
             </div>
         </div>
         <div className="enter-site">
-            <Link href="/home"><a>Enter</a></Link>
+            <Link href="/front"><a>Enter</a></Link>
         </div>
     </div>
 )
