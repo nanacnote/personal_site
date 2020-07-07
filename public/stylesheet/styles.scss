@@ -75,6 +75,9 @@ body {
     .c-text-info {
         color: map.get($arg, "$text-info");
     }
+    .c-text-primary {
+        color: map.get($arg, "$text-primary");
+    }
 
     .footer {
         text-align: center;
@@ -317,13 +320,21 @@ body {
                             }
                         }
                     }
+                    .main-pic-text {
+                        position: absolute;
+                        padding: 0 25px 0 10px;
+                        opacity: 0;
+                    }
                 }
             }
         }
         .home-page-right-bottom {
             display: none;
-            border: solid 1px red;
         }
+    }
+
+    .skills-row-0 {
+        // opacity: 0.25;
     }
 }
 

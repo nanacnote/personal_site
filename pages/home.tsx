@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import { useEffect, useState } from "react";
 import { Footer, useBreakPoint } from "./components";
+import * as _sortBy from 'lodash/sortBy';
 import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -9,6 +10,7 @@ import CountUp from 'react-countup';
 import {
   FaAlignJustify,
   FaTimes,
+  FaQuestionCircle,
   FaDesktop, 
   FaBoxOpen, 
   FaGithub,
@@ -40,6 +42,9 @@ type Tdata = {
 } 
 
 export const Home = ({ post }): JSX.Element => {
+
+    // ref for div that wraps around the bottom right section of home page
+    let homeRightBottomRef: HTMLElement;
 
     //sider icons object 
     const siderLinks = [
@@ -73,7 +78,7 @@ export const Home = ({ post }): JSX.Element => {
   const tl_textVid = gsap.timeline();
 
   //instantiate useBreakPoint hook
-    const [ cur_viewport, cur_viewportSize ] = useBreakPoint()
+  const [ cur_viewport, cur_viewportSize ] = useBreakPoint()
 
   //all useState hooks below
   //controls state of sider in small media
@@ -97,10 +102,42 @@ export const Home = ({ post }): JSX.Element => {
     themeProvider.className = `theme-provider theme-${event.target.innerText.toLowerCase()}`
   }
 
-  //function to handle modal iframe
+  //function to handle modal iframe content displayed
   const modalIframeHandler =  (arg: Tdata["modalData"])=> {
     setmodalContent(arg)
     setmodalShow(true)
+  }
+
+  //function to help determine how to display the skills progress bar takes 
+  //two argument 1. type of output required 2. the level of achievement as a number
+  //this function is mainly called by data coming in from getstaticprops
+  const skillsLevelBarHelper = (arg_1: "color" | "description" , arg_2: number)=>{
+    if(arg_1 === "color"){
+        return(
+            arg_2 >= 75 ? "bg-success" :
+            arg_2 >= 50 ? "bg-info":
+            arg_2 >= 25 ? "bg-warning":
+            "bg-danger"
+        )
+    }
+    if(arg_1 === "description"){
+        return(
+            arg_2 >= 75 ? "Expert" :
+            arg_2 >= 50 ? "Advance":
+            arg_2 >= 25 ? "Intermediate":
+            "Beginer"
+        )
+    }
+  }
+
+  //scroll gsap activity class with helper functions
+  const scrollHelper = {
+        //returns the inner width of a div by taking the class name as argument 
+    parentWidth: (arg: string | HTMLElement): number=> {
+        return (
+            (document.querySelector(arg) as HTMLElement)?.offsetWidth / 2 
+        )
+    }
   }
 
     // useEffect for other activities on page other than gsap
@@ -109,36 +146,24 @@ export const Home = ({ post }): JSX.Element => {
       window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [siderState])
 
-    //scroll gsap activity class
-  const scrollHelper = {
-    parentWidth: (arg: string): number=> {
-        return (
-            (document.querySelector(arg) as HTMLElement)?.offsetWidth / 2
-        )
-    }
-  }
   // gsap scrolltrigger config
   useEffect(() => {
-      // instantiate timeline
+      // instantiate timeline for scroll animation of main-pic and main-numbers
     const tl_scrollViews = gsap.timeline({
         scrollTrigger: {
-            trigger: ".grad-hr",
-            markers: true,
+            trigger: ".grad-hr", 
             scrub: 3,
             start: "top top",
-          //   endTrigger: ".main-pic-wrapper",
-          //   end: "bottom top",
             end: "+=450",
             toggleActions: "restart complete reverse reverse"
         }
     });
-
     tl_scrollViews
-    .to(".main-pic-wrapper",{duration: 1, x: scrollHelper.parentWidth(".home-page-right"), stagger: -0.025})
-    .to(".main-numbers-col", {duration: 0.05, yPercent: -100, stagger: -0.025 }, "-=1")
-    .to(".main-pic-header, .main-numbers-header", {duration: 0.05, opacity: 0,},"-=1")
+    .fromTo(".main-pic-wrapper",{x: 0}, {duration: 1, x: scrollHelper.parentWidth(".home-page-right"), stagger: -0.025})
+    .fromTo(".main-numbers-col",{yPercent: 0}, {duration: 0.05, yPercent: -100}, "-=1")
+    .fromTo(".main-pic-header, .main-numbers-header", {opacity: 1}, {duration: 0.05, opacity: 0,},"-=1")
+    .fromTo(".main-pic-text", {opacity: 0},{duration: 1, opacity: 1},"-=0.5")
 
-    // , onComplete: setintroTransition, onCompleteParams: [true]
   }, [landingTransition, cur_viewportSize])
 
   // gsap text video
@@ -180,15 +205,15 @@ export const Home = ({ post }): JSX.Element => {
     .set(".main-text-2", {opacity: 1, width: "100%", height: "100%"})
     .to(".t-04", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "bold", fontSize: "4vmax", top: 0, color:"white", ease: "elastic.out(1,0.30)"})
     .to(".t-04", {duration: 0.5, fontSize: "2vmax"})
-    .to(".main-text-heart", {duration: 2, transform: "rotateY(180deg)", repeat: -1}, "-=0.5")
+    .to(".main-text-heart", {duration: 2, rotationY: 360, repeat: -1}, "-=0.5")
     .to(".t-05", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "bolder", fontSize: "6vmax", top: "10%", color: "#39FF14"})
-    .to(".t-05", {transform: "rotate(90deg)", top:"50%", fontSize: "4vmax", ease: "bounce.out"})
+    .to(".t-05", {rotation: 90, top:"50%", fontSize: "4vmax", ease: "bounce.out"})
     .to(".t-06", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "bolder", fontSize: "6vmax", top: "20%", left: "7.5%", color: "#FE4164", ease: "back.out(4)"})
     .to(".t-07", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "bolder", fontSize: "3vmax", top: "45%", left: "7.5%", color: "#1C1CF0", ease: "back.out(4)"})
     .to(".t-08", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "900", fontSize: "3vmax", top: "60%", left: "55%", color: "#292421", borderTop: "solid 7.5px #FFE135", ease: "elastic.out(1,0.30)"})
     .to(".t-09", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "600", fontSize: "6vmax", bottom: "10%", left: "10%", color: "#FFE135", borderBottom: "solid 7.5px #434343", ease: "none"})
     .to(".t-10", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "300", fontSize: "3vmax", top: "15%", right: "2.5%", color: "#292421"})
-    .to(".t-10", {transform:"rotate(90deg)", top:"25%", fontSize: "2vmax", ease: "bounce.out"})
+    .to(".t-10", {rotation: 90, top:"25%", fontSize: "2vmax", ease: "bounce.out"})
     .to(".t-11", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "900", fontSize: "2vmax", top: "30%", left: "55%", color: "#292421", ease: "elastic.out(1,0.30)"})
     .to(".t-12", {duration: 0.5, opacity: 1, position: "absolute", display: "inline", fontWeight: "lighter", fontSize: "3vmax", top: "45%", left: "57.5%", color: "#292421", ease: "elastic.out(1,0.30)"})
     .to(".t-a", {duration: 2, opacity: 0}, "+=3")
@@ -286,7 +311,7 @@ export const Home = ({ post }): JSX.Element => {
 
                     <Col className="home-page-right">
                         <Container fluid className="home-page-right-top">
-                            <Row className="pb-5">
+                            <Row className="mb-5">
                                 <Col>
                                     <div className="theme-col">
                                         <div className="theme-col-items theme-col-header">
@@ -306,17 +331,17 @@ export const Home = ({ post }): JSX.Element => {
                                             <span>currently working on</span>
                                         </div> 
                                         <div className="current-col-items current-col-link">
-                                            <span className="clickable-item position-relative" onClick={()=>modalIframeHandler(post[0])}>insight | Financial Research Platform</span>
+                                            <span className="clickable-item position-relative" onClick={()=>modalIframeHandler(post.current_project)}>insight | Financial Research Platform</span>
                                         </div>
                                     </div>
                                 </Col>
                             </Row>
 
-                            <Row className="pb-5">
+                            <Row className="mb-5">
                                 <div className="grad-hr"></div>
                             </Row>
 
-                            <Row className="pb-5">
+                            <Row className="mb-5">
                                 <Container fluid>
                                     <div className="px-5 main-text-row">
                                         <div className="main-text-1">
@@ -345,7 +370,7 @@ export const Home = ({ post }): JSX.Element => {
                                 </Container>
                             </Row>
 
-                            <Row className="pb-5">
+                            <Row className="mb-5">
                                 <Container fluid>
                                     <Row className="main-pic-numbers">
                                         <Col className="main-pic">
@@ -355,6 +380,22 @@ export const Home = ({ post }): JSX.Element => {
                                                 </div>
                                             </Row>
                                             <Row className="main-pic-col">
+                                                <div className="main-pic-text">
+                                                    <div className="main-pic-text-head">
+                                                        <h3>
+                                                            The "Big Idea"
+                                                        </h3>
+                                                    </div>
+                                                    <div className="main-pic-text-body">
+                                                        <span>
+                                                            The idea behind my portfolio page is to implement 
+                                                            features and tools rather than write about them.
+                                                            <span className="bg-warning">&nbsp;Click the&nbsp;<FaQuestionCircle/> 
+                                                            &nbsp;icon&nbsp;</span>&nbsp;
+                                                            next to a feature to learn more about it.
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 <div className="main-pic-wrapper">
                                                     <img src="/svg/21.svg" alt="tech-pics" />
                                                 </div>
@@ -378,11 +419,11 @@ export const Home = ({ post }): JSX.Element => {
                                             <Row className="main-numbers-col">
                                                 <div className="main-numbers-wrapper">
                                                     <h6><strong>Projects</strong></h6>
-                                                    <span className="c-text-info h3"><CountUp end={15} /></span>
+                                                    <span className="c-text-info h3"><CountUp end={15} redraw delay={6}/></span>
                                                 </div>
                                                 <div className="main-numbers-wrapper">
                                                     <h6><strong>Vistors</strong></h6>
-                                                    <span className="c-text-info h3"><CountUp end={65} /></span>
+                                                    <span className="c-text-info h3"><CountUp end={65} delay={6}/></span>
                                                 </div>
                                                 <div className="main-numbers-wrapper">
                                                     <h6><strong>Your Location</strong></h6>
@@ -396,14 +437,98 @@ export const Home = ({ post }): JSX.Element => {
                         </Container>
 
                         {/* container for second part of right handside of page */}
+                        <div className="w-100" ref={div => homeRightBottomRef = div}>
                         <Container fluid className="home-page-right-bottom">
-                            <Row className="pb-5">
-                                <Container fluid>
-                                    <div style={{width: "100%", height: "45vh", backgroundColor: "grey"}} />
-                                    <div style={{width: "100%", height: "45vh", backgroundColor: "brown"}} />
-                                </Container>
-                            </Row>
+                            {[post.web_development_skill, post.data_science_skill].map((e, i) => 
+                                <Row className="mb-5 overflow-hidden">
+                                    <Container fluid className={`skills-row skills-row-${i}`}>
+                                        <Row>
+                                            <div className={`d-flex ${i%2 === 0 ? "flex-row" : "flex-row-reverse"} w-100 pb-5`}>
+                                                <div className="mr-2 d-none d-md-block">
+                                                    <img src={`/pics/${i+1}.jpg`} alt="web-dev photo" style={{width: "400px", height: "100%"}}/>
+                                                </div>
+                                                <div className="w-100 d-flex flex-column">
+                                                    <div className="w-100 pr-2 pl-2 pb-2">
+                                                        <h4><strong>{e?.title}</strong></h4>
+                                                        <p>{e?.sub_title}</p>
+                                                    </div>
+                                                    <div className="w-100 h-75">
+                                                        <Container fluid>
+                                                            <Row>
+                                                                <Col xs={12} lg={6} className="p-2">
+                                                                    <div>
+                                                                        <h5><strong>Frameworks</strong></h5>
+                                                                    </div>
+                                                                    <div>
+                                                                        {_sortBy( Object.entries(e?.frameworks || {}), [function(o) { return o[1] }] ).reverse().map(e =>
+                                                                        <div className="d-flex flex-row align-items-center pr-5">
+                                                                            <div className="pr-2">{e[0]}</div>
+                                                                            <div className="progress w-50 ml-auto">
+                                                                                <div className= {`progress-bar ${skillsLevelBarHelper("color", +e[1])} progress-bar-striped progress-bar-animated`} role="progressbar" aria-valuenow={+e[1]} aria-valuemin={0} aria-valuemax={100} style={{width: `${e[1]}%`}}>{skillsLevelBarHelper("description", +e[1])}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        )}
+                                                                    </div>
+                                                                </Col>
+                                                                <Col xs={12} lg={6} className="p-2">
+                                                                    <div>
+                                                                        <h5><strong>Libraries</strong></h5>
+                                                                    </div>
+                                                                    <div>
+                                                                        {_sortBy( Object.entries(e?.libraries || {}), [function(o) { return o[1] }] ).reverse().map(e =>
+                                                                        <div className="d-flex flex-row align-items-center pr-5">
+                                                                            <div className="pr-2">{e[0]}</div>
+                                                                            <div className="progress w-50 ml-auto">
+                                                                                <div className= {`progress-bar ${skillsLevelBarHelper("color", +e[1])} progress-bar-striped progress-bar-animated`} role="progressbar" aria-valuenow={+e[1]} aria-valuemin={0} aria-valuemax={100} style={{width: `${e[1]}%`}}>{skillsLevelBarHelper("description", +e[1])}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        )}
+                                                                    </div>
+                                                                </Col>
+                                                                <Col xs={12} lg={6} className="p-2">
+                                                                    <div>
+                                                                        <h5><strong>Technologies</strong></h5>
+                                                                    </div>
+                                                                    <div>
+                                                                        {_sortBy( Object.entries(e?.technologies || {}), [function(o) { return o[1] }] ).reverse().map(e =>
+                                                                        <div className="d-flex flex-row align-items-center pr-5">
+                                                                            <div className="pr-2">{e[0]}</div>
+                                                                            <div className="progress w-50 ml-auto">
+                                                                                <div className= {`progress-bar ${skillsLevelBarHelper("color", +e[1])} progress-bar-striped progress-bar-animated`} role="progressbar" aria-valuenow={+e[1]} aria-valuemin={0} aria-valuemax={100} style={{width: `${e[1]}%`}}>{skillsLevelBarHelper("description", +e[1])}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        )}
+                                                                    </div>
+                                                                </Col>
+                                                                <Col xs={12} lg={6} className="p-2">
+                                                                    <div>
+                                                                        <h5><strong>Tools</strong></h5>
+                                                                    </div>
+                                                                    <div>
+                                                                        {_sortBy( Object.entries(e?.tools || {}), [function(o) { return o[1] }] ).reverse().map(e =>
+                                                                        <div className="d-flex flex-row align-items-center pr-5">
+                                                                            <div className="pr-2">{e[0]}</div>
+                                                                            <div className="progress w-50 ml-auto">
+                                                                                <div className= {`progress-bar ${skillsLevelBarHelper("color", +e[1])} progress-bar-striped progress-bar-animated`} role="progressbar" aria-valuenow={+e[1]} aria-valuemin={0} aria-valuemax={100} style={{width: `${e[1]}%`}}>{skillsLevelBarHelper("description", +e[1])}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        )}
+                                                                    </div>
+                                                                </Col>
+                                                            </Row>
+                                                        </Container>
+                                                    </div>
+                                                    <div className="w-100 p-2">
+                                                        <h4>Projects</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Row>
+                                    </Container>
+                                </Row>
+                            )}
                         </Container>
+                        </div>
 
                         {/* modal for showing iframe when currently working on is clicked */}
                         <Container fluid className="iframe-modal">
@@ -435,7 +560,6 @@ export const Home = ({ post }): JSX.Element => {
                             <Footer/>
                         </Container>
                     </Col>
-
                 </Row>
             </Container>
         }
@@ -447,14 +571,91 @@ export default Home
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const post: Array<{[key: string]: string}> = [
-        {
+    const post: object = {
+        current_project: {
             src: "https://insight-client.herokuapp.com/",
             title: "insight",
             header: "insight | Financial Research Platform",
             body: `This is an open source project with a goal to consolidate equity research for all publicly traded companies. This consolidation will allow for more complex analysis to be layered on top of the structured data. % In later iterations portfolio optimisation and sentimental analysis tools will be implemented to allow for prudent investment.`,
+        },
+        web_development_skill: {
+            title: "Web Development",
+            sub_title: "having been coding for many years I have used a lot of frameworks and libraries. Below is how comfortable I am with some of the major ones.",
+            frameworks :{
+                "react": 90,
+                "vue": 60,
+                "next": 85,
+                "express": 90,
+                "nest": 70,
+                "loopback": 50,
+                "jest": 75,
+            },
+            libraries: {
+                "jquery": 90,
+                "lodash": 90,
+                "chartjs": 85,
+                "gsap": 75,
+                "d3": 75,
+                "boostrap": 90,
+                "material ui": 90,
+            },
+            technologies: {
+                "nodejs": 90,
+                "git": 90,
+                "npm": 90,
+                "docker": 90,
+                "sql": 90,
+                "nosql (mongoDB)": 90,
+                "graphql": 75,
+            },
+            tools: {
+                "adobe xd": 90,
+                "sass": 90,
+                "chrome tools": 90,
+                "webpack": 80,
+                "browserify": 80,
+                "gulp": 75,
+                "grunt": 65,
+            },
+            projects: {
+
+            }
+        },
+        data_science_skill: {
+            title: "Data Science",
+            sub_title: "I use Python & R alot for doing tasks related to data cleaning, structuring, anlysis (including Machine learning) and visualisation. Below is how comfortable I am with some of the major ones.",
+            frameworks :{
+                "django": 50,
+                "dash": 50,
+                "flask": 50,
+            },
+            libraries: {
+                "numpy": 90,
+                "scipy": 90,
+                "pandas": 90,
+                "matplotlib": 80,
+                "seaborn": 75,
+                "sciKit-learn": 65,
+                "TensorFlow": 65,
+            },
+            technologies: {
+                "pip": 90,
+                "anaconda": 85,
+                "NLP": 50,
+                "ML": 65,
+            },
+            tools: {
+                "jupyter": 90,
+                "spyder": 90,
+                "r studio": 75,
+                "pyenv": 90,
+                "tableau": 50,
+            },
+            projects: {
+                monte_carlo: "hello"
+            }
         }
-    ]
+    }
   
     return {
       props: {
