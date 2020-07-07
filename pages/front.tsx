@@ -524,7 +524,7 @@ export const Front = ({ post }): JSX.Element => {
       )
       .from(
         '.sider-btn',
-        { duration: 0.25, transform: 'rotateY(180deg)', stagger: 0.05 },
+        { duration: 0.25, rotationY: 180, stagger: 0.05 },
         '-=2.5'
       )
       .from(
