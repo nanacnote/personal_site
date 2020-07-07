@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { ClipWindow, Footer } from './components'
+import { ClipWindow, Footer } from '../components'
 
 export const Home = (): JSX.Element => (
   <div className="home-page">
