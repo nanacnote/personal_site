@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
-import { Footer, useBreakPoint } from '../components'
+import { Footer } from '../components'
+import { useBreakPoint } from '../hooks'
 import * as _sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
@@ -653,6 +654,7 @@ export const Front = ({ post }): JSX.Element => {
                         <span>try some themes</span>
                       </div>
                       <div className="theme-col-items theme-col-link">
+                        <Container fluid className="p-0">
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
@@ -680,6 +682,7 @@ export const Front = ({ post }): JSX.Element => {
                         >
                           Happy
                         </span>
+                        </Container>
                       </div>
                     </div>
                   </Col>
@@ -828,7 +831,7 @@ export const Front = ({ post }): JSX.Element => {
                 <Container fluid className="front-page-right-bottom">
                   {[post.web_development_skill, post.data_science_skill].map(
                     (e, i) => (
-                      <Row className="mb-5 overflow-hidden">
+                      <Row key={`skills-${i}`} className="mb-5 overflow-hidden">
                         <Container
                           fluid
                           className={`skills-row skills-row-${i}`}
@@ -876,7 +879,7 @@ export const Front = ({ post }): JSX.Element => {
                                           )
                                             .reverse()
                                             .map((e) => (
-                                              <div className="d-flex flex-row align-items-center pr-5">
+                                              <div key={e[0]} className="d-flex flex-row align-items-center pr-5">
                                                 <div className="pr-2">
                                                   {e[0]}
                                                 </div>
@@ -921,7 +924,7 @@ export const Front = ({ post }): JSX.Element => {
                                           )
                                             .reverse()
                                             .map((e) => (
-                                              <div className="d-flex flex-row align-items-center pr-5">
+                                              <div key={e[0]} className="d-flex flex-row align-items-center pr-5">
                                                 <div className="pr-2">
                                                   {e[0]}
                                                 </div>
@@ -968,7 +971,7 @@ export const Front = ({ post }): JSX.Element => {
                                           )
                                             .reverse()
                                             .map((e) => (
-                                              <div className="d-flex flex-row align-items-center pr-5">
+                                              <div key={e[0]} className="d-flex flex-row align-items-center pr-5">
                                                 <div className="pr-2">
                                                   {e[0]}
                                                 </div>
@@ -1013,7 +1016,7 @@ export const Front = ({ post }): JSX.Element => {
                                           )
                                             .reverse()
                                             .map((e) => (
-                                              <div className="d-flex flex-row align-items-center pr-5">
+                                              <div key={e[0]} className="d-flex flex-row align-items-center pr-5">
                                                 <div className="pr-2">
                                                   {e[0]}
                                                 </div>
@@ -1081,8 +1084,8 @@ export const Front = ({ post }): JSX.Element => {
                   </Modal.Header>
                   <Modal.Body>
                     <div>
-                      {modalContent.body?.split('%').map((e) => (
-                        <p>{e}</p>
+                      {modalContent.body?.split('%').map((e,i) => (
+                        <p key={i}>{e}</p>
                       ))}
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
