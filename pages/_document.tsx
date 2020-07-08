@@ -11,6 +11,9 @@ class MyDocument extends Document {
       <Html>
         <Head />
         <body className="theme-provider theme-light">
+          <div className="d-flex flex-justify-center position-absolute" style={{right: 0, zIndex: 500}}>
+            <span className="bg-info px-5">under construction</span>
+          </div>
           <Main />
           <NextScript />
         </body>
