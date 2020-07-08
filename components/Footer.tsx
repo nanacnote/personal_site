@@ -1,13 +1,34 @@
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'
 export const Footer = (): JSX.Element => (
-    <div className="footer">
-        <div>
-            <a href="https://github.com/nanacnote" target="_blank" className="footer-socials px-1 h3"><FaGithub /></a>
-            <a href="https://www.linkedin.com/in/owusu-k-adjei-bohyen-b9b4bb83" target="_blank" className="footer-socials px-1 h3"><FaLinkedin /></a>
-            <a href="https://www.instagram.com/cedi_note" target="_blank" className="footer-socials px-1 h3"><FaInstagram /></a>
-        </div>
-        <div>Owusu K. © {new Date(Date.now()).getFullYear()} | Fullstack Developer & Data Scientist</div>
+  <div className="footer">
+    <div>
+      <a
+        href="https://github.com/nanacnote"
+        target="_blank"
+        className="footer-socials px-1 h3"
+      >
+        <FaGithub />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/owusu-k-adjei-bohyen-b9b4bb83"
+        target="_blank"
+        className="footer-socials px-1 h3"
+      >
+        <FaLinkedin />
+      </a>
+      <a
+        href="https://www.instagram.com/cedi_note"
+        target="_blank"
+        className="footer-socials px-1 h3"
+      >
+        <FaInstagram />
+      </a>
     </div>
+    <div>
+      Owusu K. © {new Date(Date.now()).getFullYear()} | Fullstack Developer &
+      Data Scientist
+    </div>
+  </div>
 )
 
 export default Footer
