@@ -194,7 +194,7 @@ export const Front = ({ post }): JSX.Element => {
         {
           scrollTrigger: {
             trigger: e as HTMLElement,
-            markers: true,
+            // markers: true,
             start: 'top 90%',
             toggleActions: 'restart none none reverse',
           },
