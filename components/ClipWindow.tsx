@@ -34,17 +34,17 @@ export const ClipWindow = (): JSX.Element => {
       rotation: 360,
       duration: 0.5,
     })
-    tl.to('.pen-tip', { rotation: 360, duration: 0.5 })
+    tl.to('.pen-tip', { rotation: 360, duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', rotation: -360, duration: 0.5 },
-      '-=0.5'
+      { width: '5px', height: '5px', rotation: -360, duration: 0.05 },
+      '-=0.05'
     )
-    tl.to('.pen-tip', { height: '400px', duration: 0.5 })
+    tl.to('.pen-tip', { height: '400px', duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', y: -100, duration: 0.5 },
-      '-=0.25'
+      { width: '5px', height: '5px', y: -100, duration: 0.05 },
+      '-=0.025'
     )
     // top-left draw line to right
     tl.to('.pen-tip', {
@@ -53,17 +53,17 @@ export const ClipWindow = (): JSX.Element => {
       rotation: 360,
       duration: 0.5,
     })
-    tl.to('.pen-tip', { rotation: 360, duration: 0.5 })
+    tl.to('.pen-tip', { rotation: 360, duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', rotation: -360, duration: 0.5 },
-      '-=0.5'
+      { width: '5px', height: '5px', rotation: -360, duration: 0.05 },
+      '-=0.05'
     )
-    tl.to('.pen-tip', { width: '500px', duration: 0.5 })
+    tl.to('.pen-tip', { width: '500px', duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', x: 125, duration: 0.5 },
-      '-=0.25'
+      { width: '5px', height: '5px', x: 125, duration: 0.05 },
+      '-=0.025'
     )
     // top-right draw line down
     tl.to('.pen-tip', {
@@ -72,17 +72,17 @@ export const ClipWindow = (): JSX.Element => {
       rotation: 360,
       duration: 0.5,
     })
-    tl.to('.pen-tip', { rotation: 360, duration: 0.5 })
+    tl.to('.pen-tip', { rotation: 360, duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', rotation: -360, duration: 0.5 },
-      '-=0.5'
+      { width: '5px', height: '5px', rotation: -360, duration: 0.05 },
+      '-=0.05'
     )
-    tl.to('.pen-tip', { height: '400px', duration: 0.5 })
+    tl.to('.pen-tip', { height: '400px', duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', y: 100, duration: 0.5 },
-      '-=0.25'
+      { width: '5px', height: '5px', y: 100, duration: 0.05 },
+      '-=0.025'
     )
     // bottom-righ draw line to left
     tl.to('.pen-tip', {
@@ -91,26 +91,26 @@ export const ClipWindow = (): JSX.Element => {
       rotation: 360,
       duration: 0.5,
     })
-    tl.to('.pen-tip', { rotation: 360, duration: 0.5 })
+    tl.to('.pen-tip', { rotation: 360, duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', rotation: -360, duration: 0.5 },
-      '-=0.5'
+      { width: '5px', height: '5px', rotation: -360, duration: 0.05 },
+      '-=0.05'
     )
-    tl.to('.pen-tip', { width: '500px', duration: 0.5 })
+    tl.to('.pen-tip', { width: '500px', duration: 0.05 })
     tl.to(
       '.pen-tip',
-      { width: '5px', height: '5px', x: -125, duration: 0.5 },
-      '-=0.25'
+      { width: '5px', height: '5px', x: -125, duration: 0.05 },
+      '-=0.025'
     )
     // final spin step
     tl.to('.pen-tip', {
       width: '10px',
       height: '10px',
       rotation: 360,
-      duration: 0.5,
+      duration: 0.05,
     })
-    tl.to('.pen-tip', { rotation: 360, duration: 0.5 })
+    tl.to('.pen-tip', { rotation: 360, duration: 0.05 })
     tl.to(
       '.pen-tip',
       {
@@ -118,9 +118,9 @@ export const ClipWindow = (): JSX.Element => {
         height: '5px',
         rotation: -360,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.05,
       },
-      '-=0.5'
+      '-=0.05'
     )
     // draw white window background
     tl.to(clipWindowRef, { width: '0px', height: '0px', duration: 0 })
