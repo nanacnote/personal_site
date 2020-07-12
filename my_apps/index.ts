@@ -1,1 +1,1 @@
-export { Pendulum } from './pendulum'
+export { Pendulum } from './Pendulum'
