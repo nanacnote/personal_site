@@ -1,1 +1,1 @@
-export { BallPhysics } from './physics'
+export { Pendulum } from './pendulum'

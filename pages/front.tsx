@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
 import { Footer } from '../components'
 import { useBreakPoint } from '../hooks'
-import { BallPhysics } from '../my_apps'
+import { Pendulum } from '../my_apps'
 import * as _sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
@@ -100,7 +100,7 @@ export const Front = ({ post }): JSX.Element => {
     <Spinner animation="border" role="status" variant="primary" />
   )
   //control what is showing in the main text section when try somthing cool is clicked
-  const [testStage, settestStage] = useState(false)
+  const [testCoolStage, settestCoolStage] = useState(false)
   //triggered when bottom right section is active
   const [showBottomRight, setshowBottomRight] = useState(false)
   //controls skills bar animation
@@ -161,6 +161,7 @@ export const Front = ({ post }): JSX.Element => {
   //scroll gsap activity class with helper functions
   const scrollHelper = {
     //returns the inner width of a div by taking the class name as argument
+    //put . infront of class and # infront of id
     parentWidth: (arg: string): number => {
       return (document.querySelector(arg) as HTMLElement)?.offsetWidth / 2
     },
@@ -177,8 +178,7 @@ export const Front = ({ post }): JSX.Element => {
   //useEffect for controlling the click to test something cool canvas
   useEffect(() => {
     getVistorLocation()
-    BallPhysics('test-stage-window')
-  }, [testStage])
+  }, [testCoolStage])
 
   //useEffect for controlling component in viewport behaviour
   useEffect(() => {
@@ -213,7 +213,7 @@ export const Front = ({ post }): JSX.Element => {
     )
   }, [showBottomRight, currentViewportSize])
 
-  // gsap scrolltrigger config
+  // gsap big idea scrolltrigger config
   useEffect(() => {
     // instantiate timeline for scroll animation of main-languages and main-numbers
     const tl_scrollViews = gsap.timeline({
@@ -349,7 +349,7 @@ export const Front = ({ post }): JSX.Element => {
           .set('.main-text-1', {
             width: '0%',
             height: '0%',
-            borderBottom: 'solid 5px',
+            borderBottom: 'solid 0.5vmax',
           })
           .to('.main-text-1', { duration: 0.5, width: '10%', opacity: 0.5 })
           .to('.main-text-1', {
@@ -360,7 +360,7 @@ export const Front = ({ post }): JSX.Element => {
           .to('.main-text-1', {
             duration: 1,
             width: '15%',
-            borderBottom: 'solid 7.5px',
+            borderBottom: 'solid 0.5vmax',
             opacity: 1,
           })
           .set('.t-03', { display: 'inline' })
@@ -371,7 +371,7 @@ export const Front = ({ post }): JSX.Element => {
               duration: 2,
               x: '0%',
               opacity: 1,
-              text: { value: 'hello', delimiter: ' ' },
+              text: { value: "<span style='font-size: 4vmax;'>Hello</span>", delimiter: ' ' },
               ease: 'bounce.out',
             }
           )
@@ -467,7 +467,7 @@ export const Front = ({ post }): JSX.Element => {
             top: '60%',
             left: '55%',
             color: '#292421',
-            borderTop: 'solid 7.5px #FFE135',
+            borderTop: 'solid 0.5vmax #FFE135',
             ease: 'elastic.out(1,0.30)',
           })
           .to('.t-09', {
@@ -480,7 +480,7 @@ export const Front = ({ post }): JSX.Element => {
             bottom: '10%',
             left: '10%',
             color: '#FFE135',
-            borderBottom: 'solid 7.5px #434343',
+            borderBottom: 'solid 0.5vmax #434343',
             ease: 'none',
           })
           .to('.t-10', {
@@ -534,7 +534,7 @@ export const Front = ({ post }): JSX.Element => {
             x: 0,
             y: 0,
           })
-          .set('.test-stage-intro', { display: 'inline' })
+          .set('.test-cool-stage-intro', { display: 'inline' })
       : null
   }, [landingTransition])
 
@@ -701,30 +701,22 @@ export const Front = ({ post }): JSX.Element => {
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >
-                          Light
-                        </span>
-                        &nbsp; | &nbsp;
+                        >Light</span>
+                        <span>&nbsp;|&nbsp;</span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >
-                          Dark
-                        </span>
-                        &nbsp; | &nbsp;
+                        >Dark</span>
+                        <span>&nbsp;|&nbsp;</span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >
-                          Dull
-                        </span>
-                        &nbsp; | &nbsp;
+                        >Dull</span>
+                        <span>&nbsp;|&nbsp;</span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >
-                          Happy
-                        </span>
+                        >Happy</span>
                       </div>
                     </div>
                   </Col>
@@ -781,17 +773,13 @@ export const Front = ({ post }): JSX.Element => {
                         <span className="t-a t-12 h1">mathematics</span>
                       </div>
                       <div className="main-text-3">
-                        {testStage ? (
-                          <div id="test-stage-window" className="" />
-                        ) : (
-                          <span
-                            className="test-stage test-stage-intro clickable-item position-relative"
-                            onClick={() => settestStage(true)}
-                          >
-                            click here to test <br />
-                            something cool I built
-                          </span>
-                        )}
+                        <span
+                          className="test-cool-stage test-cool-stage-intro clickable-item position-relative"
+                          onClick={() => settestCoolStage(true)}
+                        >
+                          click here to test <br />
+                          something cool I built
+                        </span>
                       </div>
                     </div>
                   </Container>
@@ -1166,7 +1154,7 @@ export const Front = ({ post }): JSX.Element => {
                   aria-labelledby="modal-for-current"
                 >
                   <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
+                    <Modal.Title id="currently-working-on-title">
                       {modalContent.header}
                     </Modal.Title>
                   </Modal.Header>
@@ -1184,6 +1172,27 @@ export const Front = ({ post }): JSX.Element => {
                         onLoad={() => setiframeStatus(null)}
                       />
                     </div>
+                  </Modal.Body>
+                </Modal>
+              </Container>
+
+              {/* modal for showing test app when currently test something cool is clicked */}
+              <Container fluid className="test-cool-stuff-modal">
+                <Modal
+                  size="xl"
+                  show={testCoolStage}
+                  onHide={() => {
+                    settestCoolStage(false)
+                  }}
+                  aria-labelledby="modal-for-test-cool-stuff"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="test-cool-stuff-title">
+                      header
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Pendulum/>
                   </Modal.Body>
                 </Modal>
               </Container>

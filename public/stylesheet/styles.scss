@@ -8,8 +8,14 @@
 
 @font-face {
     font-family: 'ZillaSlab';
-    font-weight: 600;
+    font-weight: 300;
     src: local('ZillaSlab'), url(/fonts/Zilla_Slab/ZillaSlab-Medium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'ZillaSlab';
+    font-weight: 600;
+    src: local('ZillaSlab'), url(/fonts/Zilla_Slab/ZillaSlab-SemiBold.ttf) format('truetype');
 }
 
 @font-face {
@@ -164,6 +170,10 @@ body {
 
     //_______________________
     // front pages main
+    .test-cool-stuff-modal {
+        
+    }
+
     .front-main-container {
         background: map.get($arg, "$bg-secondary");
         color: map.get($arg, "$text-secondary");
@@ -291,7 +301,7 @@ body {
                             font-size: 1rem;
                         }
                     }
-                    .test-stage {
+                    .test-cool-stage {
                         display: none;
                     }
                 }
