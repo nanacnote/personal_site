@@ -14,6 +14,42 @@ export const ClipWindow = (): JSX.Element => {
     return tmp
   }
 
+  const techStackArray = [
+    "webpack",
+    "tensor flow",
+    "redux",
+    "next js",
+    "jest js",
+    "lodash",
+    "heroku",
+    "graphql",
+    "express js",
+    "docker",
+    "browserify",
+    "babel",
+    "mongodb",
+    "boostrap",
+    "git",
+    "mysql",
+    "material UI", 
+    "gulp",
+    "java",
+    "semantic UI",
+    "typescript",
+    "npm",
+    "bash",
+    "linux",
+    "adobe xd",
+    "node js",
+    "vscode",
+    "python",
+    "jquery",
+    "javascript",
+    "html5",
+    "css3",
+    "r lang",
+  ]
+
   useEffect(() => {
     const tl = gsap.timeline()
     // clipWindowRef.onmouseenter = function() {
@@ -144,7 +180,7 @@ export const ClipWindow = (): JSX.Element => {
     tl.to('.enter-site', { opacity: 1, duration: 0.5 })
     tl.to('.enter-site', { y: 5, duration: 1 }, '-=0.5')
     // svg animation
-    numRangeArray(33).map((e) =>
+    numRangeArray(34).map((e) =>
       tl
         .to(
           `.svg-logo-${e}`,
@@ -194,7 +230,7 @@ export const ClipWindow = (): JSX.Element => {
               key={e}
               className={`svg-logo-${e} svg-logo`}
               src={`/svg/${e}.svg`}
-              alt="logo-image"
+              alt={techStackArray[e - 1]}
             />
           ))}
         </div>
