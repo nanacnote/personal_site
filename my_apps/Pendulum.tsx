@@ -20,7 +20,7 @@ export class Pendulum extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props)
     this.state = {
-      showMore: true,
+      showMore: false,
       moreLess: "more",
     }
   }
@@ -192,7 +192,6 @@ export class Pendulum extends Component<TProps, TState> {
                   <li><b>Newton's first law</b></li>
                   <li><b>Newton's second law</b></li>
                   <li><b>Newton's third law</b></li>
-                  <li><b>law of conservation of momentum</b></li>
                 </ul>
                 <p>However it takes quiet a bit of code to implement.</p>
                 <p>
@@ -219,7 +218,7 @@ export class Pendulum extends Component<TProps, TState> {
                       <p>
                         To start with, the Matter.js engine and the renderer should be initialise. 
                         This website is built with Next.js so to create an instance of Matter.js, 
-                        the code block should sit in the <i><u>componentDidMount</u></i> lifecycle event (ie when
+                        the code block should sit in the <i><u>componentDidMount</u></i> lifecycle method (ie when
                         using a class based component). Also this website is developed in strict typescript mode hence
                         all the typing and type casting inside the code.
                       </p>
@@ -344,15 +343,34 @@ export class Pendulum extends Component<TProps, TState> {
                     <li><b>mouse event</b></li>
                     <div className="p-3">
                       <p>
-                        Once I had the circle bodies, I was left with one more step to complete 
-                        the physica appearance of the craddle. This was to add constraints to the 
-                        balls and attach them to the roof of the world. this can be acheived by 
-                        calling the constraint method. In my case with multiple balls I adopted 
-                        the map function to map over the balls array and attach a constraint to 
-                        each ball while immediately adding this new composite to the world.
+                        Finally the mouse and touch event handlers are attached to the canvas 
+                        using the mouse and mouseEvent methods from Matter.js using the code block 
+                        below. I have also included the code that triggers the engine and render's run method
+                        and closed the <i><u>componentDidMount</u></i> life cycle method.
                       </p>
                       <div className="code-block">
                         ...<br/>
+                        &emsp;// add click listner to canvas<br/>
+                        &emsp;const mouseEvent = this.Mouse.create(this.myRef)<br/>
+                        &emsp;const mouseConstraint = this.MouseConstraint.create(this.engine_m, &#123;<br/>
+                        &emsp;&emsp;mouse: mouseEvent,<br/>
+                        &emsp;&emsp;constraint: &#123;<br/>
+                        &emsp;&emsp;&emsp;stiffness: 0.2,<br/>
+                        &emsp;&emsp;&emsp;angularStiffness: 0,<br/>
+                        &emsp;&emsp;&emsp;render: &#123;<br/>
+                        &emsp;&emsp;&emsp;&emsp;visible: false,<br/>
+                        &emsp;&emsp;&emsp;&#125;<br/>
+                        &emsp;&emsp;&#125; as any,<br/>
+                        &emsp;&#125;)<br/>
+                        &emsp;this.World.add(this.world_m, mouseConstraint);<br/>
+                        <br/>
+                        &emsp;// run the engine<br/>
+                        &emsp;this.Engine.run(this.engine_m)<br/>
+                        <br/>
+                        &emsp;// run the renderer<br/>
+                        &emsp;this.Render.run(this.render_m)<br/>
+                        <br/>
+                      &emsp;&#125;<br/>
                       </div>
                     </div>
               </div>
