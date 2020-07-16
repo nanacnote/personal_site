@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import Matter from 'matter-js'
+import { Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { FaQuestionCircle, FaArrowUp } from 'react-icons/fa'
 
-// typings declaration
+/**
+ * typings declaration for props on Pendulum module
+ */
 type TProps = {}
 
+/**
+ * typings declaration for state on Pendulum module
+ */
 type TState = {
-  Mbox: Matter.Body
-  roof: Matter.Body
-  ground: Matter.Body
-  leftWall: Matter.Body
-  rightWall: Matter.Body
+  showMore: boolean,
+  moreLess: string,
 }
 
 export class Pendulum extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props)
     this.state = {
-      Mbox: this.Bodies.rectangle(400, 30, 60, 60),
-      roof: this.Bodies.rectangle(400, 0, 810, 20, { isStatic: true }),
-      ground: this.Bodies.rectangle(400, 400, 810, 20, { isStatic: true }),
-      leftWall: this.Bodies.rectangle(0, 200, 20, 410, { isStatic: true }),
-      rightWall: this.Bodies.rectangle(800, 200, 20, 410, { isStatic: true }),
+      showMore: true,
+      moreLess: "more",
     }
   }
   // ref for canvas wrapper
@@ -30,18 +31,21 @@ export class Pendulum extends Component<TProps, TState> {
   private Engine = Matter.Engine
   private Render = Matter.Render
   private World = Matter.World
-  private Body = Matter.Body
   private Bodies = Matter.Bodies
-  private Composite = Matter.Composite
-  private Composites = Matter.Composites
   private Constraint = Matter.Constraint
+  private Mouse = Matter.Mouse
+  private MouseConstraint = Matter.MouseConstraint
 
   // create an engine
   private engine_m = this.Engine.create()
+  // create the world
+  private world_m = this.engine_m.world
+  // create the renderer
+  private render_m: Matter.Render;
 
   componentDidMount() {
     // create a renderer
-    const render_m = this.Render.create({
+    this.render_m = this.Render.create({
       canvas: this.myRef,
       engine: this.engine_m,
       options: {
@@ -49,118 +53,340 @@ export class Pendulum extends Component<TProps, TState> {
         height: 400,
         background: 'transparent',
         wireframes: false,
-      },
+        showAngleIndicator: true,
+      } as any,
     })
+    
+    // create roof body and add to world
+    const roof = this.Bodies.rectangle(400, 0, 810, 20, {isStatic: true})
+    const ground = this.Bodies.rectangle(400, 400, 810, 20, {isStatic: true})
+    const leftWall = this.Bodies.rectangle(0, 300, 20, 610, {isStatic: true})
+    const rightWall = this.Bodies.rectangle(800, 300, 20, 610, {isStatic: true})
+    this.World.add(this.world_m, [roof, ground, leftWall, rightWall])
 
-    // add ground to the world
-    this.World.add(this.engine_m.world, [
-      this.state.Mbox,
-      this.state.roof,
-      this.state.ground,
-      this.state.leftWall,
-      this.state.rightWall,
-    ])
+    const balls = []
+    // create 5 balls body and add to world with constraints
+    for(let i=0; i<5; i++){
+      balls.push( 
+        this.Bodies.circle(
+          300+ i*40 , 300, 20, 
+          { inertia: Infinity, restitution: 1, friction: 0, frictionAir: 0.0001, slop: 1 }
+        )
+      )
+    }
+
+    // add constraints to the balls in the world
+    balls.map((e,i) => {
+      const constraint = this.Constraint.create({
+        bodyA: e,
+        pointB: { x: 300 + i*40, y: 0 },
+        length: 200,
+        stiffness: 1,
+        render: {
+          strokeStyle: 'black',
+        }
+      } as any);
+      this.World.add(this.world_m, [e, constraint])
+    })
+    
+    // add click listner to canvas
+    const mouseEvent = this.Mouse.create(this.myRef)
+    const mouseConstraint = this.MouseConstraint.create(this.engine_m, {
+      mouse: mouseEvent,
+      constraint: {
+        stiffness: 0.2,
+        angularStiffness: 0,
+        render: {
+          visible: false,
+        }
+      } as any,
+    })
+    this.World.add(this.world_m, mouseConstraint);
 
     // run the engine
     this.Engine.run(this.engine_m)
 
     // run the renderer
-    this.Render.run(render_m)
+    this.Render.run(this.render_m)
+
   }
 
-  componentDidUpdate() {
+  componentWillUnmount() {
     this.Engine.clear(this.engine_m)
+    this.Render.stop(this.render_m)
   }
 
   render() {
-    // creates a cirlce body with specified phyical properties
-    const newMball = () => {
-      let ball = this.Bodies.circle(400, 30, 30, {
-        render: {
-          sprite: {
-            texture:
-              'https://opengameart.org/sites/default/files/styles/medium/public/SoccerBall_0.png',
-            xScale: 0.6,
-            yScale: 0.6,
-          },
-        },
-        restitution: 1,
-        frictionAir: 0.001,
-      })
-      return ball
-    }
-    // creates a square body with specified phyical properties
-    const newMBox = (x=400, y=30, width=60, height=60) => {
-      let box = this.Bodies.rectangle(x, y, width, height)
-      box.frictionAir = 0.001
-      return box
-    }
-
-    // creates a car body with specified phyical properties
-    const newMCar = () => {
-      let car = this.Composites.car(400, 30, 175, 20, 30);
-      return car
-    }
-
-    // creates a chain body with specified phyical properties
-    const newMChain = () => {
-      let boxes = this.Composites.stack(400, 30, 3, 1, 10, 0, function(x, y) {
-        return newMBox(x, y, 50, 40);
-      })
-      let chain = this.Composites.chain(boxes, 0.5, 0, -0.5, 0, { stiffness: 1});
-      return chain
-    }
-
-    const foo = () => {
-      const constraint = this.Constraint.create({
-        bodyA: this.state.Mbox,
-        bodyB: this.state.roof,
-        length: 100,
-        stiffness: 1,
-        render: {
-          strokeStyle: 'grey',
-        }
-      });
-      this.World.add(this.engine_m.world, constraint)
-      // add bodies to the world (2nd params)
-      // this.World.add(this.engine_m.world, newMBox())
-
-      // //2 params keepStatic prevents clear of static assets
-      // this.World.clear(this.engine_m.world, true)
-
-      // // rotate all bodies around point (3rd params) angle in rad (2nd params)
-      // this.Composite.rotate( this.engine_m.world,  Math.PI/4, {x: 400, y: 300})
-
-      // //control the size of a single body
-      // this.Body.scale( this.state.Mball, 1.5, 1.5 );
-
-      // //controls the position of a single body
-      // this.Body.translate( this.state.Mbox, {x: -10, y: 20} );
-
-      // // applies linear and angular velocities respectively
-      // this.Body.setVelocity( this.state.Mbox, {x: -5, y: 0});
-      // this.Body.setAngularVelocity( this.state.Mbox, Math.PI/6);
-
-      // // applies force to body
-      // this.Body.applyForce(
-      //   this.state.Mbox,
-      //   {
-      //     x: this.state.Mbox.position.x,
-      //     y: this.state.Mbox.position.y,
-      //   },
-      //   {
-      //     x: 0,
-      //     y: -0.05,
-      //   }
-      // )
+    const showMoreHandler = async ()=> {
+      await this.setState({showMore: !this.state.showMore})
+      switch (this.state.showMore) {
+        case true:
+          this.setState({moreLess: "less"})
+          break;
+        case false:
+          this.setState({moreLess: "more"})
+          break;
+        default:
+          break;
+      }
     }
 
     return (
-      <div className="d-flex justify-content-center align-items-center overflow-hidden">
-        <canvas className="modal-canvas" ref={(div) => (this.myRef = div)} onClick={foo} />
-      </div>
+      <>
+      <Container>
+        <Row>
+          <Col xs={12} xl={4}>
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <div >
+                
+                <div>
+                  <h5>
+                    <strong>a simple physics simulation</strong>
+                  </h5>
+                </div>
+
+                <hr/>
+
+                <div>
+                  <span>
+                  This project was inspired by the thought of capturing some fundatmental physics
+                  laws using a visual and interactive approach. After thinking on this for a while, 
+                  I decided to simulate the famous so called Newtons cradle.
+                  </span>
+                  <span>
+                    <div 
+                      className="py-1 mb-3 position-relative clickable-item"
+                      onClick={ showMoreHandler }
+                    >
+                      show {this.state.moreLess} <FaQuestionCircle />
+                    </div>
+                  </span>
+                </div>
+                
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <canvas 
+                className="modal-canvas"
+                ref={(div) => (this.myRef = div)}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          {
+            this.state.showMore ?
+          <div className="my-5 px-4 w-100" >
+            <hr/>
+            <div>
+              <div className="mb-3">
+                <span className="bg-warning">
+                  Drag one of the balls at he ends and release to start the simulation
+                </span>
+              </div>
+              <div>
+                <p>This simple expirement explains a few fundatmental laws of physics.</p>
+                <ul>
+                  <li><b>Newton's first law</b></li>
+                  <li><b>Newton's second law</b></li>
+                  <li><b>Newton's third law</b></li>
+                  <li><b>law of conservation of momentum</b></li>
+                </ul>
+                <p>However it takes quiet a bit of code to implement.</p>
+                <p>
+                  Luckily HTML5's canvas API coupled with the popular JavaScript physics engine: 
+                  Matter.js made coding this fairly easy. But then again an intermediate understanding
+                  of Canvas API and Matter.js is needed.  
+                </p>
+                <p>
+                  I will focus on the <i><u>Physics</u></i> and <i><u>Matter.js</u></i> in this write up but if you require more information on canvas
+                  checkout <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN web doc</a>.
+                  But in a nutshell the canvas API just like the name suggest is a space within which you can render 2D and 3D
+                  context.
+                </p>
+                <p><b>So what is Matter.js?</b></p>
+                <p>
+                  Matter.js is a 2D physics engine for the web as described on the <a href="https://brm.io/matter-js/" target="_blank">matter.js website</a>.
+                  It can be used to simulate how rigid bodies will behave in the real world. For example using Matter.js
+                  you can simulate what will happen when a force of x amount hits a station body. This ability makes
+                  Matter.js useful in game development, computer graphics and film. 
+                </p>
+                <p>In this project a few steps were neccessary to simulate the cradle.</p>
+                  <li><b>initialise instance</b></li>
+                    <div className="p-3">
+                      <p>
+                        To start with, the Matter.js engine and the renderer should be initialise. 
+                        This website is built with Next.js so to create an instance of Matter.js, 
+                        the code block should sit in the <i><u>componentDidMount</u></i> lifecycle event (ie when
+                        using a class based component). Also this website is developed in strict typescript mode hence
+                        all the typing and type casting inside the code.
+                      </p>
+                      <div className="code-block">
+                        <p>
+                          // module aliases
+                          private Engine = Matter.Engine<br/>
+                          private Render = Matter.Render<br/>
+                          private World = Matter.World<br/>
+                          private Bodies = Matter.Bodies<br/>
+                          private Constraint = Matter.Constraint<br/>
+                          private Mouse = Matter.Mouse<br/>
+                          private MouseConstraint = Matter.MouseConstraint<br/>
+                          <br/>
+                          // create an engine<br/>
+                          private engine_m = this.Engine.create()<br/>
+                          // create the world<br/>
+                          private world_m = this.engine_m.world<br/>
+                          // create the renderer<br/>
+                          private render_m: Matter.Render;<br/>
+                          <br/>
+                          componentDidMount() &#123;<br/>
+                          &emsp;// create a renderer<br/>
+                          &emsp;this.render_m = this.Render.create(&#123;<br/>
+                            &emsp;&emsp;canvas: this.myRef,<br/>
+                            &emsp;&emsp;engine: this.engine_m,<br/>
+                            &emsp;&emsp;options: &#123;<br/>
+                            &emsp;&emsp;&emsp;width: 800,<br/>
+                            &emsp;&emsp;&emsp;height: 400,<br/>
+                            &emsp;&emsp;&emsp;background: 'transparent',<br/>
+                            &emsp;&emsp;&emsp;wireframes: false,<br/>
+                            &emsp;&emsp;&emsp;showAngleIndicator: true,<br/>
+                            &emsp;&emsp;&#125; as any,<br/>
+                            &emsp;&#125;)<br/>
+                          ...<br/>
+                        </p>
+                      </div>
+                    </div>
+                  <li><b>static roof</b></li>
+                    <div className="p-3">
+                      <p>
+                        In matter.js a rigid body can be made to behave like a wall by setting <code>isStatic: true</code> in 
+                        the options object of the bodies method. Using this I positioned a roof at the top of the canvas 
+                        to which I subsequently attached the pendulums. I also created three other bodies to serve as walls
+                        and a ground.
+                      </p>
+                      <div className="code-block">
+                        <p>
+                          ...<br/>
+                          // create static roof body<br/>
+                          const roof = this.Bodies.rectangle(400, 0, 810, 20, &#123; isStatic: true &#125;)<br/>
+                          const ground = this.Bodies.rectangle(400, 400, 810, 20, &#123; isStatic: true &#125;)<br/>
+                          const leftWall = this.Bodies.rectangle(0, 300, 20, 610, &#123; isStatic: true &#125;)<br/>
+                          const rightWall = this.Bodies.rectangle(800, 300, 20, 610, &#123; isStatic: true &#125;)<br/>
+                          ...<br/>
+                        </p>
+                      </div>
+                      <p>After creating the bodies the next step was to add them into the world</p>
+                      <div className="code-block">
+                        <p>
+                          ...<br/>
+                          // add bodies into world<br/>
+                          this.World.add(this.world_m, [roof, ground, leftWall, rightWall])<br/>
+                          ...<br/>
+                        </p>
+                      </div>
+                    </div>
+                      
+                  <li><b>circle bodies</b></li>
+                    <div className="p-3">
+                      <p>
+                        Matter.js has factory defined bodies. These can be accessed through the
+                        bodies method. I decided to use the circles body which renders a color filled
+                        circle onto the canvas. The optional options object passed to this method as a parameter
+                        is where the magic happens. To acheive a real world case of solid spherical weighted balls with the right elasticity,
+                        the options object should look something like this.<br/>
+                        <code>&#123; inertia: Infinity, restitution: 1, friction: 0, frictionAir: 0.0001, slop: 1 &#125;</code> 
+                      </p>
+                      <div className="code-block">
+                        ...<br/>
+                        const balls = []<br/>
+                        // create 5 balls body and add to world with constraints<br/>
+                        for(let i=0; i&gt;5; i++) &#123;<br/>
+                        &emsp;balls.push( <br/>
+                        &emsp;&emsp;this.Bodies.circle(<br/>
+                        &emsp;&emsp;&emsp;300+ i*40 , 300, 20, <br/>
+                        &emsp;&emsp;&emsp;&#123; inertia: Infinity, restitution: 1, friction: 0, frictionAir: 0.0001, slop: 1 &#125;<br/>
+                        &emsp;&emsp;)<br/>
+                        &emsp;)<br/>
+                        &#125;<br/>
+                        ...<br/>
+                      </div>
+                    </div>
+                    <li><b>constraints</b></li>
+                    <div className="p-3">
+                      <p>
+                        Once I had the circle bodies, I was left with one more step to complete 
+                        the physica appearance of the craddle. This was to add constraints to the 
+                        balls and attach them to the roof of the world. this can be acheived by 
+                        calling the constraint method. In my case with multiple balls I adopted 
+                        the map function to map over the balls array and attach a constraint to 
+                        each ball while immediately adding this new composite to the world.
+                      </p>
+                      <div className="code-block">
+                        ...<br/>
+                        // add constraints to the balls in the world<br/>
+                        balls.map((e,i) =&gt; &#123;<br/>
+                        &emsp;const constraint = this.Constraint.create(&#123;<br/>
+                        &emsp;&emsp;bodyA: e,<br/>
+                        &emsp;&emsp;pointB: &#123; x: 300 + i*40, y: 0 &#125;,<br/>
+                        &emsp;&emsp;length: 200,<br/>
+                        &emsp;&emsp;stiffness: 1,<br/>
+                        &emsp;&emsp;render: &#123;<br/>
+                        &emsp;&emsp;&emsp;strokeStyle: 'black',<br/>
+                        &emsp;&emsp;&#125;<br/>
+                        &emsp;&#125; as any);<br/>
+                        &emsp;this.World.add(this.world_m, [e, constraint])<br/>
+                        &#125;)<br/>
+                        ...<br/>
+                      </div>
+                    </div>
+                    <li><b>mouse event</b></li>
+                    <div className="p-3">
+                      <p>
+                        Once I had the circle bodies, I was left with one more step to complete 
+                        the physica appearance of the craddle. This was to add constraints to the 
+                        balls and attach them to the roof of the world. this can be acheived by 
+                        calling the constraint method. In my case with multiple balls I adopted 
+                        the map function to map over the balls array and attach a constraint to 
+                        each ball while immediately adding this new composite to the world.
+                      </p>
+                      <div className="code-block">
+                        ...<br/>
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div className="d-flex flex-column justify-content-center align-items-start position-sticky" style={{bottom: "25px"}}>
+              <div>
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={function (props) {
+                    return (
+                      <Tooltip id="button-tooltip" {...props}>
+                        Show Less
+                      </Tooltip>
+                    );
+                  }}
+                >
+                  <div
+                    className="mt-5 clickable-item-circle"
+                    onClick={ showMoreHandler }
+                  >
+                    <FaArrowUp/>
+                  </div>
+                </OverlayTrigger>
+              </div>
+            </div>
+          </div>
+          :
+          null
+          }
+        </Row>
+      </Container>
+      </>
     )
   }
 }
-
 export default Pendulum
