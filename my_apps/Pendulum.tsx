@@ -89,7 +89,7 @@ export class Pendulum extends Component<TProps, TState> {
       this.World.add(this.world_m, [e, constraint])
     })
     
-    // add click listner to canvas
+    // add click listener to canvas
     const mouseEvent = this.Mouse.create(this.myRef)
     const mouseConstraint = this.MouseConstraint.create(this.engine_m, {
       mouse: mouseEvent,
@@ -219,7 +219,7 @@ export class Pendulum extends Component<TProps, TState> {
                         To start with, the Matter.js engine and the renderer should be initialised. 
                         This website is built with Next.js so to create an instance of Matter.js, 
                         the code block should sit in the <i><u>componentDidMount</u></i> lifecycle method (ie when
-                        using a class-based component). Also this website is developed in strict typescript mode hence
+                        using a class-based component). Also, this website is developed in strict typescript mode hence
                         all the typing and type casting inside the code.
                       </p>
                       <div className="code-block">
@@ -268,7 +268,7 @@ export class Pendulum extends Component<TProps, TState> {
                       <div className="code-block">
                         <p>
                           ...<br/>
-                          // create static roof body<br/>
+                          // create static roof body, ground and walls<br/>
                           const roof = this.Bodies.rectangle(400, 0, 810, 20, &#123; isStatic: true &#125;)<br/>
                           const ground = this.Bodies.rectangle(400, 400, 810, 20, &#123; isStatic: true &#125;)<br/>
                           const leftWall = this.Bodies.rectangle(0, 300, 20, 610, &#123; isStatic: true &#125;)<br/>
@@ -293,7 +293,7 @@ export class Pendulum extends Component<TProps, TState> {
                         Matter.js has factory defined bodies. These can be accessed through the
                         bodies method. I decided to use the circles body which renders a color filled
                         circle onto the canvas. The optional options object passed to this method as a parameter
-                        is where the magic happens. To acheive a real world case of solid spherical weighted balls with the right elasticity,
+                        is where the magic happens. To achieve a real world case of solid spherical weighted balls with the right elasticity,
                         the options object should look something like this.<br/>
                         <code>&#123; inertia: Infinity, restitution: 1, friction: 0, frictionAir: 0.0001, slop: 1 &#125;</code> 
                       </p>
@@ -315,10 +315,10 @@ export class Pendulum extends Component<TProps, TState> {
                     <li><b>constraints</b></li>
                     <div className="p-3">
                       <p>
-                        Once I had the circle bodies, I was left with one more step to complete 
-                        the physica appearance of the craddle. This was to add constraints to the 
-                        balls and attach them to the roof of the world. this can be acheived by 
-                        calling the constraint method. In my case with multiple balls I adopted 
+                        After creating the circle bodies, there was one more step left to complete
+                        the physical appearance of the cradle. This was to add constraints to the 
+                        balls and attach them to the roof of the world. This step can be achieved by 
+                        calling the constraint method. In my case with multiple balls I called 
                         the map function to map over the balls array and attach a constraint to 
                         each ball while immediately adding this new composite to the world.
                       </p>
@@ -343,14 +343,15 @@ export class Pendulum extends Component<TProps, TState> {
                     <li><b>mouse event</b></li>
                     <div className="p-3">
                       <p>
-                        Finally the mouse and touch event handlers are attached to the canvas 
-                        using the mouse and mouseEvent methods from Matter.js using the code block 
-                        below. I have also included the code that triggers the engine and render's run method
+                        Finally I attached the mouse and touch event handlers to the canvas 
+                        using the mouse and mouseEvent methods from Matter.js. The code block 
+                        below shows the syntax. I have also included the code that triggers 
+                        method that runs the engine and renderer.
                         and closed the <i><u>componentDidMount</u></i> life cycle method.
                       </p>
                       <div className="code-block">
                         ...<br/>
-                        &emsp;// add click listner to canvas<br/>
+                        &emsp;// add click listener to canvas<br/>
                         &emsp;const mouseEvent = this.Mouse.create(this.myRef)<br/>
                         &emsp;const mouseConstraint = this.MouseConstraint.create(this.engine_m, &#123;<br/>
                         &emsp;&emsp;mouse: mouseEvent,<br/>
