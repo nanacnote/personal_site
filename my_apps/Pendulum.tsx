@@ -149,9 +149,9 @@ export class Pendulum extends Component<TProps, TState> {
 
                 <div>
                   <span>
-                  This project was inspired by the thought of capturing some fundatmental physics
+                  This project was inspired by the thought of capturing some fundamental physics
                   laws using a visual and interactive approach. After thinking on this for a while, 
-                  I decided to simulate the famous so called Newtons cradle.
+                  I decided to simulate the famous so-called Newtons cradle.
                   </span>
                   <span>
                     <div 
@@ -183,20 +183,20 @@ export class Pendulum extends Component<TProps, TState> {
             <div>
               <div className="mb-3">
                 <span className="bg-warning">
-                  Drag one of the balls at he ends and release to start the simulation
+                  Drag one of the balls at the ends and release to start the simulation
                 </span>
               </div>
               <div>
-                <p>This simple expirement explains a few fundatmental laws of physics.</p>
+                <p>This simple experiment explains a few fundamental laws of physics.</p>
                 <ul>
                   <li><b>Newton's first law</b></li>
                   <li><b>Newton's second law</b></li>
                   <li><b>Newton's third law</b></li>
                 </ul>
-                <p>However it takes quiet a bit of code to implement.</p>
+                <p>However it takes quite a bit of code to implement.</p>
                 <p>
                   Luckily HTML5's canvas API coupled with the popular JavaScript physics engine: 
-                  Matter.js made coding this fairly easy. But then again an intermediate understanding
+                  Matter.js made coding this fairly easy. But then again, an intermediate understanding
                   of Canvas API and Matter.js is needed.  
                 </p>
                 <p>
@@ -208,18 +208,18 @@ export class Pendulum extends Component<TProps, TState> {
                 <p><b>So what is Matter.js?</b></p>
                 <p>
                   Matter.js is a 2D physics engine for the web as described on the <a href="https://brm.io/matter-js/" target="_blank">matter.js website</a>.
-                  It can be used to simulate how rigid bodies will behave in the real world. For example using Matter.js
+                  It can be used to simulate how rigid bodies will behave in the real world. For example, using Matter.js
                   you can simulate what will happen when a force of x amount hits a station body. This ability makes
                   Matter.js useful in game development, computer graphics and film. 
                 </p>
-                <p>In this project a few steps were neccessary to simulate the cradle.</p>
+                <p>In this project a few steps were necessary to simulate the cradle.</p>
                   <li><b>initialise instance</b></li>
                     <div className="p-3">
                       <p>
-                        To start with, the Matter.js engine and the renderer should be initialise. 
+                        To start with, the Matter.js engine and the renderer should be initialised. 
                         This website is built with Next.js so to create an instance of Matter.js, 
                         the code block should sit in the <i><u>componentDidMount</u></i> lifecycle method (ie when
-                        using a class based component). Also this website is developed in strict typescript mode hence
+                        using a class-based component). Also this website is developed in strict typescript mode hence
                         all the typing and type casting inside the code.
                       </p>
                       <div className="code-block">
