@@ -211,7 +211,7 @@ export const Front = ({ post }): JSX.Element => {
         }
       )
     )
-  }, [showBottomRight, currentViewportSize])
+  }, [showBottomRight, currentViewportSize, siderState])
 
   // gsap big idea scrolltrigger config
   useEffect(() => {
@@ -253,7 +253,7 @@ export const Front = ({ post }): JSX.Element => {
         { duration: 1, opacity: 1 },
         '-=0.5'
       )
-  }, [landingTransition, currentViewportSize])
+  }, [landingTransition, currentViewportSize, siderState])
 
   // gsap text video
   useEffect(() => {
@@ -264,7 +264,8 @@ export const Front = ({ post }): JSX.Element => {
             '.main-text-row',
             {
               duration: 0.5,
-              height: '350px',
+              height: '25vmax',
+              minHeight: '350px',
               width: '100%',
               paddingTop: '10px',
             },
@@ -304,7 +305,7 @@ export const Front = ({ post }): JSX.Element => {
             '-=1'
           )
           .set('.main-text-1', { width: '100%', height: '100%' }, '-=1')
-          //set rest of page display to block at thispoint
+          //set rest of page display to block at this point
           .set('.t-01', {
             y: '-500%',
             display: 'inline',

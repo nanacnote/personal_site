@@ -155,7 +155,7 @@ export class Pendulum extends Component<TProps, TState> {
                   </span>
                   <span>
                     <div 
-                      className="py-1 mb-3 position-relative clickable-item"
+                      className="py-1 mb-3 position-relative clickable-item text-primary bg-white"
                       onClick={ showMoreHandler }
                     >
                       show {this.state.moreLess} <FaQuestionCircle />
