@@ -220,7 +220,7 @@ export const Front = ({ post }): JSX.Element => {
       scrollTrigger: {
         trigger: '.grad-hr',
         scrub: 3,
-        markers: true,
+        // markers: true,
         start: 'top top',
         end: '+=450',
         toggleActions: 'restart complete reverse none',
