@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
+    "@types/lodash": "^4.14.157",
     "@types/matter-js": "^0.14.4",
     "bootstrap": "^4.5.0",
     "gsap": "^3.3.4",

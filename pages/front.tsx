@@ -158,7 +158,7 @@ export const Front = ({ post }): JSX.Element => {
     }
   }
 
-  //scroll gsap activity class with helper functions
+  //scroll gsap activity object with helper functions
   const scrollHelper = {
     //returns the inner width of a div by taking the class name as argument
     //put . infront of class and # infront of id
@@ -211,7 +211,7 @@ export const Front = ({ post }): JSX.Element => {
         }
       )
     )
-  }, [showBottomRight, currentViewportSize, siderState])
+  }, [showBottomRight])
 
   // gsap big idea scrolltrigger config
   useEffect(() => {
@@ -220,9 +220,10 @@ export const Front = ({ post }): JSX.Element => {
       scrollTrigger: {
         trigger: '.grad-hr',
         scrub: 3,
+        markers: true,
         start: 'top top',
         end: '+=450',
-        toggleActions: 'restart complete reverse reverse',
+        toggleActions: 'restart complete reverse none',
       },
     })
     tl_scrollViews

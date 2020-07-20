@@ -15,7 +15,7 @@ class MyDocument extends Document {
             className="d-flex flex-justify-center position-absolute"
             style={{ right: 0, zIndex: 500 }}
           >
-            <span className="bg-info px-5">under construction</span>
+            <span className="bg-warning px-5">rebuilding</span>
           </div>
           <Main />
           <NextScript />

@@ -4,8 +4,8 @@
 // it also returns the value of the viewport after every adjustment
 
 import { useState, useEffect } from 'react'
-
-const debounce = require('lodash/debounce')
+import debounce from 'lodash/debounce'
+// const debounce = require('lodash/debounce')
 
 // helper function to translate the size to string of xs sm md lg
 const helper = (arg: number | undefined) => {
