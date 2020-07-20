@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Footer } from '../components'
 import { useBreakPoint } from '../hooks'
 import { Pendulum } from '../my_apps'
-import * as _sortBy from 'lodash/sortBy'
+import sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -220,7 +220,7 @@ export const Front = ({ post }): JSX.Element => {
       scrollTrigger: {
         trigger: '.grad-hr',
         scrub: 3,
-        markers: true,
+        // markers: true,
         start: 'top top',
         end: '+=450',
         toggleActions: 'restart complete reverse none',
@@ -914,7 +914,7 @@ export const Front = ({ post }): JSX.Element => {
                                             </h5>
                                           </div>
                                           <div>
-                                            {_sortBy(
+                                            {sortBy(
                                               Object.entries(
                                                 E?.frameworks || {}
                                               ),
@@ -968,7 +968,7 @@ export const Front = ({ post }): JSX.Element => {
                                             </h5>
                                           </div>
                                           <div>
-                                            {_sortBy(
+                                            {sortBy(
                                               Object.entries(
                                                 E?.libraries || {}
                                               ),
@@ -1022,7 +1022,7 @@ export const Front = ({ post }): JSX.Element => {
                                             </h5>
                                           </div>
                                           <div>
-                                            {_sortBy(
+                                            {sortBy(
                                               Object.entries(
                                                 E?.technologies || {}
                                               ),
@@ -1076,7 +1076,7 @@ export const Front = ({ post }): JSX.Element => {
                                             </h5>
                                           </div>
                                           <div>
-                                            {_sortBy(
+                                            {sortBy(
                                               Object.entries(E?.tools || {}),
                                               [
                                                 function (o) {
