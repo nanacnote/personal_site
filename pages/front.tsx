@@ -211,7 +211,7 @@ export const Front = ({ post }): JSX.Element => {
         }
       )
     )
-  }, [showBottomRight, currentViewportSize, siderState])
+  }, [showBottomRight])
 
   // gsap big idea scrolltrigger config
   useEffect(() => {
@@ -220,9 +220,10 @@ export const Front = ({ post }): JSX.Element => {
       scrollTrigger: {
         trigger: '.grad-hr',
         scrub: 3,
+        markers: true,
         start: 'top top',
         end: '+=450',
-        toggleActions: 'restart complete reverse reverse',
+        toggleActions: 'restart complete reverse none',
       },
     })
     tl_scrollViews
