@@ -158,7 +158,7 @@ export const Front = ({ post }): JSX.Element => {
     }
   }
 
-  //scroll gsap activity class with helper functions
+  //scroll gsap activity object with helper functions
   const scrollHelper = {
     //returns the inner width of a div by taking the class name as argument
     //put . infront of class and # infront of id
