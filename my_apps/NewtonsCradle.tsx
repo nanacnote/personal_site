@@ -4,19 +4,19 @@ import { Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaQuestionCircle, FaArrowUp } from 'react-icons/fa'
 
 /**
- * typings declaration for props on Pendulum module
+ * typings declaration for props on NewtonsCradle module
  */
 type TProps = {}
 
 /**
- * typings declaration for state on Pendulum module
+ * typings declaration for state on NewtonsCradle module
  */
 type TState = {
   showMore: boolean
   moreLess: string
 }
 
-export class Pendulum extends Component<TProps, TState> {
+export class NewtonsCradle extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props)
     this.state = {
@@ -339,7 +339,7 @@ export class Pendulum extends Component<TProps, TState> {
                         wall by setting <code>isStatic: true</code> in the
                         options object of the bodies method. Using this I
                         positioned a roof at the top of the canvas to which I
-                        subsequently attached the pendulums. I also created
+                        subsequently attached the Pendulum. I also created
                         three other bodies to serve as walls and a ground.
                       </p>
                       <div className="code-block">
@@ -571,4 +571,4 @@ export class Pendulum extends Component<TProps, TState> {
     )
   }
 }
-export default Pendulum
+export default NewtonsCradle
