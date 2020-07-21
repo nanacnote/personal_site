@@ -110,6 +110,29 @@ body {
         }
     }
 
+    .absolute-center-icon {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 3rem;
+        height: 3rem;
+        padding: 2px;
+        font-size: 3rem;
+        color: #40a9ff;
+        border: solid 5px map.get($arg, "$text-info");
+        border-radius: 1.5rem;
+        transition: all 250ms;
+        &:hover {
+            padding: 3px;
+        }
+    }
+
     .c-text-info {
         color: map.get($arg, "$text-info");
     }
@@ -334,8 +357,35 @@ body {
                             font-size: 1rem;
                         }
                     }
-                    .test-cool-stage {
+                    .test-drive-stage-intro {
                         display: none;
+                        .test-drive-container {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: hidden;
+                            .test-drive-header {
+                                font-size: 1.25rem;
+                                margin-bottom: 10px;
+                            }
+                            .test-drive-col {
+                                display: flex;
+                                flex-direction: column;
+                                width: 100%;
+                                cursor: pointer;
+                                .test-drive-name {
+                                    color: map.get($arg, "$text-clickable");
+                                    margin-bottom: 5px;
+                                }
+                                .test-drive-pic {
+                                    position: relative;
+                                    height: 5vmax;
+                                    width: auto;
+                                    overflow: hidden;
+                                }
+                            }
+                        }
                     }
                 }
             }
