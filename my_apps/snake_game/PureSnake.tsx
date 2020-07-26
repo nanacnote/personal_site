@@ -107,12 +107,13 @@ export class PureSnake extends Component<TProps, TState> {
                       dependecies.
                     </div>
                     <div>
-                      <div
-                        className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
-                        // onClick={true}
-                      >
-                        Source Code <FaGithub />
-                      </div>
+                      <a href="https://github.com/nanacnote/personal_site/tree/master/my_apps/snake_game" target="_blank">
+                        <div
+                          className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
+                        >
+                          Source Code <FaGithub />
+                        </div>
+                      </a>
                       <div
                         className="h4 py-1 my-2 position-relative clickable-item text-center text-success bg-white border border-success rounded"
                         onClick={this.playHandler}
