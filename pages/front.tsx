@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
 import { Footer } from '../components'
 import { useBreakPoint } from '../hooks'
-import { NewtonsCradle } from '../my_apps'
+import { NewtonsCradle, PureSnake } from '../my_apps'
 import sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
@@ -79,16 +79,16 @@ export const Front = ({ post }): JSX.Element => {
   const testProjects = [
     {
       name: "Newton's Cradle",
-      component: <NewtonsCradle/>,
+      component: <NewtonsCradle />,
       imageLink: '/test_drive/newton.jpg',
     },
     {
-      name: "PureJS Snake",
-      component: <div children="available in next deploy" />,
+      name: 'PureJS Snake',
+      component: <PureSnake />,
       imageLink: '/test_drive/snake.jpg',
     },
     {
-      name: "Drum Machine",
+      name: 'Drum Machine',
       component: <div children="available in next deploy" />,
       imageLink: '/test_drive/drum.jpg',
     },
@@ -149,48 +149,42 @@ export const Front = ({ post }): JSX.Element => {
   //function to handle test drive stage pic on mouse in
   const testDriveMouseIn = (event: React.MouseEvent) => {
     const targetEl = event.target as HTMLElement
-    gsap.set('.test-drive-header, .test-drive-name',{opacity: 0})
-    gsap.to(
-      targetEl.parentElement,
-      {
-        duration: 0.25,
-        height: 'auto',
-      }
-    )
+    gsap.set('.test-drive-header, .test-drive-name', { opacity: 0 })
+    gsap.to(targetEl.parentElement, {
+      duration: 0.25,
+      height: 'auto',
+    })
     const el = gsap.utils.toArray('.test-drive-img')
-    el?.map(e => {
-      e !== targetEl ?
-      gsap.to(
-        (e as HTMLElement).parentElement,
-        {
-          duration: 0.25,
-          opacity: 0,
-          height: 0,
-        }
-      )
-      : 
-      gsap.timeline().set( (e as HTMLElement).previousSibling, {display: 'flex'} )
-      .fromTo((e as HTMLElement).previousSibling,{opacity: 0},{duration: 0.25 ,opacity: 1})
+    el?.map((e) => {
+      e !== targetEl
+        ? gsap.to((e as HTMLElement).parentElement, {
+            duration: 0.25,
+            opacity: 0,
+            height: 0,
+          })
+        : gsap
+            .timeline()
+            .set((e as HTMLElement).previousSibling, { display: 'flex' })
+            .fromTo(
+              (e as HTMLElement).previousSibling,
+              { opacity: 0 },
+              { duration: 0.25, opacity: 1 }
+            )
     })
   }
 
   //function to handle test drive stage pic on mouse out
   const testDriveMouseOut = () => {
-    gsap.set('.test-drive-header, .test-drive-name',{opacity: 1})
+    gsap.set('.test-drive-header, .test-drive-name', { opacity: 1 })
     const el = gsap.utils.toArray('.test-drive-img')
-    el?.map(e =>
-      {
-        gsap.to(
-          (e as HTMLElement).parentElement,
-          {
-            duration: 0.25,
-            opacity: 1,
-            height: '5vmax',
-          }
-        )
-        gsap.set( (e as HTMLElement).previousSibling, {display: 'none'} )
-      }
-    )
+    el?.map((e) => {
+      gsap.to((e as HTMLElement).parentElement, {
+        duration: 0.25,
+        opacity: 1,
+        height: '5vmax',
+      })
+      gsap.set((e as HTMLElement).previousSibling, { display: 'none' })
+    })
   }
 
   //function to handle modal iframe content displayed
@@ -604,7 +598,11 @@ export const Front = ({ post }): JSX.Element => {
             x: 0,
             y: 0,
           })
-          .set('.main-text-3', { height: '100%', width:'75%' })
+          .set('.main-text-3', {
+            height: '100%',
+            width: '75%',
+            overflow: 'visible',
+          })
           .set('.test-drive-stage-intro', { display: 'inline' })
       : null
   }, [landingTransition])
@@ -772,22 +770,30 @@ export const Front = ({ post }): JSX.Element => {
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >Light</span>
+                        >
+                          Light
+                        </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >Dark</span>
+                        >
+                          Dark
+                        </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >Dull</span>
+                        >
+                          Dull
+                        </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
-                        >Happy</span>
+                        >
+                          Happy
+                        </span>
                       </div>
                     </div>
                   </Col>
@@ -846,25 +852,47 @@ export const Front = ({ post }): JSX.Element => {
                       <div className="main-text-3">
                         <div className="test-drive-stage-intro">
                           <div className="test-drive-container">
-                            <div className="test-drive-header"><span>test drive a project</span></div>
-                            <div className={currentViewport ? "d-flex flex-column" : "d-flex"}>
-                              {testProjects.map((e, i)=>
+                            <div className="test-drive-header">
+                              <span>test drive a project</span>
+                            </div>
+                            <div
+                              className={
+                                currentViewport
+                                  ? 'd-flex flex-column'
+                                  : 'd-flex'
+                              }
+                            >
+                              {testProjects.map((e) => (
                                 <div
                                   key={e.name}
-                                  className= "test-drive-col"
+                                  className="test-drive-col"
                                   onClick={() => settestDriveStage(e)}
                                 >
-                                  <div className="test-drive-name">{e.name}</div>
-                                  {
-                                    currentViewport ?
-                                    null :
-                                    <div className="test-drive-pic" onMouseEnter={testDriveMouseIn} onMouseLeave={testDriveMouseOut}>
-                                      <div className="absolute-center-icon"><FaPlayCircle/></div>
-                                      <img className="test-drive-img" src={e?.imageLink} alt="project-pics" style={{height: 'auto', width: '100%'}}/>
+                                  <div className="test-drive-name">
+                                    {e.name}
+                                  </div>
+                                  {currentViewport ? null : (
+                                    <div
+                                      className="test-drive-pic"
+                                      onMouseEnter={testDriveMouseIn}
+                                      onMouseLeave={testDriveMouseOut}
+                                    >
+                                      <div className="absolute-center-icon">
+                                        <FaPlayCircle />
+                                      </div>
+                                      <img
+                                        className="test-drive-img"
+                                        src={e?.imageLink}
+                                        alt="project-pics"
+                                        style={{
+                                          height: 'auto',
+                                          width: '100%',
+                                        }}
+                                      />
                                     </div>
-                                  }
+                                  )}
                                 </div>
-                              )}
+                              ))}
                             </div>
                           </div>
                         </div>
@@ -1279,9 +1307,7 @@ export const Front = ({ post }): JSX.Element => {
                       {testDriveStage?.name}
                     </Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>
-                    {testDriveStage?.component}
-                  </Modal.Body>
+                  <Modal.Body>{testDriveStage?.component}</Modal.Body>
                 </Modal>
               </Container>
 
