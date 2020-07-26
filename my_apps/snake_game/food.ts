@@ -1,5 +1,5 @@
 /**
- * typings declaration for food module
+ * TS declaration for food module
  */
 export type TFood = {
   params: {

@@ -2,7 +2,7 @@ import Snake from './snake'
 import Food from './food'
 
 /**
- * typings declaration for Stage module
+ * TS declaration for Stage module
  */
 export type TStage = {
   params: {

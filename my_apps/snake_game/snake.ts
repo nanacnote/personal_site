@@ -1,5 +1,5 @@
 /**
- * typings declaration for Snake module
+ * TS declaration for Snake module
  */
 export type TSnake = {
   params: {

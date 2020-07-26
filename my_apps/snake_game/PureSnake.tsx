@@ -4,7 +4,7 @@ import Stage, { TInput } from './stage'
 import { FaPlayCircle, FaPauseCircle, FaGithub } from 'react-icons/fa'
 
 /**
- * typings declaration for props on PureSnake module
+ * TS declaration for props on PureSnake module
  */
 type TProps = {}
 
