@@ -12,20 +12,20 @@ type TProps = {}
  * typings declaration for state on NewtonsCradle module
  */
 type TState = {
-  showMore: boolean
-  moreLess: string
+  viewCode: boolean
+  showHide: string
 }
 
 export class NewtonsCradle extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props)
     this.state = {
-      showMore: false,
-      moreLess: 'more',
+      viewCode: false,
+      showHide: 'Show',
     }
   }
   // ref for canvas wrapper
-  private myRef: HTMLCanvasElement
+  private canvasRef: HTMLCanvasElement
 
   // module aliases
   private Engine = Matter.Engine
@@ -46,7 +46,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
   componentDidMount() {
     // create a renderer
     this.render_m = this.Render.create({
-      canvas: this.myRef,
+      canvas: this.canvasRef,
       engine: this.engine_m,
       options: {
         width: 800,
@@ -95,7 +95,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
     })
 
     // add click listener to canvas
-    const mouseEvent = this.Mouse.create(this.myRef)
+    const mouseEvent = this.Mouse.create(this.canvasRef)
     const mouseConstraint = this.MouseConstraint.create(this.engine_m, {
       mouse: mouseEvent,
       constraint: {
@@ -121,14 +121,14 @@ export class NewtonsCradle extends Component<TProps, TState> {
   }
 
   render() {
-    const showMoreHandler = async () => {
-      await this.setState({ showMore: !this.state.showMore })
-      switch (this.state.showMore) {
+    const viewCodeHandler = async () => {
+      await this.setState({ viewCode: !this.state.viewCode })
+      switch (this.state.viewCode) {
         case true:
-          this.setState({ moreLess: 'less' })
+          this.setState({ showHide: 'Hide' })
           break
         case false:
-          this.setState({ moreLess: 'more' })
+          this.setState({ showHide: 'Show' })
           break
         default:
           break
@@ -151,20 +151,20 @@ export class NewtonsCradle extends Component<TProps, TState> {
                   <hr />
 
                   <div>
-                    <span>
+                    <div className="mb-5">
                       This project was inspired by the thought of capturing some
                       fundamental physics laws using a visual and interactive
                       approach. After thinking on this for a while, I decided to
                       simulate the famous so-called Newtons cradle.
-                    </span>
-                    <span>
+                    </div>
+                    <div>
                       <div
-                        className="py-1 mb-3 position-relative clickable-item text-primary bg-white"
-                        onClick={showMoreHandler}
+                        className="py-1 mb-3 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
+                        onClick={viewCodeHandler}
                       >
-                        show {this.state.moreLess} <FaQuestionCircle />
+                        {this.state.showHide} Source Code<FaQuestionCircle />
                       </div>
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,13 +173,13 @@ export class NewtonsCradle extends Component<TProps, TState> {
               <div>
                 <canvas
                   className="modal-canvas"
-                  ref={(div) => (this.myRef = div)}
+                  ref={(div) => (this.canvasRef = div)}
                 />
               </div>
             </Col>
           </Row>
           <Row>
-            {this.state.showMore ? (
+            {this.state.viewCode ? (
               <div className="my-5 px-4 w-100">
                 <hr />
                 <div>
@@ -271,7 +271,9 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       </p>
                       <div className="code-block">
                         <p>
-                          // module aliases private Engine = Matter.Engine
+                          // module aliases 
+                          <br />
+                          private Engine = Matter.Engine
                           <br />
                           private Render = Matter.Render
                           <br />
@@ -305,7 +307,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                           <br />
                           &emsp;this.render_m = this.Render.create(&#123;
                           <br />
-                          &emsp;&emsp;canvas: this.myRef,
+                          &emsp;&emsp;canvas: this.canvasRef,
                           <br />
                           &emsp;&emsp;engine: this.engine_m,
                           <br />
@@ -496,7 +498,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         <br />
                         &emsp;// add click listener to canvas
                         <br />
-                        &emsp;const mouseEvent = this.Mouse.create(this.myRef)
+                        &emsp;const mouseEvent = this.Mouse.create(this.canvasRef)
                         <br />
                         &emsp;const mouseConstraint =
                         this.MouseConstraint.create(this.engine_m, &#123;
@@ -549,14 +551,14 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       overlay={function (props) {
                         return (
                           <Tooltip id="button-tooltip" {...props}>
-                            Show Less
+                            Hide Source Code
                           </Tooltip>
                         )
                       }}
                     >
                       <div
                         className="mt-5 clickable-item-circle"
-                        onClick={showMoreHandler}
+                        onClick={viewCodeHandler}
                       >
                         <FaArrowUp />
                       </div>
