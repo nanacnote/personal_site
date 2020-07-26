@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import Stage, { TInput } from './Stage'
+import Stage, { TInput } from './stage'
 import { FaPlayCircle, FaPauseCircle, FaGithub } from 'react-icons/fa'
 
 /**

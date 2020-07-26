@@ -1,5 +1,5 @@
-import Snake from './Snake'
-import Food from './Food'
+import Snake from './snake'
+import Food from './food'
 
 /**
  * typings declaration for Stage module
