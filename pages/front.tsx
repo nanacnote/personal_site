@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
 import { Footer } from '../components'
 import { useBreakPoint } from '../hooks'
-import { NewtonsCradle, PureSnake } from '../my_apps'
+// import { NewtonsCradle, PureSnake } from '../my_apps'
 import sortBy from 'lodash/sortBy'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
@@ -79,12 +79,14 @@ export const Front = ({ post }): JSX.Element => {
   const testProjects = [
     {
       name: "Newton's Cradle",
-      component: <NewtonsCradle />,
+      // component: <NewtonsCradle />,
+      component: <div children="available in next deploy" />,
       imageLink: '/test_drive/newton.jpg',
     },
     {
       name: 'PureJS Snake',
-      component: <PureSnake />,
+      // component: <PureSnake />,
+      component: <div children="available in next deploy" />,
       imageLink: '/test_drive/snake.jpg',
     },
     {
