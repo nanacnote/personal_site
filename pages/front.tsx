@@ -31,7 +31,6 @@ import {
   FaLock,
   FaSmile,
   FaSmileWink,
-  FaNutritionix,
   FaPlayCircle,
 } from 'react-icons/fa'
 
@@ -46,9 +45,6 @@ type Tdata = {
 }
 
 export const Front = ({ post }): JSX.Element => {
-  // ref for div that wraps around the bottom right section of front page
-  let frontRightBottomRef: HTMLElement
-
   //sider icons object
   const siderLinks = [
     {
@@ -80,27 +76,25 @@ export const Front = ({ post }): JSX.Element => {
     {
       name: "Newton's Cradle",
       component: <NewtonsCradle />,
-      // component: <div children="available in next deploy" />,
       imageLink: '/test_drive/newton.jpg',
     },
     {
       name: 'PureJS Snake',
       component: <PureSnake />,
-      // component: <div children="available in next deploy" />,
       imageLink: '/test_drive/snake.jpg',
     },
     {
       name: 'Drum Machine',
       // component: <DrumMachine />,
-      component: <div children="available in next deploy" />,
+      component: <div> available in next deploy </div>,
       imageLink: '/test_drive/drum.jpg',
     },
   ]
 
   // instantiate gsap
   gsap.registerPlugin(TextPlugin, ScrollTrigger)
-  const tl_landing = gsap.timeline()
-  const tl_textVid = gsap.timeline()
+  const tlLanding = gsap.timeline()
+  const tlTextVid = gsap.timeline()
 
   //instantiate useBreakPoint hook
   const [currentViewport, currentViewportSize] = useBreakPoint()
@@ -200,24 +194,24 @@ export const Front = ({ post }): JSX.Element => {
   //two argument 1. type of output required 2. the level of achievement as a number
   //this function is mainly called by data coming in from getstaticprops
   const skillsLevelBarHelper = (
-    arg_1: 'color' | 'description',
-    arg_2: number
+    arg1: 'color' | 'description',
+    arg2: number
   ) => {
-    if (arg_1 === 'color') {
-      return arg_2 >= 75
+    if (arg1 === 'color') {
+      return arg2 >= 75
         ? 'bg-success'
-        : arg_2 >= 50
+        : arg2 >= 50
         ? 'bg-info'
-        : arg_2 >= 25
+        : arg2 >= 25
         ? 'bg-warning'
         : 'bg-danger'
     }
-    if (arg_1 === 'description') {
-      return arg_2 >= 75
+    if (arg1 === 'description') {
+      return arg2 >= 75
         ? 'Expert'
-        : arg_2 >= 50
+        : arg2 >= 50
         ? 'Advance'
-        : arg_2 >= 25
+        : arg2 >= 25
         ? 'Intermediate'
         : 'Beginer'
     }
@@ -281,7 +275,7 @@ export const Front = ({ post }): JSX.Element => {
   // gsap big idea scrolltrigger config
   useEffect(() => {
     // instantiate timeline for scroll animation of main-languages and main-numbers
-    const tl_scrollViews = gsap.timeline({
+    const tlScrollViews = gsap.timeline({
       scrollTrigger: {
         trigger: '.grad-hr',
         scrub: 3,
@@ -291,7 +285,7 @@ export const Front = ({ post }): JSX.Element => {
         toggleActions: 'restart complete reverse none',
       },
     })
-    tl_scrollViews
+    tlScrollViews
       .fromTo(
         '.main-languages-wrapper',
         { x: 0 },
@@ -324,7 +318,7 @@ export const Front = ({ post }): JSX.Element => {
   // gsap text video
   useEffect(() => {
     !landingTransition
-      ? tl_textVid
+      ? tlTextVid
           .to('.grad-hr', { duration: 1, width: '100%' }, '+=2.5')
           .to(
             '.main-text-row',
@@ -438,7 +432,10 @@ export const Front = ({ post }): JSX.Element => {
               duration: 2,
               x: '0%',
               opacity: 1,
-              text: { value: "<span style='font-size: 4vmax;'>Hello</span>", delimiter: ' ' },
+              text: {
+                value: "<span style='font-size: 4vmax;'>Hello</span>",
+                delimiter: ' ',
+              },
               ease: 'bounce.out',
             }
           )
@@ -612,7 +609,7 @@ export const Front = ({ post }): JSX.Element => {
 
   // gsap landing animations
   useEffect(() => {
-    tl_landing
+    tlLanding
       .to('.landing-transition-left', {
         duration: 1,
         backgroundColor: '#d9d9d9',
@@ -685,14 +682,11 @@ export const Front = ({ post }): JSX.Element => {
             {currentViewport ? (
               siderState ? (
                 <Col xs={12}>
-                  <div
-                    className="siderShowHide"
-                    children={
-                      <button onClick={() => setsiderState(!siderState)}>
-                        {siderShowHideIcon}
-                      </button>
-                    }
-                  />
+                  <div className="siderShowHide">
+                    <button onClick={() => setsiderState(!siderState)}>
+                      {siderShowHideIcon}
+                    </button>
+                  </div>
                   <div className="sider">
                     <div className="sider-container">
                       {siderLinks.map((e, i) => (
@@ -723,14 +717,11 @@ export const Front = ({ post }): JSX.Element => {
                   </div>
                 </Col>
               ) : (
-                <div
-                  className="siderShowHide"
-                  children={
-                    <button onClick={() => setsiderState(!siderState)}>
-                      <FaAlignJustify />
-                    </button>
-                  }
-                />
+                <div className="siderShowHide">
+                  <button onClick={() => setsiderState(!siderState)}>
+                    <FaAlignJustify />
+                  </button>
+                </div>
               )
             ) : (
               <Col xs={12} md={3} className="sider">
@@ -985,7 +976,7 @@ export const Front = ({ post }): JSX.Element => {
               </Container>
 
               {/* container for bottom/second part of right handside of page */}
-              <div className="w-100" ref={(div) => (frontRightBottomRef = div)}>
+              <div className="w-100">
                 {showBottomRight ? (
                   <Container fluid className="front-page-right-bottom">
                     {[post.web_development_skill, post.data_science_skill].map(

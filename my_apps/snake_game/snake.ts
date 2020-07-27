@@ -109,11 +109,14 @@ export default class Snake {
   private growSnake() {
     if (this.props.addTail) {
       this.props.tailLenght += 1
-    } 
-    this.props.tail[this.props.tailLenght] = { x: this.props.x, y: this.props.y }
+    }
+    this.props.tail[this.props.tailLenght] = {
+      x: this.props.x,
+      y: this.props.y,
+    }
 
     for (let i = 0; i < this.props.tail.length; i++) {
-        this.props.tail[i - 1] = this.props.tail[i]
+      this.props.tail[i - 1] = this.props.tail[i]
     }
   }
   /**
@@ -140,8 +143,13 @@ export default class Snake {
    */
   private drawTail() {
     for (let i = 0; i < this.props.tail.length; i++) {
-    //   this.params.ctx.fillStyle = 'salmon'
-    this.params.ctx.fillStyle = 'rgb(' + Math.floor(255 - 100 * i) + ', ' + Math.floor(255 - 5 * i) + ', 0)';
+      //   this.params.ctx.fillStyle = 'salmon'
+      this.params.ctx.fillStyle =
+        'rgb(' +
+        Math.floor(255 - 100 * i) +
+        ', ' +
+        Math.floor(255 - 5 * i) +
+        ', 0)'
       this.params.ctx.fillRect(
         this.props.tail[i].x,
         this.props.tail[i].y,

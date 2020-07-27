@@ -1,10 +1,11 @@
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 export const Footer = (): JSX.Element => (
   <div className="footer">
     <div>
       <a
         href="https://github.com/nanacnote"
         target="_blank"
+        rel="noreferrer"
         className="footer-socials px-1 h3"
       >
         <FaGithub />
@@ -12,6 +13,7 @@ export const Footer = (): JSX.Element => (
       <a
         href="https://www.linkedin.com/in/owusu-k-adjei-bohyen-b9b4bb83"
         target="_blank"
+        rel="noreferrer"
         className="footer-socials px-1 h3"
       >
         <FaLinkedin />
@@ -19,6 +21,7 @@ export const Footer = (): JSX.Element => (
       <a
         href="https://www.instagram.com/cedi_note"
         target="_blank"
+        rel="noreferrer"
         className="footer-socials px-1 h3"
       >
         <FaInstagram />

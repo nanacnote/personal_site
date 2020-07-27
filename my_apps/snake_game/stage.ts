@@ -7,7 +7,7 @@ import Food from './food'
 export type TStage = {
   params: {
     canvas: HTMLCanvasElement
-    ctx: CanvasRenderingContext2D,
+    ctx: CanvasRenderingContext2D
     scale: number
   }
   props: {
