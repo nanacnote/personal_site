@@ -12,7 +12,7 @@ type TProps = {}
  * typings declaration for state on PureSnake module
  */
 type TState = {
-    gameCycle: 'Play' | 'Pause'
+  gameCycle: 'Play' | 'Pause'
   directions: TInput['directions']
 }
 
@@ -20,7 +20,7 @@ export class PureSnake extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props)
     this.state = {
-        gameCycle: 'Play',
+      gameCycle: 'Play',
       directions: undefined,
     }
     this.keyHandler = this.keyHandler.bind(this)
@@ -32,38 +32,38 @@ export class PureSnake extends Component<TProps, TState> {
   private renderer // variable for renderer
 
   //starts a new game
-  private playHandler(event: React.MouseEvent) {
-    if( this.state.gameCycle === 'Play' ){
-        //set state value for game lifecyle 
-        this.setState({
-            gameCycle: 'Pause'
+  private playHandler() {
+    if (this.state.gameCycle === 'Play') {
+      //set state value for game lifecyle
+      this.setState({
+        gameCycle: 'Pause',
+      })
+      //instatiate canvas context
+      const canvas = this.canvasRef
+      const ctx = canvas.getContext('2d')
+
+      //initialise game enivronment variables
+      //scale the size in pixels
+      const scale = 20
+
+      // attach key press listner
+      this.canvasRef.focus()
+      this.canvasRef.addEventListener('keydown', this.keyHandler)
+
+      //instantiate new stage
+      const stage = new Stage({
+        canvas: canvas,
+        ctx: ctx,
+        scale: scale,
+      })
+
+      //create renderer function to control the game state
+      this.renderer = setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        stage.start({
+          directions: this.state.directions,
         })
-        //instatiate canvas context
-        const canvas = this.canvasRef
-        const ctx = canvas.getContext('2d')
-    
-        //initialise game enivronment variables
-        //scale the size in pixels
-        const scale = 20
-    
-        // attach key press listner
-        this.canvasRef.focus()
-        this.canvasRef.addEventListener('keydown', this.keyHandler)
-    
-        //instantiate new stage
-        const stage = new Stage({
-          canvas: canvas,
-          ctx: ctx,
-          scale: scale,
-        })
-    
-        //create renderer function to control the game state
-        this.renderer = setInterval(() => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          stage.start({
-            directions: this.state.directions,
-          })
-        }, 250)
+      }, 250)
     }
   }
 
@@ -107,10 +107,12 @@ export class PureSnake extends Component<TProps, TState> {
                       dependecies.
                     </div>
                     <div>
-                      <a href="https://github.com/nanacnote/personal_site/tree/master/my_apps/snake_game" target="_blank">
-                        <div
-                          className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
-                        >
+                      <a
+                        href="https://github.com/nanacnote/personal_site/tree/master/my_apps/snake_game"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded">
                           Source Code <FaGithub />
                         </div>
                       </a>
@@ -118,12 +120,12 @@ export class PureSnake extends Component<TProps, TState> {
                         className="h4 py-1 my-2 position-relative clickable-item text-center text-success bg-white border border-success rounded"
                         onClick={this.playHandler}
                       >
-                        {this.state.gameCycle} 
-                        {
-                            this.state.gameCycle === 'Play'? <FaPlayCircle /> :
-                            this.state.gameCycle === 'Pause'? <FaPauseCircle />:
-                            null
-                        }
+                        {this.state.gameCycle}
+                        {this.state.gameCycle === 'Play' ? (
+                          <FaPlayCircle />
+                        ) : this.state.gameCycle === 'Pause' ? (
+                          <FaPauseCircle />
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -135,7 +137,7 @@ export class PureSnake extends Component<TProps, TState> {
                 <canvas
                   className="modal-canvas"
                   ref={(div) => (this.canvasRef = div)}
-                    tabIndex={1}
+                  tabIndex={1}
                   width="800"
                   height="400"
                   style={{ background: 'lightgrey' }}

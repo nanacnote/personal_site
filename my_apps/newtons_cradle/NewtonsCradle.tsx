@@ -37,17 +37,17 @@ export class NewtonsCradle extends Component<TProps, TState> {
   private MouseConstraint = Matter.MouseConstraint
 
   // create an engine
-  private engine_m = this.Engine.create()
+  private engineM = this.Engine.create()
   // create the world
-  private world_m = this.engine_m.world
+  private worldM = this.engineM.world
   // create the renderer
-  private render_m: Matter.Render
+  private renderM: Matter.Render
 
   componentDidMount() {
     // create a renderer
-    this.render_m = this.Render.create({
+    this.renderM = this.Render.create({
       canvas: this.canvasRef,
-      engine: this.engine_m,
+      engine: this.engineM,
       options: {
         width: 800,
         height: 400,
@@ -64,7 +64,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
     const rightWall = this.Bodies.rectangle(800, 300, 20, 610, {
       isStatic: true,
     })
-    this.World.add(this.world_m, [roof, ground, leftWall, rightWall])
+    this.World.add(this.worldM, [roof, ground, leftWall, rightWall])
 
     const balls = []
     // create 5 balls body and add to world with constraints
@@ -91,12 +91,12 @@ export class NewtonsCradle extends Component<TProps, TState> {
           strokeStyle: 'black',
         },
       } as any)
-      this.World.add(this.world_m, [e, constraint])
+      this.World.add(this.worldM, [e, constraint])
     })
 
     // add click listener to canvas
     const mouseEvent = this.Mouse.create(this.canvasRef)
-    const mouseConstraint = this.MouseConstraint.create(this.engine_m, {
+    const mouseConstraint = this.MouseConstraint.create(this.engineM, {
       mouse: mouseEvent,
       constraint: {
         stiffness: 0.2,
@@ -106,18 +106,18 @@ export class NewtonsCradle extends Component<TProps, TState> {
         },
       } as any,
     })
-    this.World.add(this.world_m, mouseConstraint)
+    this.World.add(this.worldM, mouseConstraint)
 
     // run the engine
-    this.Engine.run(this.engine_m)
+    this.Engine.run(this.engineM)
 
     // run the renderer
-    this.Render.run(this.render_m)
+    this.Render.run(this.renderM)
   }
 
   componentWillUnmount() {
-    this.Engine.clear(this.engine_m)
-    this.Render.stop(this.render_m)
+    this.Engine.clear(this.engineM)
+    this.Render.stop(this.renderM)
   }
 
   render() {
@@ -162,7 +162,8 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         className="py-1 mb-3 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
                         onClick={viewCodeHandler}
                       >
-                        {this.state.showHide} Source Code<FaQuestionCircle />
+                        {this.state.showHide} Source Code
+                        <FaQuestionCircle />
                       </div>
                     </div>
                   </div>
@@ -226,6 +227,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       <a
                         href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         MDN web doc
                       </a>
@@ -239,7 +241,11 @@ export class NewtonsCradle extends Component<TProps, TState> {
                     <p>
                       Matter.js is a 2D physics engine for the web as described
                       on the{' '}
-                      <a href="https://brm.io/matter-js/" target="_blank">
+                      <a
+                        href="https://brm.io/matter-js/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         matter.js website
                       </a>
                       . It can be used to simulate how rigid bodies will behave
@@ -271,7 +277,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       </p>
                       <div className="code-block">
                         <p>
-                          // module aliases 
+                          ** module aliases
                           <br />
                           private Engine = Matter.Engine
                           <br />
@@ -288,28 +294,28 @@ export class NewtonsCradle extends Component<TProps, TState> {
                           private MouseConstraint = Matter.MouseConstraint
                           <br />
                           <br />
-                          // create an engine
+                          ** create an engine
                           <br />
-                          private engine_m = this.Engine.create()
+                          private engineM = this.Engine.create()
                           <br />
-                          // create the world
+                          ** create the world
                           <br />
-                          private world_m = this.engine_m.world
+                          private worldM = this.engineM.world
                           <br />
-                          // create the renderer
+                          ** create the renderer
                           <br />
-                          private render_m: Matter.Render;
+                          private renderM: Matter.Render;
                           <br />
                           <br />
                           componentDidMount() &#123;
                           <br />
-                          &emsp;// create a renderer
+                          &emsp;** create a renderer
                           <br />
-                          &emsp;this.render_m = this.Render.create(&#123;
+                          &emsp;this.renderM = this.Render.create(&#123;
                           <br />
                           &emsp;&emsp;canvas: this.canvasRef,
                           <br />
-                          &emsp;&emsp;engine: this.engine_m,
+                          &emsp;&emsp;engine: this.engineM,
                           <br />
                           &emsp;&emsp;options: &#123;
                           <br />
@@ -341,14 +347,14 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         wall by setting <code>isStatic: true</code> in the
                         options object of the bodies method. Using this I
                         positioned a roof at the top of the canvas to which I
-                        subsequently attached the Pendulum. I also created
-                        three other bodies to serve as walls and a ground.
+                        subsequently attached the Pendulum. I also created three
+                        other bodies to serve as walls and a ground.
                       </p>
                       <div className="code-block">
                         <p>
                           ...
                           <br />
-                          // create static roof body, ground and walls
+                          ** create static roof body, ground and walls
                           <br />
                           const roof = this.Bodies.rectangle(400, 0, 810, 20,
                           &#123; isStatic: true &#125;)
@@ -374,9 +380,9 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         <p>
                           ...
                           <br />
-                          // add bodies into world
+                          ** add bodies into world
                           <br />
-                          this.World.add(this.world_m, [roof, ground, leftWall,
+                          this.World.add(this.worldM, [roof, ground, leftWall,
                           rightWall])
                           <br />
                           ...
@@ -409,7 +415,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         <br />
                         const balls = []
                         <br />
-                        // create 5 balls body and add to world with constraints
+                        ** create 5 balls body and add to world with constraints
                         <br />
                         for(let i=0; i&gt;5; i++) &#123;
                         <br />
@@ -448,7 +454,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       <div className="code-block">
                         ...
                         <br />
-                        // add constraints to the balls in the world
+                        ** add constraints to the balls in the world
                         <br />
                         balls.map((e,i) =&gt; &#123;
                         <br />
@@ -470,7 +476,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         <br />
                         &emsp;&#125; as any);
                         <br />
-                        &emsp;this.World.add(this.world_m, [e, constraint])
+                        &emsp;this.World.add(this.worldM, [e, constraint])
                         <br />
                         &#125;)
                         <br />
@@ -496,12 +502,13 @@ export class NewtonsCradle extends Component<TProps, TState> {
                       <div className="code-block">
                         ...
                         <br />
-                        &emsp;// add click listener to canvas
+                        &emsp;** add click listener to canvas
                         <br />
-                        &emsp;const mouseEvent = this.Mouse.create(this.canvasRef)
+                        &emsp;const mouseEvent =
+                        this.Mouse.create(this.canvasRef)
                         <br />
                         &emsp;const mouseConstraint =
-                        this.MouseConstraint.create(this.engine_m, &#123;
+                        this.MouseConstraint.create(this.engineM, &#123;
                         <br />
                         &emsp;&emsp;mouse: mouseEvent,
                         <br />
@@ -521,17 +528,17 @@ export class NewtonsCradle extends Component<TProps, TState> {
                         <br />
                         &emsp;&#125;)
                         <br />
-                        &emsp;this.World.add(this.world_m, mouseConstraint);
+                        &emsp;this.World.add(this.worldM, mouseConstraint);
                         <br />
                         <br />
-                        &emsp;// run the engine
+                        &emsp;** run the engine
                         <br />
-                        &emsp;this.Engine.run(this.engine_m)
+                        &emsp;this.Engine.run(this.engineM)
                         <br />
                         <br />
-                        &emsp;// run the renderer
+                        &emsp;** run the renderer
                         <br />
-                        &emsp;this.Render.run(this.render_m)
+                        &emsp;this.Render.run(this.renderM)
                         <br />
                         <br />
                         &emsp;&#125;

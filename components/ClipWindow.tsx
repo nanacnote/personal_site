@@ -7,7 +7,7 @@ export const ClipWindow = (): JSX.Element => {
   let clipWindowRef: HTMLElement
 
   const numRangeArray = (arg: number) => {
-    let tmp: Array<number> = []
+    const tmp: Array<number> = []
     for (let i = 1; i < arg; i++) {
       tmp.push(i)
     }
