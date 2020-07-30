@@ -28,6 +28,8 @@ export class ReactSnake extends Component<TProps, TState> {
       scoreBoard: {},
     }
     this.keyHandler = this.keyHandler.bind(this)
+    this.touchStart = this.touchStart.bind(this)
+    this.touchEnd = this.touchEnd.bind(this)
   }
   //set component global properties
   static defaultProps: TProps // setting smart default props
@@ -37,17 +39,51 @@ export class ReactSnake extends Component<TProps, TState> {
   private renderer: Renderer // variable for game renderer instance
 
   private dataFetch: NodeJS.Timeout // variable for getting scoreboard data
+  private touchMem: Array<number> // variable for holding initial touch coordinates
 
   //Event listner to handle key presses by setting state to pressed key
   private keyHandler(event: KeyboardEvent) {
+    // event.stopPropagation()
+    event.preventDefault()
     const direction = event.key.replace('Arrow', '')
     if (['Up', 'Down', 'Right', 'Left'].includes(direction)) {
       this.setState({
         directions: direction as TState['directions'],
       })
     }
+  }
+
+  //Event listner to handle touch start
+  private touchStart(event: TouchEvent) {
     // event.stopPropagation()
     event.preventDefault()
+    this.touchMem = [event.touches[0].clientX, event.touches[0].clientY]
+  }
+
+  //Event listner to handle touch end
+  private touchEnd(event: TouchEvent) {
+    // event.stopPropagation()
+    event.preventDefault()
+    const x = event.changedTouches[0].clientX - this.touchMem[0]
+    const y = event.changedTouches[0].clientY - this.touchMem[1]
+    if( Math.abs(x) > Math.abs(y) ){
+      // swipe action is along the x plane
+      if(x > 0){
+        this.setState({directions: 'Right'})
+      } else{
+        this.setState({directions: 'Left'})
+      }
+    } else{
+      // swipe action is along the y plan
+      if(y < 0){
+        this.setState({directions: 'Up'})
+      } else if (y === 0){
+        // console.log('Tap')
+        null
+      } else {
+        this.setState({directions: 'Down'})
+      }
+    }
   }
 
   componentDidMount() {
@@ -58,19 +94,14 @@ export class ReactSnake extends Component<TProps, TState> {
 
     this.canvasRef.addEventListener(
       'touchstart',
-      (event) => {
-        console.log(event.touches)
-        console.log(event.touches)
-      },
+      this.touchStart,
       false
     )
-    // this.canvasRef.addEventListener(
-    //   'touchend',
-    //   (event) => {
-    //     console.log(touchListX, touchListY)
-    //   },
-    //   false
-    // )
+    this.canvasRef.addEventListener(
+      'touchend',
+      this.touchEnd,
+      false
+    )
   }
 
   //starts a new game
