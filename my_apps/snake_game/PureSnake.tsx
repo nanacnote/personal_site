@@ -74,6 +74,7 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
                   <div className="mb-5">
                     A snake game implemented with HTML5 and PureJS. No
                     dependecies.
+                    Use swipe gestures as controls for touch devices.
                   </div>
                   <div className="mb-3">
                     <div>
