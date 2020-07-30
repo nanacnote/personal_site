@@ -66,22 +66,22 @@ export class ReactSnake extends Component<TProps, TState> {
     event.preventDefault()
     const x = event.changedTouches[0].clientX - this.touchMem[0]
     const y = event.changedTouches[0].clientY - this.touchMem[1]
-    if( Math.abs(x) > Math.abs(y) ){
+    if (Math.abs(x) > Math.abs(y)) {
       // swipe action is along the x plane
-      if(x > 0){
-        this.setState({directions: 'Right'})
-      } else{
-        this.setState({directions: 'Left'})
+      if (x > 0) {
+        this.setState({ directions: 'Right' })
+      } else {
+        this.setState({ directions: 'Left' })
       }
-    } else{
+    } else {
       // swipe action is along the y plan
-      if(y < 0){
-        this.setState({directions: 'Up'})
-      } else if (y === 0){
+      if (y < 0) {
+        this.setState({ directions: 'Up' })
+      } else if (y === 0) {
         // console.log('Tap')
         null
       } else {
-        this.setState({directions: 'Down'})
+        this.setState({ directions: 'Down' })
       }
     }
   }
@@ -92,16 +92,8 @@ export class ReactSnake extends Component<TProps, TState> {
       this.setState({ scoreBoard: this.renderer.getProps() })
     }, 1000)
 
-    this.canvasRef.addEventListener(
-      'touchstart',
-      this.touchStart,
-      false
-    )
-    this.canvasRef.addEventListener(
-      'touchend',
-      this.touchEnd,
-      false
-    )
+    this.canvasRef.addEventListener('touchstart', this.touchStart, false)
+    this.canvasRef.addEventListener('touchend', this.touchEnd, false)
   }
 
   //starts a new game
@@ -204,7 +196,7 @@ export class ReactSnake extends Component<TProps, TState> {
             i !== 0 ? (
               <div key={e[0]}>
                 <div>
-                  <b>{e[0].replace('_', ' ').toLocaleUpperCase()}</b>
+                  <b>{e[0].replace('0', ' ').toLocaleUpperCase()}</b>
                 </div>
                 <div>{e[1]}</div>
               </div>
