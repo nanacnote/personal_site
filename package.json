@@ -35,7 +35,7 @@
     "bootstrap": "^4.5.0",
     "gsap": "^3.3.4",
     "matter-js": "^0.14.2",
-    "next": "canary",
+    "next": "^9.4.4",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-countup": "^4.3.3",
