@@ -21,8 +21,8 @@ export default class Timer {
   /**
    * allocated variable for props value
    */
-  public current: number = 0
-  public currentHMS: string = '0'
+  public current = 0
+  public currentHMS = '0'
   private instance: NodeJS.Timeout
 
   /**
@@ -32,9 +32,9 @@ export default class Timer {
     this.instance = setInterval(() => {
       if (this.params !== this.current) {
         this.current += 1
-        let h = String(Math.floor(this.current / 3600))
-        let m = String(Math.floor((this.current % 3600) / 60))
-        let s = String((this.current % 3600) % 60)
+        const h = String(Math.floor(this.current / 3600))
+        const m = String(Math.floor((this.current % 3600) / 60))
+        const s = String((this.current % 3600) % 60)
         this.currentHMS = h + 'h' + ' ' + m + 'm' + ' ' + s + 's'
       } else {
         this.stop()

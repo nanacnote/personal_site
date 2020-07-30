@@ -16,7 +16,7 @@ type TState = {
   gameCycle: 'Start' | 'Pause' | 'Resume' | 'Stop' | 'Restart'
 }
 
-export const PureSnake: React.FC<TProps> = ({ ...props }): JSX.Element => {
+export const PureSnake: React.FC<TProps> = (): JSX.Element => {
   // declare power on, play and pause state varaible
   const [io, setio] = useState<TState['io']>(undefined)
   const [gameStateButton, setgameStateButton] = useState<TState['gameCycle']>(

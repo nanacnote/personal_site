@@ -56,9 +56,7 @@ export class ReactSnake extends Component<TProps, TState> {
       this.setState({ scoreBoard: this.renderer.getProps() })
     }, 1000)
 
-    let touchListX = []
-    let touchListY = []
-    document.addEventListener(
+    this.canvasRef.addEventListener(
       'touchstart',
       (event) => {
         console.log(event.touches)
