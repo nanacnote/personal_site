@@ -74,9 +74,30 @@ export class ReactSnake extends Component<TProps, TState> {
             touchListY[touchListY.length - 1] - touchListY[0] &&
           touchListX[touchListX.length - 1] - touchListX[0] > 0
         ) {
-          console.log('Right')
+          // console.log('Right')
+          this.setState({
+            directions: 'Right',
+          })
         } else {
-          console.log('Left')
+          // console.log('Left')
+          this.setState({
+            directions: 'Left',
+          })
+        }
+        if (
+          touchListX[touchListX.length - 1] - touchListX[0] <
+            touchListY[touchListY.length - 1] - touchListY[0] &&
+          touchListY[touchListY.length - 1] - touchListY[0] < 0
+        ) {
+          console.log('Up')
+          this.setState({
+            directions: 'Up',
+          })
+        } else {
+          console.log('Down')
+          this.setState({
+            directions: 'Down',
+          })
         }
       },
       false
