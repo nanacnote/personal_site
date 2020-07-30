@@ -18,7 +18,7 @@ export type TRenderer = {
       score: number
       timer: string
       level: number
-      highest_score: string
+      highest0score: string
     }
   }
 }
@@ -78,7 +78,7 @@ export default class Renderer {
       score: 0,
       timer: undefined,
       level: 2,
-      highest_score: '-',
+      highest0score: '-',
     },
   }
   //variable for instance of renderer and stage

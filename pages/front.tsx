@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
-import { Footer } from '../components'
+import { Footer, SkillsSetLevel } from '../components'
 import { useBreakPoint } from '../hooks'
 import { NewtonsCradle, PureSnake } from '../my_apps'
 import sortBy from 'lodash/sortBy'
@@ -808,7 +808,7 @@ export const Front = ({ post }): JSX.Element => {
                         <span
                           className="clickable-item position-relative"
                           onClick={() =>
-                            modalIframeHandler(post.current_project)
+                            modalIframeHandler(post.currentProject)
                           }
                         >
                           <a href="#" data-no-decoration>
@@ -821,12 +821,12 @@ export const Front = ({ post }): JSX.Element => {
                 </Row>
 
                 <Row className="mb-5">
-                  <div className="grad-hr"></div>
+                  <div className="grad-hr border-0 rounded"></div>
                 </Row>
 
                 <Row className="mb-5">
                   <Container fluid>
-                    <div className="px-5 main-text-row">
+                    <div className="px-5 main-text-row border-0 rounded">
                       <div className="main-text-1">
                         <span>
                           <FaSmile className="t-a t-01" />
@@ -868,7 +868,7 @@ export const Front = ({ post }): JSX.Element => {
                                 }
                               `}
                             >
-                              {testProjects.map((e) => (
+                              {testProjects.map((e, i) => (
                                 <div
                                   key={e.name}
                                   className="test-drive-col"
@@ -888,7 +888,7 @@ export const Front = ({ post }): JSX.Element => {
                                           <FaPlayCircle />
                                         </div>
                                         <img
-                                          className="test-drive-img"
+                                          className="test-drive-img border-0 rounded"
                                           src={e?.imageLink}
                                           alt="project-pics"
                                           style={{
@@ -926,8 +926,8 @@ export const Front = ({ post }): JSX.Element => {
                             <div className="main-languages-text-body">
                               <span>
                                 The idea behind my portfolio page is to
-                                implement features and tools rather than write
-                                about them.
+                                implement features and tools rather than just
+                                write about them.
                                 <span className="bg-warning">
                                   &nbsp;Click the&nbsp;
                                   <FaQuestionCircle />
@@ -993,7 +993,7 @@ export const Front = ({ post }): JSX.Element => {
               <div className="w-100">
                 {showBottomRight ? (
                   <Container fluid className="front-page-right-bottom">
-                    {[post.web_development_skill, post.data_science_skill].map(
+                    {[post.webDevelopmentSkill, post.dataScienceSkill].map(
                       (E, I) => (
                         <Row
                           key={`skills-${I}`}
@@ -1009,8 +1009,13 @@ export const Front = ({ post }): JSX.Element => {
                                   I % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
                                 } w-100 pb-5`}
                               >
-                                <div className="mr-2 d-none d-lg-block">
+                                <div
+                                  className={`d-none d-lg-block ${
+                                    I % 2 === 0 ? 'mr-2' : 'ml-2'
+                                  }`}
+                                >
                                   <img
+                                    className="border-0 rounded"
                                     src={`/pics/${I + 1}.jpg`}
                                     alt="web-dev photo"
                                     style={{
@@ -1020,234 +1025,87 @@ export const Front = ({ post }): JSX.Element => {
                                   />
                                 </div>
                                 <div className="w-100 d-flex flex-column">
-                                  <div className="w-100 pr-2 pl-2 pb-2">
+                                  <div className="w-100 p-3 mb-2">
                                     <h4>
                                       <strong>{E?.title}</strong>
                                     </h4>
-                                    <p>{E?.sub_title}</p>
+                                    <p>{E?.subTitle}</p>
                                   </div>
-                                  <div className="w-100 h-75">
+                                  <div className="w-100 h-75 mb-2">
                                     <Container fluid>
                                       <Row>
-                                        <Col xs={12} lg={6} className="p-2">
+                                        <Col xs={12} lg={6} className="p-3 mb-2">
                                           <div>
                                             <h5>
                                               <strong>Frameworks</strong>
                                             </h5>
                                           </div>
-                                          <div>
-                                            {sortBy(
-                                              Object.entries(
-                                                E?.frameworks || {}
-                                              ),
-                                              [
-                                                function (o) {
-                                                  return o[1]
-                                                },
-                                              ]
-                                            )
-                                              .reverse()
-                                              .map((e) => (
-                                                <div
-                                                  key={e[0]}
-                                                  className="d-flex flex-row align-items-center pr-5"
-                                                >
-                                                  <div className="pr-2">
-                                                    {e[0]}
-                                                  </div>
-                                                  <div className="progress w-50 ml-auto">
-                                                    <div
-                                                      className={`progress-bar ${skillsLevelBarHelper(
-                                                        'color',
-                                                        +e[1]
-                                                      )} progress-bar-striped progress-bar-animated`}
-                                                      role="progressbar"
-                                                      aria-valuenow={+e[1]}
-                                                      aria-valuemin={0}
-                                                      aria-valuemax={100}
-                                                      style={{
-                                                        width: `${
-                                                          skillsBarAnimator >= I
-                                                            ? e[1]
-                                                            : 0
-                                                        }%`,
-                                                      }}
-                                                    >
-                                                      {skillsLevelBarHelper(
-                                                        'description',
-                                                        +e[1]
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              ))}
-                                          </div>
+                                          <SkillsSetLevel
+                                            category={'frameworks'} 
+                                            skills={E} 
+                                            skillsIndex={I} 
+                                            skillsBarAnimator={skillsBarAnimator} 
+                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                          />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-2">
+                                        <Col xs={12} lg={6} className="p-3 mb-2">
                                           <div>
                                             <h5>
                                               <strong>Libraries</strong>
                                             </h5>
                                           </div>
-                                          <div>
-                                            {sortBy(
-                                              Object.entries(
-                                                E?.libraries || {}
-                                              ),
-                                              [
-                                                function (o) {
-                                                  return o[1]
-                                                },
-                                              ]
-                                            )
-                                              .reverse()
-                                              .map((e) => (
-                                                <div
-                                                  key={e[0]}
-                                                  className="d-flex flex-row align-items-center pr-5"
-                                                >
-                                                  <div className="pr-2">
-                                                    {e[0]}
-                                                  </div>
-                                                  <div className="progress w-50 ml-auto">
-                                                    <div
-                                                      className={`progress-bar ${skillsLevelBarHelper(
-                                                        'color',
-                                                        +e[1]
-                                                      )} progress-bar-striped progress-bar-animated`}
-                                                      role="progressbar"
-                                                      aria-valuenow={+e[1]}
-                                                      aria-valuemin={0}
-                                                      aria-valuemax={100}
-                                                      style={{
-                                                        width: `${
-                                                          skillsBarAnimator >= I
-                                                            ? e[1]
-                                                            : 0
-                                                        }%`,
-                                                      }}
-                                                    >
-                                                      {skillsLevelBarHelper(
-                                                        'description',
-                                                        +e[1]
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              ))}
-                                          </div>
+                                          <SkillsSetLevel
+                                            category={'libraries'} 
+                                            skills={E} 
+                                            skillsIndex={I} 
+                                            skillsBarAnimator={skillsBarAnimator} 
+                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                          />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-2">
+                                        <Col xs={12} lg={6} className="p-3 mb-2">
                                           <div>
                                             <h5>
                                               <strong>Technologies</strong>
                                             </h5>
                                           </div>
-                                          <div>
-                                            {sortBy(
-                                              Object.entries(
-                                                E?.technologies || {}
-                                              ),
-                                              [
-                                                function (o) {
-                                                  return o[1]
-                                                },
-                                              ]
-                                            )
-                                              .reverse()
-                                              .map((e) => (
-                                                <div
-                                                  key={e[0]}
-                                                  className="d-flex flex-row align-items-center pr-5"
-                                                >
-                                                  <div className="pr-2">
-                                                    {e[0]}
-                                                  </div>
-                                                  <div className="progress w-50 ml-auto">
-                                                    <div
-                                                      className={`progress-bar ${skillsLevelBarHelper(
-                                                        'color',
-                                                        +e[1]
-                                                      )} progress-bar-striped progress-bar-animated`}
-                                                      role="progressbar"
-                                                      aria-valuenow={+e[1]}
-                                                      aria-valuemin={0}
-                                                      aria-valuemax={100}
-                                                      style={{
-                                                        width: `${
-                                                          skillsBarAnimator >= I
-                                                            ? e[1]
-                                                            : 0
-                                                        }%`,
-                                                      }}
-                                                    >
-                                                      {skillsLevelBarHelper(
-                                                        'description',
-                                                        +e[1]
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              ))}
-                                          </div>
+                                          <SkillsSetLevel
+                                            category={'technologies'} 
+                                            skills={E} 
+                                            skillsIndex={I} 
+                                            skillsBarAnimator={skillsBarAnimator} 
+                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                          />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-2">
+                                        <Col xs={12} lg={6} className="p-3 mb-2">
                                           <div>
                                             <h5>
                                               <strong>Tools</strong>
                                             </h5>
                                           </div>
-                                          <div>
-                                            {sortBy(
-                                              Object.entries(E?.tools || {}),
-                                              [
-                                                function (o) {
-                                                  return o[1]
-                                                },
-                                              ]
-                                            )
-                                              .reverse()
-                                              .map((e) => (
-                                                <div
-                                                  key={e[0]}
-                                                  className="d-flex flex-row align-items-center pr-5"
-                                                >
-                                                  <div className="pr-2">
-                                                    {e[0]}
-                                                  </div>
-                                                  <div className="progress w-50 ml-auto">
-                                                    <div
-                                                      className={`progress-bar ${skillsLevelBarHelper(
-                                                        'color',
-                                                        +e[1]
-                                                      )} progress-bar-striped progress-bar-animated`}
-                                                      role="progressbar"
-                                                      aria-valuenow={+e[1]}
-                                                      aria-valuemin={0}
-                                                      aria-valuemax={100}
-                                                      style={{
-                                                        width: `${
-                                                          skillsBarAnimator >= I
-                                                            ? e[1]
-                                                            : 0
-                                                        }%`,
-                                                      }}
-                                                    >
-                                                      {skillsLevelBarHelper(
-                                                        'description',
-                                                        +e[1]
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              ))}
-                                          </div>
+                                          <SkillsSetLevel
+                                            category={'tools'} 
+                                            skills={E} 
+                                            skillsIndex={I} 
+                                            skillsBarAnimator={skillsBarAnimator} 
+                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                          />
                                         </Col>
                                       </Row>
                                     </Container>
                                   </div>
-                                  <div className="w-100 p-2">
-                                    <h4>Projects</h4>
+                                  <div className="w-100 p-3 border rounded">
+                                    <h5>
+                                      <strong>Projects</strong>
+                                    </h5>
+                                    <div>
+                                      {Object.entries(E?.projects).map((e) => (
+                                        <div key={e[0]} className="px-3">
+                                          <li>{e[1]}</li>
+                                          <li>{e[1]}</li>
+                                          <li>{e[1]}</li>
+                                        </div>
+                                      ))}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1335,15 +1193,15 @@ export default Front
 
 export const getStaticProps: GetStaticProps = async () => {
   const post: object = {
-    current_project: {
+    currentProject: {
       src: 'https://insight-client.herokuapp.com/',
       title: 'insight',
       header: 'insight | Financial Research Platform',
       body: `This is an open source project with a goal to consolidate equity research for all publicly traded companies. This consolidation will allow for more complex analysis to be layered on top of the structured data. % In later iterations portfolio optimisation and sentimental analysis tools will be implemented to allow for prudent investment.`,
     },
-    web_development_skill: {
+    webDevelopmentSkill: {
       title: 'Web Development',
-      sub_title:
+      subTitle:
         'having been coding for many years I have used a lot of frameworks and libraries. Below is how comfortable I am with some of the major ones.',
       frameworks: {
         react: 90,
@@ -1381,11 +1239,13 @@ export const getStaticProps: GetStaticProps = async () => {
         gulp: 75,
         grunt: 65,
       },
-      projects: {},
+      projects: {
+        userAuthentication: '-',
+      },
     },
-    data_science_skill: {
+    dataScienceSkill: {
       title: 'Data Science',
-      sub_title:
+      subTitle:
         'I use Python & R alot for doing tasks related to data cleaning, structuring, analysis (including Machine learning) and visualisation. Below is how comfortable I am with some of the major data science tools and tech.',
       frameworks: {
         django: 50,
@@ -1415,7 +1275,7 @@ export const getStaticProps: GetStaticProps = async () => {
         tableau: 50,
       },
       projects: {
-        monte_carlo: 'hello',
+        monteCarlo: '-',
       },
     },
   }
@@ -1426,5 +1286,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   }
 }
-
-// &#128170;&#129327;&#9939;&#128200;&#129516;&#128218;&#128071;&#129300;
