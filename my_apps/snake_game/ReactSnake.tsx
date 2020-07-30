@@ -58,50 +58,21 @@ export class ReactSnake extends Component<TProps, TState> {
 
     let touchListX = []
     let touchListY = []
-    this.canvasRef.addEventListener(
-      'touchmove',
+    document.addEventListener(
+      'touchstart',
       (event) => {
-        touchListX.push(event.changedTouches.item(0).clientX)
-        touchListY.push(event.changedTouches.item(0).clientY)
+        console.log(event.touches)
+        console.log(event.touches)
       },
       false
     )
-    this.canvasRef.addEventListener(
-      'touchend',
-      (event) => {
-        if (
-          touchListX[touchListX.length - 1] - touchListX[0] >
-            touchListY[touchListY.length - 1] - touchListY[0] &&
-          touchListX[touchListX.length - 1] - touchListX[0] > 0
-        ) {
-          // console.log('Right')
-          this.setState({
-            directions: 'Right',
-          })
-        } else {
-          // console.log('Left')
-          this.setState({
-            directions: 'Left',
-          })
-        }
-        if (
-          touchListX[touchListX.length - 1] - touchListX[0] <
-            touchListY[touchListY.length - 1] - touchListY[0] &&
-          touchListY[touchListY.length - 1] - touchListY[0] < 0
-        ) {
-          console.log('Up')
-          this.setState({
-            directions: 'Up',
-          })
-        } else {
-          console.log('Down')
-          this.setState({
-            directions: 'Down',
-          })
-        }
-      },
-      false
-    )
+    // this.canvasRef.addEventListener(
+    //   'touchend',
+    //   (event) => {
+    //     console.log(touchListX, touchListY)
+    //   },
+    //   false
+    // )
   }
 
   //starts a new game
