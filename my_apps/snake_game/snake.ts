@@ -1,6 +1,6 @@
-/**
- * TS declaration for Snake module
- */
+// /**
+//  * TS declaration for Snake module
+//  */
 export type TSnake = {
   params: {
     ctx: CanvasRenderingContext2D
@@ -17,7 +17,7 @@ export type TSnake = {
 }
 
 /**
- * Create a new snake object.
+ * Create a new snake class.
  */
 export default class Snake {
   /**

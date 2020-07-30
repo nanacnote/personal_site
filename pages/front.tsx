@@ -765,28 +765,36 @@ export const Front = ({ post }): JSX.Element => {
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          Light
+                          <a href="#" data-no-decoration>
+                            Light
+                          </a>
                         </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          Dark
+                          <a href="#" data-no-decoration>
+                            Dark
+                          </a>
                         </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          Dull
+                          <a href="#" data-no-decoration>
+                            Dull
+                          </a>
                         </span>
                         <span> | </span>
                         <span
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          Happy
+                          <a href="#" data-no-decoration>
+                            Happy
+                          </a>
                         </span>
                       </div>
                     </div>
@@ -803,7 +811,9 @@ export const Front = ({ post }): JSX.Element => {
                             modalIframeHandler(post.current_project)
                           }
                         >
-                          insight | Financial Research Platform
+                          <a href="#" data-no-decoration>
+                            insight | Financial Research Platform
+                          </a>
                         </span>
                       </div>
                     </div>
@@ -850,11 +860,13 @@ export const Front = ({ post }): JSX.Element => {
                               <span>test drive a project</span>
                             </div>
                             <div
-                              className={
-                                currentViewport
-                                  ? 'd-flex flex-column'
-                                  : 'd-flex'
-                              }
+                              className={`px-2
+                                ${
+                                  currentViewport
+                                    ? 'd-flex flex-column'
+                                    : 'd-flex'
+                                }
+                              `}
                             >
                               {testProjects.map((e) => (
                                 <div
@@ -862,29 +874,31 @@ export const Front = ({ post }): JSX.Element => {
                                   className="test-drive-col"
                                   onClick={() => settestDriveStage(e)}
                                 >
-                                  <div className="test-drive-name">
-                                    {e.name}
-                                  </div>
-                                  {currentViewport ? null : (
-                                    <div
-                                      className="test-drive-pic"
-                                      onMouseEnter={testDriveMouseIn}
-                                      onMouseLeave={testDriveMouseOut}
-                                    >
-                                      <div className="absolute-center-icon">
-                                        <FaPlayCircle />
-                                      </div>
-                                      <img
-                                        className="test-drive-img"
-                                        src={e?.imageLink}
-                                        alt="project-pics"
-                                        style={{
-                                          height: 'auto',
-                                          width: '100%',
-                                        }}
-                                      />
+                                  <button data-no-decoration>
+                                    <div className="test-drive-name">
+                                      {e.name}
                                     </div>
-                                  )}
+                                    {currentViewport ? null : (
+                                      <div
+                                        className="test-drive-pic"
+                                        onMouseEnter={testDriveMouseIn}
+                                        onMouseLeave={testDriveMouseOut}
+                                      >
+                                        <div className="absolute-center-icon">
+                                          <FaPlayCircle />
+                                        </div>
+                                        <img
+                                          className="test-drive-img"
+                                          src={e?.imageLink}
+                                          alt="project-pics"
+                                          style={{
+                                            height: 'auto',
+                                            width: '100%',
+                                          }}
+                                        />
+                                      </div>
+                                    )}
+                                  </button>
                                 </div>
                               ))}
                             </div>

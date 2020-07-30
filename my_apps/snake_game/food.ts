@@ -1,6 +1,6 @@
-/**
- * TS declaration for food module
- */
+// /**
+//  * TS declaration for food module
+//  */
 export type TFood = {
   params: {
     canvas: HTMLCanvasElement
@@ -15,7 +15,7 @@ export type TFood = {
 }
 
 /**
- * Create a new food object.
+ * Create a new food class.
  */
 export default class Food {
   /**
