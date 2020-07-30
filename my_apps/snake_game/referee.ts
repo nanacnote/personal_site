@@ -38,7 +38,7 @@ export default function referee(params: TReferee) {
   // determine when new food lands on tail and call a re drop of food
   const tail = Object.values(tailCord[tailCord.length - 1])
   for (let i = 0; i < tail.length; i++) {
-    let tailXY = Object.values(tail[i] ? tail[i] : { x: 0, y: 0 })
+    const tailXY = Object.values(tail[i] ? tail[i] : { x: 0, y: 0 })
     if (tailXY[0] === xFood && tailXY[1] === yFood) {
       params.food.setProps({ empty: true })
     }
