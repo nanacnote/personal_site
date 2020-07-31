@@ -2,8 +2,7 @@ import { GetStaticProps } from 'next'
 import { useEffect, useState } from 'react'
 import { Footer, SkillsSetLevel } from '../components'
 import { useBreakPoint } from '../hooks'
-import { NewtonsCradle, PureSnake } from '../my_apps'
-import sortBy from 'lodash/sortBy'
+import { NewtonsCradle, PureSnake, DrumMachine } from '../my_apps'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/dist/TextPlugin'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -85,8 +84,7 @@ export const Front = ({ post }): JSX.Element => {
     },
     {
       name: 'Drum Machine',
-      // component: <DrumMachine />,
-      component: <div> available in next deploy </div>,
+      component: <DrumMachine />,
       imageLink: '/test_drive/drum.jpg',
     },
   ]
@@ -1034,60 +1032,92 @@ export const Front = ({ post }): JSX.Element => {
                                   <div className="w-100 h-75 mb-2">
                                     <Container fluid>
                                       <Row>
-                                        <Col xs={12} lg={6} className="p-3 mb-2">
+                                        <Col
+                                          xs={12}
+                                          lg={6}
+                                          className="p-3 mb-2"
+                                        >
                                           <div>
                                             <h5>
                                               <strong>Frameworks</strong>
                                             </h5>
                                           </div>
                                           <SkillsSetLevel
-                                            category={'frameworks'} 
-                                            skills={E} 
-                                            skillsIndex={I} 
-                                            skillsBarAnimator={skillsBarAnimator} 
-                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                            category={'frameworks'}
+                                            skills={E}
+                                            skillsIndex={I}
+                                            skillsBarAnimator={
+                                              skillsBarAnimator
+                                            }
+                                            skillsLevelBarHelper={
+                                              skillsLevelBarHelper
+                                            }
                                           />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-3 mb-2">
+                                        <Col
+                                          xs={12}
+                                          lg={6}
+                                          className="p-3 mb-2"
+                                        >
                                           <div>
                                             <h5>
                                               <strong>Libraries</strong>
                                             </h5>
                                           </div>
                                           <SkillsSetLevel
-                                            category={'libraries'} 
-                                            skills={E} 
-                                            skillsIndex={I} 
-                                            skillsBarAnimator={skillsBarAnimator} 
-                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                            category={'libraries'}
+                                            skills={E}
+                                            skillsIndex={I}
+                                            skillsBarAnimator={
+                                              skillsBarAnimator
+                                            }
+                                            skillsLevelBarHelper={
+                                              skillsLevelBarHelper
+                                            }
                                           />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-3 mb-2">
+                                        <Col
+                                          xs={12}
+                                          lg={6}
+                                          className="p-3 mb-2"
+                                        >
                                           <div>
                                             <h5>
                                               <strong>Technologies</strong>
                                             </h5>
                                           </div>
                                           <SkillsSetLevel
-                                            category={'technologies'} 
-                                            skills={E} 
-                                            skillsIndex={I} 
-                                            skillsBarAnimator={skillsBarAnimator} 
-                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                            category={'technologies'}
+                                            skills={E}
+                                            skillsIndex={I}
+                                            skillsBarAnimator={
+                                              skillsBarAnimator
+                                            }
+                                            skillsLevelBarHelper={
+                                              skillsLevelBarHelper
+                                            }
                                           />
                                         </Col>
-                                        <Col xs={12} lg={6} className="p-3 mb-2">
+                                        <Col
+                                          xs={12}
+                                          lg={6}
+                                          className="p-3 mb-2"
+                                        >
                                           <div>
                                             <h5>
                                               <strong>Tools</strong>
                                             </h5>
                                           </div>
                                           <SkillsSetLevel
-                                            category={'tools'} 
-                                            skills={E} 
-                                            skillsIndex={I} 
-                                            skillsBarAnimator={skillsBarAnimator} 
-                                            skillsLevelBarHelper={skillsLevelBarHelper}
+                                            category={'tools'}
+                                            skills={E}
+                                            skillsIndex={I}
+                                            skillsBarAnimator={
+                                              skillsBarAnimator
+                                            }
+                                            skillsLevelBarHelper={
+                                              skillsLevelBarHelper
+                                            }
                                           />
                                         </Col>
                                       </Row>

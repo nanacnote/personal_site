@@ -1,0 +1,104 @@
+.container> * {
+    box-sizing: border-box;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+        width: 800px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .device {
+            background: lightslategray;
+            min-width: 600px;
+            width: 90%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
+            -webkit-box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
+            -moz-box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
+            .screen {
+                width: 90%;
+                height: 75px;
+                margin: 5%;
+                background: black; 
+            }
+            .wrapper {
+                display: flex;
+                width: 90%;
+                height: 300px;
+                margin: 5%;
+                .padContainer {
+                    width: 70%;
+                    height: 100%;
+                    .padTop {
+                        display: flex;
+                        width: 100%;
+                        height: 50%;
+                        margin-bottom: 2.5%;
+                    }
+                    .padBottom {
+                        display: flex;
+                        width: 100%;
+                        height: 50%;
+                        margin-top: 2.5%;
+                    }
+                }
+                .controlsContainer {
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    width: 30%;
+                    height: 100%;
+                    .volume {
+                        width: 80%;
+                        height: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin pad($color) {
+    margin: 0 1% 0 1%;
+    width: 35%;
+    height: 100%;
+    border: solid 2.5px $color;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.75); 
+    background-position: center;
+    transition: background 0.8s;
+    &:hover {
+        background: rgba(0, 0, 0, 1) radial-gradient(circle, transparent 1%, rgba(0, 0, 0, 0.75) 100%) center/15000000%;
+    }
+    &:active {
+        background-color: $color;
+        background-size: 100%;
+        transition: background 0s;
+    }
+}
+
+.padRed {
+    @include pad(#E81819);
+}
+.padOrange {
+    @include pad(#FA8943);
+}
+.padYellow {
+    @include pad(#FAFA49);
+}
+.padBlue {
+    @include pad(#56CA5E);
+}
+.padPurple {
+    @include pad(#0cbfe9);
+}
+.padGreen {
+    @include pad(#C438D7);
+}
