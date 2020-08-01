@@ -265,7 +265,14 @@ body {
 
     //_______________________
     // front pages main
+
+    .modal-90w {
+        //custom boostrap modal
+        width: 95vw;
+        max-width: none !important;
+    }
     .modal-canvas {
+        //responsive canvas when on is place on the modal
         width: 100%;
         height: auto;
     }
@@ -465,7 +472,6 @@ body {
         }
     }
 }
-
 
 .theme-light {
     $light-colors : 

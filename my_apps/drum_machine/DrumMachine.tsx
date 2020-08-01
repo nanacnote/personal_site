@@ -31,10 +31,11 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
 
                 <div>
                   <div className="mb-5">
-                    A drum machine application built entirely with vanilla JS.
-                    It utilises the audio API and touch event listner for adding
-                    pressure sensitve inputs on touch devices. Inputs can be
-                    recorded and concatenated to make a track.
+                    A drum machine application. UI built entirely in CSS.
+                    It utilises <a href="https://createjs.com/soundjs" target="_blank" rel="noreferrer">gskinner</a>'s 
+                    Sound JS API for audio files handling,
+                    and touch event listner for adding
+                    pressure sensitve inputs on touch devices.
                   </div>
                   <div className="mb-3">
                     <div>

@@ -1,71 +1,12 @@
-.container> * {
+.container * {
     box-sizing: border-box;
 }
-
-.main{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .container {
-        width: 800px;
-        height: 600px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .device {
-            background: lightslategray;
-            min-width: 600px;
-            width: 90%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
-            -webkit-box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
-            -moz-box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
-            .screen {
-                width: 90%;
-                height: 75px;
-                margin: 5%;
-                background: black; 
-            }
-            .wrapper {
-                display: flex;
-                width: 90%;
-                height: 300px;
-                margin: 5%;
-                .padContainer {
-                    width: 70%;
-                    height: 100%;
-                    .padTop {
-                        display: flex;
-                        width: 100%;
-                        height: 50%;
-                        margin-bottom: 2.5%;
-                    }
-                    .padBottom {
-                        display: flex;
-                        width: 100%;
-                        height: 50%;
-                        margin-top: 2.5%;
-                    }
-                }
-                .controlsContainer {
-                    display: flex;
-                    align-items: flex-end;
-                    justify-content: center;
-                    width: 30%;
-                    height: 100%;
-                    .volume {
-                        width: 80%;
-                        height: 50%;
-                    }
-                }
-            }
-        }
-    }
+.container {
+    padding: 10px;
 }
 
 @mixin pad($color) {
+    position: relative;
     margin: 0 1% 0 1%;
     width: 35%;
     height: 100%;
@@ -82,23 +23,148 @@
         background-size: 100%;
         transition: background 0s;
     }
+    .padLight {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5%;
+        height: 5%;
+        background: $color;
+        border-bottom-left-radius: 5px;
+    }
 }
 
-.padRed {
-    @include pad(#E81819);
+@mixin global ($height) {
+    
+    .main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .device {
+                background: lightslategray;
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: inset 0px 0px 54px -20px rgba(0,0,0,0.73);
+                .screen {
+                    display: flex;
+                    // justify-content: space-between;
+                    width: 90%;
+                    height: 75px;
+                    margin: 5%;
+                    padding: 0.5% 2% 0.5% 2%;
+                    background: black;
+                    border-radius: 5px;
+                    box-shadow: inset 1px 1px 3px rgb(136, 136, 136);
+                    .screenSection {
+                        display: flex;
+                        flex-direction: column;
+                        width: 33.3%;
+                        .screenSectionHeader {
+                            color: darkslategrey;
+                        }
+                        .screenSectionBody {
+                            display: block;
+                            padding-left: 2.5%;
+                        }
+                    }
+                }
+                .wrapper {
+                    display: flex;
+                    width: 90%;
+                    height: 10vmin;
+                    max-height: 300px;
+                    min-height: $height;
+                    margin: 5%;
+                    .padContainer {
+                        width: 70%;
+                        height: 100%;
+                        .padTop {
+                            display: flex;
+                            width: 100%;
+                            height: 50%;
+                            margin-bottom: 2.5%;
+                        }
+                        .padBottom {
+                            display: flex;
+                            width: 100%;
+                            height: 50%;
+                            margin-top: 2.5%;
+                        }
+                    }
+                    .controlsContainer {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: flex-end;
+                        width: 30%;
+                        height: 100%;
+                        .instruments {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 85%;
+                            height: 50%;
+                            .instrumentsSection {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 90%;
+                                height: 25%;
+                                margin: 5% 0;
+                                .instrumentsSectionItem {
+                                    width: 45%;
+                                    height: 100%;
+                                    border-radius: 30%/50%;
+                                    border: solid 0.25em #0e0e0e;
+                                    background-color: grey;
+                                    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1d1d1d), color-stop(1, #131313));
+                                }
+                            }
+                        }
+                        .volume {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 85%;
+                            height: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .padRed {
+        @include pad(#E81819);
+    }
+    .padOrange {
+        @include pad(#FA8943);
+    }
+    .padYellow {
+        @include pad(#FAFA49);
+    }
+    .padGreen {
+        @include pad(#56CA5E);
+    }
+    .padBlue {
+        @include pad(#0cbfe9);
+    }
+    .padPurple {
+        @include pad(#C438D7);
+    }
 }
-.padOrange {
-    @include pad(#FA8943);
+
+@media only screen and (max-width: 700px) {
+    @include global(200px)
 }
-.padYellow {
-    @include pad(#FAFA49);
-}
-.padBlue {
-    @include pad(#56CA5E);
-}
-.padPurple {
-    @include pad(#0cbfe9);
-}
-.padGreen {
-    @include pad(#C438D7);
+@media only screen and (min-width: 700px) {
+    @include global(350px)
 }

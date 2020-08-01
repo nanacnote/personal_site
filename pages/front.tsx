@@ -76,16 +76,19 @@ export const Front = ({ post }): JSX.Element => {
       name: "Newton's Cradle",
       component: <NewtonsCradle />,
       imageLink: '/test_drive/newton.jpg',
+      size: "default"
     },
     {
       name: 'PureJS Snake',
       component: <PureSnake />,
       imageLink: '/test_drive/snake.jpg',
+      size: "default"
     },
     {
       name: 'Drum Machine',
       component: <DrumMachine />,
       imageLink: '/test_drive/drum.jpg',
+      size: "custom"
     },
   ]
 
@@ -1191,7 +1194,8 @@ export const Front = ({ post }): JSX.Element => {
               {/* modal for showing test app when currently test something cool is clicked */}
               <Container fluid className="test-drive-stuff-modal">
                 <Modal
-                  size="xl"
+                  size={testDriveStage?.size === 'custom' ? undefined : "xl"}
+                  dialogClassName={testDriveStage?.size === 'custom' ? "modal-90w" : undefined}
                   show={testDriveStage ? true : false}
                   onHide={() => {
                     settestDriveStage(null)
