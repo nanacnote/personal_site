@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import Head from 'next/head'
 import { VolumeDial, Visualiser, Pad, volumeControls, padControls, } from './'
 import styles from './ReactDrum.module.scss'
 
@@ -19,18 +18,12 @@ export class ReactDrum extends PureComponent<TProps, TState> {
 
   componentDidMount() {
     const volumeC = volumeControls(this)
-    const padC = padControls(this)
-  }
-  componentWillUpdate(){
-    // console.log(this.state.padActive)
+    const padC = padControls({superThis: this, soundsJSON: drumsJSON})
   }
 
   render() {
     return (
     <>
-    <Head>
-        <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
-    </Head>
       <div className={styles.main}>
         <div className={styles.container}>
           <div className={styles.device}>
@@ -89,3 +82,39 @@ export class ReactDrum extends PureComponent<TProps, TState> {
   }
 }
 export default ReactDrum
+
+
+const drumsJSON = {
+    "urls": [
+      "./drum_machine/drum_sample.ogg",
+      "./drum_machine/drum_sample.m4a",
+      "./drum_machine/drum_sample.mp3",
+      "./drum_machine/drum_sample.ac3"
+    ],
+    "sprite": {
+      "808": [
+        0,
+        2400
+      ],
+      "Crash": [
+        4000,
+        4948.458049886622
+      ],
+      "HiHat": [
+        10000,
+        4948.458049886622
+      ],
+      "Kick": [
+        16000,
+        454.55782312925305
+      ],
+      "Snap": [
+        18000,
+        2474.2176870748303
+      ],
+      "Snare": [
+        22000,
+        2474.2176870748303
+      ]
+    }
+  }
