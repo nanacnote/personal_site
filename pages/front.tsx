@@ -34,7 +34,7 @@ import {
 } from 'react-icons/fa'
 
 // typings declaration
-type Tdata = {
+type TData = {
   modalData: {
     src: string | undefined
     title: string | undefined
@@ -108,7 +108,7 @@ export const Front = ({ post }): JSX.Element => {
   const [landingTransition, setlandingTransition] = useState(true)
   //controls modal popup
   const [modalShow, setmodalShow] = useState(false)
-  const [modalContent, setmodalContent] = useState<Tdata['modalData']>({
+  const [modalContent, setmodalContent] = useState<TData['modalData']>({
     src: undefined,
     title: undefined,
     header: undefined,
@@ -186,7 +186,7 @@ export const Front = ({ post }): JSX.Element => {
   }
 
   //function to handle modal iframe content displayed
-  const modalIframeHandler = (arg: Tdata['modalData']) => {
+  const modalIframeHandler = (arg: TData['modalData']) => {
     setmodalContent(arg)
     setmodalShow(true)
   }

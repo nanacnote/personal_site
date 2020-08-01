@@ -30,11 +30,13 @@
     ]
   },
   "dependencies": {
+    "@types/howler": "^2.2.1",
     "@types/jquery": "^3.5.1",
     "@types/lodash": "^4.14.157",
     "@types/matter-js": "^0.14.4",
     "bootstrap": "^4.5.0",
     "gsap": "^3.3.4",
+    "howler": "^2.2.0",
     "jquery": "^3.5.1",
     "matter-js": "^0.14.2",
     "next": "^9.4.4",
