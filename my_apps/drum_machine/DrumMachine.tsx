@@ -33,8 +33,17 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                   <div className="mb-5">
                     <p>A drum machine application. UI built entirely in CSS.</p>
                     <p>
-                      It utilises <a href="https://howlerjs.com/" target="_blank" rel="noreferrer">howler</a> 
-                      audio API for audio files handling, and touch event listner for adding pressure sensitve inputs on touch devices.
+                      It utilises{' '}
+                      <a
+                        href="https://howlerjs.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        howler
+                      </a>
+                      audio API for audio files handling, and touch event
+                      listner for adding pressure sensitve inputs on touch
+                      devices.
                     </p>
                   </div>
                   <div className="mb-3">

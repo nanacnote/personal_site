@@ -67,13 +67,15 @@
                     .screenSection {
                         display: flex;
                         flex-direction: column;
+                        padding: 0 5%;
                         width: 33.3%;
+                        overflow: hidden;
                         .screenSectionHeader {
-                            color: darkslategrey;
+                            color: darkslategray;
                         }
                         .screenSectionBody {
                             display: block;
-                            padding-left: 2.5%;
+                            color: lightsteelblue;
                         }
                     }
                 }
@@ -114,20 +116,12 @@
                             align-items: center;
                             width: 85%;
                             height: 50%;
-                            .instrumentsSection {
+                            .instrumentsSelector {
                                 display: flex;
                                 justify-content: space-between;
                                 width: 90%;
                                 height: 25%;
                                 margin: 5% 0;
-                                .instrumentsSectionItem {
-                                    width: 45%;
-                                    height: 100%;
-                                    border-radius: 30%/50%;
-                                    border: solid 0.25em #0e0e0e;
-                                    background-color: grey;
-                                    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1d1d1d), color-stop(1, #131313));
-                                }
                             }
                         }
                         .volume {
