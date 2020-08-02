@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useTouchSwipe } from '../../hooks'
 
 export const VolumeDial: React.FC<{}> = (): JSX.Element => {
+  // declare variable for ref
+  let element = useRef()
+
+  // initialise touch input hook
+  const direction = useTouchSwipe(element.current)
+  console.log(direction)
+
   return (
     <>
-      <div className="knob-surround">
+      <div className="knob-surround" ref={element}>
         <div className="knob"></div>
 
         <span className="min">Min</span>
