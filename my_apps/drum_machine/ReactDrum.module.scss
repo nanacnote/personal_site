@@ -15,6 +15,15 @@
     background: rgba(0, 0, 0, 0.75); 
     background-position: center;
     transition: background 0.8s;
+    .padActive {
+        // used by keydown to activate the color effect
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 1) radial-gradient(circle, transparent 1%, rgba(0, 0, 0, 0.75) 100%) center/15000000%;
+        background-color: $color;
+        background-size: 100%;
+        transition: background 0s;
+    }
     &:hover {
         background: rgba(0, 0, 0, 1) radial-gradient(circle, transparent 1%, rgba(0, 0, 0, 0.75) 100%) center/15000000%;
     }
@@ -22,6 +31,21 @@
         background-color: $color;
         background-size: 100%;
         transition: background 0s;
+    }
+    .padRef {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        &>div {
+            font-size: 200%;
+            opacity: 0.5;
+            user-select: none;
+        }
     }
     .padLight {
         position: absolute;
