@@ -869,7 +869,7 @@ export const Front = ({ post }): JSX.Element => {
                                 }
                               `}
                             >
-                              {testProjects.map((e, i) => (
+                              {testProjects.map((e) => (
                                 <div
                                   key={e.name}
                                   className="test-drive-col"

@@ -1,26 +1,26 @@
 import { default as $ } from 'jquery'
-// import { Howl } from 'howler'
 
 export default function padControls(params: any) {
-  // // config howler with soundJSON params item
-  // const sound = new Howl({
-  //   src: params.soundsJSON.urls,
-  //   sprite: params.soundsJSON.sprite,
-  //   onend: function () {
-  //     console.log('Finished!')
-  //   },
-  // })
-
   // all pad elements selector
-  let pad = $('.pad')
+  const pad = $('.pad')
 
   // click event
-  pad.on('mousedown', function (e) {
+  pad.on('mousedown', function () {
     params.setState({ padActive: true })
     const idx = pad.index(this) + 1
     params.setState({ padActive: { status: true, index: idx } })
   })
-  pad.on('mouseup', function (e) {
+  pad.on('mouseup', function () {
+    params.setState({ padActive: { status: false, index: 0 } })
+  })
+
+  // click event
+  pad.on('touchstart', function () {
+    params.setState({ padActive: true })
+    const idx = pad.index(this) + 1
+    params.setState({ padActive: { status: true, index: idx } })
+  })
+  pad.on('touchend', function () {
     params.setState({ padActive: { status: false, index: 0 } })
   })
 }

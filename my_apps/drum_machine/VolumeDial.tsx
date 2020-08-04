@@ -3,11 +3,10 @@ import { useTouchSwipe } from '../../hooks'
 
 export const VolumeDial: React.FC<{}> = (): JSX.Element => {
   // declare variable for ref
-  let element = useRef()
+  const element = useRef()
 
   // initialise touch input hook
-  const direction = useTouchSwipe(element.current)
-  console.log(direction)
+  // const direction = useTouchSwipe(element.current)
 
   return (
     <>
