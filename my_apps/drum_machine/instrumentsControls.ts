@@ -13,10 +13,10 @@ export default function instruments(params: any) {
   params.setState({ allSoundKits: sounds })
 
   // select all button elements
-  let button = $('.instrumentsSelectorItem')
+  const button = $('.instrumentsSelectorItem')
 
   // click event
-  button.on('click', function (e) {
+  button.on('click', function () {
     //   get index of current clicked button
     const idx = button.index(this)
     // get name of soundkit to use
@@ -64,12 +64,12 @@ const allSoundKits = {
       './drum_machine/synth_sample.ac3',
     ],
     sprite: {
-      CautionPluck_C: [0, 5200.45351473923],
-      Chord_1_G: [7000, 1237.1201814058957],
-      'Chord_2_F#': [10000, 1026.4852607709756],
-      Stab_Dmin: [13000, 839.9999999999999],
-      Steel_Stab_One_Shot_D: [15000, 1750],
-      Synth_Chord_Lead1_Cmaj7: [18000, 8166.530612244898],
+      CautionPluckC: [0, 5200.45351473923],
+      ChordG: [7000, 1237.1201814058957],
+      ChordFSharp: [10000, 1026.4852607709756],
+      StabDmin: [13000, 839.9999999999999],
+      SteelStabD: [15000, 1750],
+      ChordCmaj7: [18000, 8166.530612244898],
     },
   },
 }

@@ -2,10 +2,10 @@ import { default as $ } from 'jquery'
 import { Howler } from 'howler'
 
 export default function volumeDialControls(param: any) {
-  let knob = $('.knob')
+  const knob = $('.knob')
   let angle = 50
-  let minangle = 0
-  let maxangle = 270
+  const minangle = 0
+  const maxangle = 270
 
   // set initial volume
   Howler.volume(0.19)
@@ -35,7 +35,7 @@ export default function volumeDialControls(param: any) {
     })
 
     // highlight ticks
-    var activeTicks = Math.round(angle / 10) + 1
+    let activeTicks = Math.round(angle / 10) + 1
     $('.tick').removeClass('activetick')
     $('.tick').slice(0, activeTicks).addClass('activetick')
 
