@@ -19,7 +19,6 @@ export default function padControls(params: any) {
     params.setState({ padActive: true })
     const idx = pad.index(this) + 1
     params.setState({ padActive: { status: true, index: idx } })
-    console.log('touch')
   })
   pad.on('touchend', function (e) {
     params.setState({ padActive: { status: false, index: 0 } })
