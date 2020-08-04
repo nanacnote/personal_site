@@ -5,22 +5,12 @@ export default function padControls(params: any) {
   const pad = $('.pad')
 
   // click event
-  pad.on('mousedown', function () {
+  pad.on('pointerdown', function () {
     params.setState({ padActive: true })
     const idx = pad.index(this) + 1
     params.setState({ padActive: { status: true, index: idx } })
   })
-  pad.on('mouseup', function () {
-    params.setState({ padActive: { status: false, index: 0 } })
-  })
-
-  // click event
-  pad.on('touchstart', function () {
-    params.setState({ padActive: true })
-    const idx = pad.index(this) + 1
-    params.setState({ padActive: { status: true, index: idx } })
-  })
-  pad.on('touchend', function () {
+  pad.on('pointerup', function () {
     params.setState({ padActive: { status: false, index: 0 } })
   })
 }
