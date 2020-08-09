@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import Matter from 'matter-js'
 import { Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaQuestionCircle, FaArrowUp } from 'react-icons/fa'

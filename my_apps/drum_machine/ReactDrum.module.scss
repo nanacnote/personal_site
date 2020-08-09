@@ -12,6 +12,7 @@
     height: 100%;
     border: solid 2.5px $color;
     border-radius: 5px;
+    touch-action: manipulation;
     background: rgba(0, 0, 0, 0.75); 
     background-position: center;
     transition: background 0.8s;

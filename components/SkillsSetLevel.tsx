@@ -34,7 +34,7 @@ export const SkillsSetLevel: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 style={{
                   width: `${
                     props.skillsBarAnimator >= props.skillsIndex ? e[1] : 0
-                  }%`,
+                    }%`,
                 }}
               >
                 {props.skillsLevelBarHelper('description', +e[1])}

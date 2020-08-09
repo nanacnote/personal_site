@@ -1,7 +1,7 @@
-import { Stage, Timer } from './'
+import { Stage, Timer } from '.'
 
 /**
- * TS declaration for Stage module
+ * TS declaration for Renderer module
  */
 export type TRenderer = {
   params: {
