@@ -29,10 +29,10 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
     gameStateButton === 'Start'
       ? setgameStateButton('Pause')
       : gameStateButton === 'Pause'
-        ? setgameStateButton('Resume')
-        : gameStateButton === 'Resume'
-          ? setgameStateButton('Pause')
-          : null
+      ? setgameStateButton('Resume')
+      : gameStateButton === 'Resume'
+      ? setgameStateButton('Pause')
+      : null
     setgameCycle(
       (event.target as Element).textContent.trim() as TState['gameCycle']
     )
@@ -93,24 +93,24 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
                       className={`h4 py-1 my-2 position-relative clickable-item text-center bg-white border rounded 
                       ${
                         gameStateButton === 'Start' ||
-                          gameStateButton === 'Resume'
+                        gameStateButton === 'Resume'
                           ? 'text-success border-success'
                           : 'text-warning border-warning'
-                        }`}
+                      }`}
                       onClick={playHandler}
                     >
                       {gameStateButton}
                       {gameStateButton === 'Start' ||
-                        gameStateButton === 'Resume' ? (
-                          <FaPlayCircle />
-                        ) : gameStateButton === 'Pause' ? (
-                          <FaPauseCircle />
-                        ) : null}
+                      gameStateButton === 'Resume' ? (
+                        <FaPlayCircle />
+                      ) : gameStateButton === 'Pause' ? (
+                        <FaPauseCircle />
+                      ) : null}
                     </div>
                     <div
                       className={`h4 py-1 my-2 position-relative clickable-item text-center bg-white border rounded text-secondary border-secondary ${
                         gameStateButton === 'Start' ? 'd-none' : 'd-block'
-                        }`}
+                      }`}
                       onClick={restartHandler}
                     >
                       Restart <FaReply />

@@ -47,7 +47,7 @@ export class ReactDrum extends PureComponent<TProps, TState> {
     const remove = (param: HTMLDivElement) => {
       setTimeout(() => {
         param.classList.remove(styles.padActive)
-      }, 250);
+      }, 250)
     }
 
     const idx = +e.key

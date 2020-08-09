@@ -39,8 +39,8 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                         rel="noreferrer"
                       >
                         howler
-                      </a>
-                      {' '}audio API for audio files handling, and touch event
+                      </a>{' '}
+                      audio API for audio files handling, and touch event
                       listner for adding pressure sensitve inputs on touch
                       devices.
                     </p>

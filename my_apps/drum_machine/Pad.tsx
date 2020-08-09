@@ -13,9 +13,7 @@ export const Pad = React.forwardRef<HTMLDivElement, TProps>(
       <div className={`${props.parentClass} pad`}>
         <div ref={forwardedRef}>
           <div className={props.keyRefClass}>
-            <div>
-              {props.keyRef}
-            </div>
+            <div>{props.keyRef}</div>
           </div>
           <div className={props.childClass} />
         </div>
