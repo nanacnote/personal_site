@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Renderer } from './'
 import styles from './ReactSnake.module.scss'
 

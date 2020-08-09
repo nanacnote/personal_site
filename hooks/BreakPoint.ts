@@ -7,11 +7,11 @@ import { useState, useEffect } from 'react'
 import debounce from 'lodash/debounce'
 // const debounce = require('lodash/debounce')
 
-// helper function to translate the size to string of xs sm md lg
+// helper function to translate the size to boolean value
 const helper = (arg: number | undefined) => {
   return arg
     ? () => {
-        if (arg < 800) {
+        if (arg < 768) {
           return true
         } else {
           return false
@@ -43,7 +43,7 @@ export function useBreakPoint() {
       setviewPortSize(window.innerWidth)
     }
 
-    window.addEventListener('resize', debounce(handleResize, 1000))
+    window.addEventListener('resize', debounce(handleResize, 500))
 
     return () => {
       window.removeEventListener('resize', debounce(handleResize, 500))

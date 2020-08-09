@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const Instruments: React.FC<{ type: string }> = ({
   ...props
 }): JSX.Element => {

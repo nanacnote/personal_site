@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { ReactDrum } from './'
 import { FaGithub } from 'react-icons/fa'
@@ -40,7 +39,7 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                         rel="noreferrer"
                       >
                         howler
-                      </a>
+                      </a>{' '}
                       audio API for audio files handling, and touch event
                       listner for adding pressure sensitve inputs on touch
                       devices.

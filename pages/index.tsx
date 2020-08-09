@@ -19,5 +19,4 @@ export const Home = (): JSX.Element => (
     </footer>
   </div>
 )
-
 export default Home

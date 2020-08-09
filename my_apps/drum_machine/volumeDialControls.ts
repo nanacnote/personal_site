@@ -7,18 +7,21 @@ export default function volumeDialControls(param: any) {
   const minangle = 0
   const maxangle = 270
 
+  // variable for holding initial touch coordinates
+  let touchMem: Array<number> = []
+
   // set initial volume
   Howler.volume(0.19)
 
-  const moveKnob = (direction) => {
+  const moveKnob = (direction: 'up' | 'down', rotation: number = 2) => {
     if (direction == 'up') {
-      if (angle + 2 <= maxangle) {
-        angle = angle + 2
+      if (angle + rotation <= maxangle) {
+        angle = angle + rotation
         setAngle()
       }
     } else if (direction == 'down') {
-      if (angle - 2 >= minangle) {
-        angle = angle - 2
+      if (angle - rotation >= minangle) {
+        angle = angle - rotation
         setAngle()
       }
     }
@@ -63,5 +66,36 @@ export default function volumeDialControls(param: any) {
       moveKnob('down')
     }
     return false
+  })
+
+  // touchstart event handler
+  knob.bind('touchstart', function (e) {
+    e.preventDefault()
+    touchMem = [e.touches[0].clientX, e.touches[0].clientY]
+  })
+
+  // touchend event handler
+  knob.bind('touchend', function (e) {
+    e.preventDefault()
+    const x = e.changedTouches[0].clientX - touchMem[0]
+    const y = e.changedTouches[0].clientY - touchMem[1]
+    if (Math.abs(x) > Math.abs(y)) {
+      // swipe action is along the x plane
+      if (x > 0) {
+        moveKnob('up', 16)
+      } else {
+        moveKnob('down', 16)
+      }
+    } else {
+      // swipe action is along the y plan
+      if (y < 0) {
+        moveKnob('up', 16)
+      } else if (y === 0) {
+        // console.log('Tap')
+        null
+      } else {
+        moveKnob('down', 16)
+      }
+    }
   })
 }

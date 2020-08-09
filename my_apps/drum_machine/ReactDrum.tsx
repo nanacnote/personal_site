@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import { PureComponent } from 'react'
 import {
   Instruments,
   instrumentsControls,
@@ -44,14 +44,14 @@ export class ReactDrum extends PureComponent<TProps, TState> {
   // keydown handler
   private keyDown = (e: KeyboardEvent) => {
     //remove the effect added by active class
-      const remove = (param: HTMLDivElement)=> {
-        setTimeout(() => {
-            param.classList.remove(styles.padActive)
-        }, 250);
-      }
+    const remove = (param: HTMLDivElement) => {
+      setTimeout(() => {
+        param.classList.remove(styles.padActive)
+      }, 250)
+    }
 
     const idx = +e.key
-    if ( [1, 2, 3, 4, 5, 6].includes(idx) ) {
+    if ([1, 2, 3, 4, 5, 6].includes(idx)) {
       this.setState({ padActive: { status: true, index: idx } })
       switch (idx) {
         case 1:

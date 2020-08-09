@@ -236,7 +236,7 @@ export const ClipWindow = (): JSX.Element => {
         </div>
       </div>
       <div className="enter-site">
-        <Link href="/front">
+        <Link href="/main">
           <a href="#">Enter</a>
         </Link>
       </div>
