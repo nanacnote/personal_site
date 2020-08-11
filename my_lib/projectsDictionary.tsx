@@ -1,0 +1,47 @@
+import { NewtonsCradle, PureSnake, DrumMachine } from '../my_apps'
+
+// all projects object
+export const projectsDictionary = {
+  'Web Development': [
+    {
+      slug: 'NewtonsCradle',
+      name: 'Pusher v1.0',
+      component: <NewtonsCradle key="NewtonsCradle" />,
+      imageLink: '/test_drive/newton.jpg',
+      title:
+        "Pusher v1.0 | Using Matter JS physics engine to simulate a Newoton's Cradle",
+      size: 'default',
+    },
+    {
+      slug: 'PureSnake',
+      name: 'SnakeX v2.0',
+      component: <PureSnake key="PureSnake" />,
+      imageLink: '/test_drive/snake.jpg',
+      title:
+        'SnakeX v2.0 | A HTML 5 game coded in entirely in vanilla JS and wrapped into a React component',
+      size: 'default',
+    },
+    {
+      slug: 'DrumMachine',
+      name: 'C-Note dM20',
+      component: <DrumMachine key="DrumMachine" />,
+      imageLink: '/test_drive/drum.jpg',
+      title:
+        'C-Note dM20 | CSS designed Drum Machine with sounds handled with Howler audio API for cross platform compatibility',
+      size: 'custom',
+    },
+  ],
+  'Data Science': [
+    {
+      slug: 'GameOfChance',
+      name: 'Uneven Match',
+      component: (
+        <div key="GameOfChance" children="available on next deployment" />
+      ),
+      imageLink: '',
+      title:
+        'Uneven Match | A Monte Carlo simulation of how the house always has an advantage in 50/50 roulette spin',
+      size: 'default',
+    },
+  ],
+}

@@ -1,0 +1,1 @@
+export { projectsDictionary } from './projectsDictionary'

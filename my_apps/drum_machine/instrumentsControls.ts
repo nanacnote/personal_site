@@ -42,10 +42,10 @@ export default function instruments(params: any) {
 const allSoundKits = {
   drums: {
     urls: [
-      './drum_machine/drum_sample.ogg',
-      './drum_machine/drum_sample.m4a',
-      './drum_machine/drum_sample.mp3',
-      './drum_machine/drum_sample.ac3',
+      '/drum_machine/drum_sample.ogg',
+      '/drum_machine/drum_sample.m4a',
+      '/drum_machine/drum_sample.mp3',
+      '/drum_machine/drum_sample.ac3',
     ],
     sprite: {
       '808': [0, 2400],
@@ -58,10 +58,10 @@ const allSoundKits = {
   },
   synth: {
     urls: [
-      './drum_machine/synth_sample.ogg',
-      './drum_machine/synth_sample.m4a',
-      './drum_machine/synth_sample.mp3',
-      './drum_machine/synth_sample.ac3',
+      '/drum_machine/synth_sample.ogg',
+      '/drum_machine/synth_sample.m4a',
+      '/drum_machine/synth_sample.mp3',
+      '/drum_machine/synth_sample.ac3',
     ],
     sprite: {
       CautionPluckC: [0, 5200.45351473923],

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { Container, Row, Col, Modal, Spinner } from 'react-bootstrap'
 import { Footer } from '.'
 import { gsap } from 'gsap'
-import { MyContext } from '../components'
+import { MyContext } from '.'
 import {
   FaTimes,
   FaAlignJustify,
