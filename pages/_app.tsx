@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app'
-import { MyProvider } from '../components'
+import { MyProvider } from '../my_components'
 import '../public/stylesheet/styles.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {

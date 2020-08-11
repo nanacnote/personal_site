@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react'
 import debounce from 'lodash/debounce'
 // const debounce = require('lodash/debounce')
 
-// helper function to translate the size to boolean value
-const helper = (arg: number | undefined) => {
+// helperBoolean function to translate the size to boolean value
+const helperBoolean = (arg: number | undefined) => {
   return arg
     ? () => {
         if (arg < 768) {
@@ -20,10 +20,28 @@ const helper = (arg: number | undefined) => {
     : undefined
 }
 
+// helper function to translate the size to string of xs sm md lg
+const helperStandard = (arg: number) => {
+  if (arg < 320) {
+    return 'xs'
+  } else if (arg >= 320 && arg < 720) {
+    return 'sm'
+  } else if (arg >= 720 && arg < 1024) {
+    return 'md'
+  } else if (arg >= 1024) {
+    return 'lg'
+  }
+}
+
 // Hook to monitor viewport size
 export function useBreakPoint() {
   //constant update of viewport size
   const [viewPortSize, setviewPortSize] = useState<number>(0)
+
+  //define viewport size as xs sm md lg
+  const [viewPortSizeStandard, setviewPortSizeStandard] = useState<
+    'xs' | 'sm' | 'md' | 'lg' | undefined
+  >(undefined)
 
   //defined viewport size (as per small or large)
   const [breakPoint, setbreakPoint] = useState<true | false | undefined>(
@@ -31,7 +49,8 @@ export function useBreakPoint() {
   )
 
   useEffect(() => {
-    setbreakPoint(helper(window.innerWidth))
+    setbreakPoint(helperBoolean(window.innerWidth))
+    setviewPortSizeStandard(helperStandard(window.innerWidth))
     setviewPortSize(window.innerWidth)
 
     if (typeof window !== 'object') {
@@ -39,7 +58,8 @@ export function useBreakPoint() {
     }
 
     const handleResize = () => {
-      setbreakPoint(helper(window.innerWidth))
+      setbreakPoint(helperBoolean(window.innerWidth))
+      setviewPortSizeStandard(helperStandard(window.innerWidth))
       setviewPortSize(window.innerWidth)
     }
 
@@ -50,5 +70,5 @@ export function useBreakPoint() {
     }
   }, [])
 
-  return [breakPoint, viewPortSize]
+  return [breakPoint, viewPortSizeStandard, viewPortSize]
 }
