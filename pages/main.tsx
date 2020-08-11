@@ -62,15 +62,15 @@ export const getStaticProps: GetStaticProps = async () => {
         grunt: 65,
       },
       projects: {
-        "Using Matter JS physics engine to make a Newton's Cradle": {
+        "Newton's Cradle | Using Matter JS physics engine to simulate a Newoton's Cradle": {
           link: '/projects',
           componentName: 'NewtonsCradle',
         },
-        'Snake Game coded in vanilla JS': {
+        'Hungry Snake | A HTML 5 game coded in entirely in vanilla JS and wrapped into a React component': {
           link: '/projects',
           componentName: 'PureSnake',
         },
-        'CSS designed Drum Machine sounds handled with Howler audio API': {
+        'C-Note v1.0.0 | CSS designed Drum Machine with sounds handled with Howler audio API for cross platform compatibility': {
           link: '/projects',
           componentName: 'DrumMachine',
         },
