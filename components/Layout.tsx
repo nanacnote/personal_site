@@ -102,13 +102,16 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
   }
 
   // ref for transition element
-  let landingTransitionLeft
+  let landingTransitionLeft: HTMLDivElement
 
   useEffect(() => {
+    const tlLanding = gsap.timeline()
+    const tlAnimate = gsap.timeline()
+    const tlNoAnimate = gsap.timeline()
+
     // transition animation controller
     if (context.landingStatus) {
-      gsap
-        .timeline()
+      tlLanding
         .to(landingTransitionLeft, {
           duration: 1,
           backgroundColor: '#d9d9d9',
@@ -131,8 +134,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
     }
     if (!context.landingStatus && props.siderAnimation) {
       //layout animation
-      gsap
-        .timeline()
+      tlAnimate
         .from('.sider', { duration: 1, height: '0', ease: 'bounce.out' })
         .set('.sider-container', { opacity: 1 })
         .from('.sider-section', {
@@ -156,24 +158,19 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
           ease: 'elastic.out(1,0.30)',
         })
         .to('.grad-hr', { duration: 0.5, width: '100%' }, '-=1')
-        .to('.current-col, .theme-col', { duration: 1, opacity: 1 }, '-=0.5')
-        .from(
+        .set('.current-col, .theme-col', { visibility: 'visible' })
+        .fromTo(
           '.current-col-items, .theme-col-items',
-          { duration: 0.75, opacity: 0, y: -20, stagger: 0.25 },
-          '-=1'
+          { opacity: 0, yPercent: -50 },
+          { duration: 0.75, opacity: 1, yPercent: 0, stagger: 0.25 },
+          '-=0.5'
         )
     } else {
       // layout no animation
-      gsap
-        .timeline()
+      tlNoAnimate
         .set('.sider-container', { opacity: 1 })
         .set('.grad-hr', { width: '100%' })
-        .to('.current-col, .theme-col', { duration: 1, opacity: 1 })
-        .from(
-          '.current-col-items, .theme-col-items',
-          { duration: 0.75, opacity: 0, y: -20, stagger: 0.25 },
-          '-=1'
-        )
+        .set('.current-col, .theme-col', { visibility: 'visible' })
     }
 
     // open / close menu icon display controller
@@ -181,6 +178,12 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
       ? setsiderShowHideIcon(<FaTimes />)
       : setsiderShowHideIcon(<FaAlignJustify />)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    return () => {
+      tlLanding.kill()
+      tlAnimate.kill()
+      tlNoAnimate.kill()
+    }
   }, [context.landingStatus, context.siderState, context.currentViewport])
 
   //sider html

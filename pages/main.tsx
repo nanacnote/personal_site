@@ -10,11 +10,9 @@ export const Home = ({ post }): JSX.Element => (
     </Head>
 
     <main>
-      <div className="main-container">
-        <Layout siderAnimation>
-          <Introduction post={post} />
-        </Layout>
-      </div>
+      <Layout siderAnimation>
+        <Introduction post={post} />
+      </Layout>
     </main>
   </div>
 )

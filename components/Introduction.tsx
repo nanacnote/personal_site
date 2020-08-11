@@ -251,9 +251,9 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
     // get visitors location on component mount
     getVistorLocation()
 
+    const tlText = gsap.timeline()
     !context.landingStatus
-      ? gsap
-          .timeline()
+      ? tlText
           .to(
             '.main-text-row',
             {
@@ -536,6 +536,10 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
           })
           .set('.test-drive-stage-intro', { display: 'inline' })
       : null
+
+    return () => {
+      tlText.kill()
+    }
   }, [])
 
   return (
