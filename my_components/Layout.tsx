@@ -3,6 +3,7 @@ import { Container, Row, Col, Modal, Spinner } from 'react-bootstrap'
 import { Footer } from '.'
 import { gsap } from 'gsap'
 import { MyContext } from '.'
+import { currentProject } from '../my_lib'
 import {
   FaTimes,
   FaAlignJustify,
@@ -275,7 +276,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          <a href="#" data-no-decoration>
+                          <a href="#" data-no-decoration data-inherit-color>
                             Light
                           </a>
                         </span>
@@ -284,7 +285,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          <a href="#" data-no-decoration>
+                          <a href="#" data-no-decoration data-inherit-color>
                             Dark
                           </a>
                         </span>
@@ -293,7 +294,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          <a href="#" data-no-decoration>
+                          <a href="#" data-no-decoration data-inherit-color>
                             Dull
                           </a>
                         </span>
@@ -302,7 +303,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
                           className="clickable-item position-relative"
                           onClick={themeChanger}
                         >
-                          <a href="#" data-no-decoration>
+                          <a href="#" data-no-decoration data-inherit-color>
                             Happy
                           </a>
                         </span>
@@ -321,7 +322,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
                             modalIframeHandler(props.currentProject)
                           }
                         >
-                          <a href="#" data-no-decoration>
+                          <a href="#" data-no-decoration data-inherit-color>
                             {props.currentProject.header}
                           </a>
                         </span>
@@ -388,10 +389,5 @@ export default Layout
 //sets default props value for animation
 Layout.defaultProps = {
   siderAnimation: false,
-  currentProject: {
-    src: 'https://insight-client.herokuapp.com/',
-    title: 'insight',
-    header: 'insight | Financial Research Platform',
-    body: `This is an open source project with a goal to consolidate equity research for all publicly traded companies. This consolidation will allow for more complex analysis to be layered on top of the structured data. % In later iterations portfolio optimisation and sentimental analysis tools will be implemented to allow for prudent investment.`,
-  },
+  currentProject: currentProject,
 }

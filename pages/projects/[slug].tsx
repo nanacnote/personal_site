@@ -22,12 +22,12 @@ export const Projects = (): JSX.Element => {
         <div className="project-container">
           <Layout>
             <div className="mb-5 d-flex">
-              <div>
-                <a href="/main" data-no-decoration data-inherit-color>
-                  <div className="clickable-item p-1 position-relative">
+              <div className="clickable-item p-1 position-relative">
+                <Link href="/main">
+                  <a href="#" data-no-decoration data-inherit-color>
                     Home
-                  </div>
-                </a>
+                  </a>
+                </Link>
               </div>
               <div className="p-1 position-relative">|</div>
               <div

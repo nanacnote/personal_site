@@ -136,7 +136,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
     }
 
     return (
-      <>
+      <div>
         <Container>
           <Row>
             <Col xs={12} xl={4}>
@@ -151,15 +151,15 @@ export class NewtonsCradle extends Component<TProps, TState> {
                   <hr />
 
                   <div>
-                    <div className="mb-5">
+                    <div className="mb-3">
                       This project was inspired by the thought of capturing some
                       fundamental physics laws using a visual and interactive
                       approach. After thinking on this for a while, I decided to
                       simulate the famous so-called Newtons cradle.
                     </div>
-                    <div>
+                    <div className="mb-3">
                       <div
-                        className="py-1 mb-3 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
+                        className="py-1 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
                         onClick={viewCodeHandler}
                       >
                         <a href="#" data-no-decoration>
@@ -173,7 +173,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
               </div>
             </Col>
             <Col>
-              <div>
+              <div className="d-flex justify-content-center align-items-center h-100">
                 <canvas
                   className="modal-canvas"
                   ref={(div) => (this.canvasRef = div)}
@@ -578,7 +578,7 @@ export class NewtonsCradle extends Component<TProps, TState> {
             ) : null}
           </Row>
         </Container>
-      </>
+      </div>
     )
   }
 }
