@@ -71,7 +71,7 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
                 <hr />
 
                 <div>
-                  <div className="mb-5">
+                  <div className="mb-3">
                     A snake game implemented with HTML5 and PureJS. No
                     dependecies. Use swipe gestures as controls for touch
                     devices.
@@ -121,12 +121,14 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
             </div>
           </Col>
           <Col>
-            <ReactSnake
-              input={{
-                io: io,
-                gameCycle: gameCycle,
-              }}
-            />
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <ReactSnake
+                input={{
+                  io: io,
+                  gameCycle: gameCycle,
+                }}
+              />
+            </div>
           </Col>
         </Row>
       </Container>

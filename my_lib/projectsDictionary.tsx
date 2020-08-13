@@ -1,4 +1,9 @@
-import { NewtonsCradle, PureSnake, DrumMachine } from '../my_apps'
+import {
+  NewtonsCradle,
+  PureSnake,
+  DrumMachine,
+  BasicCalculator,
+} from '../my_apps'
 
 // all projects object
 export const projectsDictionary = {
@@ -18,7 +23,7 @@ export const projectsDictionary = {
       component: <PureSnake key="PureSnake" />,
       imageLink: '/test_drive/snake.jpg',
       title:
-        'SnakeX v2.0 | A HTML 5 game coded in entirely in vanilla JS and wrapped into a React component',
+        'SnakeX v2.0 | A HTML 5 game coded entirely in vanilla JS and wrapped into a React component',
       size: 'default',
     },
     {
@@ -29,6 +34,15 @@ export const projectsDictionary = {
       title:
         'C-Note dM20 | CSS designed Drum Machine with sounds handled with Howler audio API for cross platform compatibility',
       size: 'custom',
+    },
+    {
+      slug: 'BasicCalculator',
+      name: 'Basio 112',
+      component: <BasicCalculator key="BasicCalculator" />,
+      imageLink: '',
+      title:
+        'Basio 112 | Basic mathematics calculator designed with CSS grid and uses object oriented JS to handle all logic',
+      size: 'default',
     },
   ],
   'Data Science': [

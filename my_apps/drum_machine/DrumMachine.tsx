@@ -7,11 +7,6 @@ import { FaGithub } from 'react-icons/fa'
  */
 type TProps = {}
 
-/**
- * typings declaration for state on PureSnake module
- */
-type TState = {}
-
 export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
   return (
     <div>
@@ -29,7 +24,7 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                 <hr />
 
                 <div>
-                  <div className="mb-5">
+                  <div className="mb-3">
                     <p>A drum machine application. UI built entirely in CSS.</p>
                     <p>
                       It utilises{' '}
@@ -64,7 +59,7 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
             </div>
           </Col>
           <Col>
-            <div>
+            <div className="d-flex justify-content-center align-items-center h-100">
               <ReactDrum />
             </div>
           </Col>
