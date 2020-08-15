@@ -15,10 +15,11 @@ export const Housing: React.FC<TProps> = (props): JSX.Element => (
             <Row>
               <Col xs={12} className="p-0">
                 <div className="d-flex flex-column justify-content-center m-1 align-items-end border rounded bg-white overflow-hidden">
-                  <div className="screen px-2 py-1 w-100 text-right">
+                  <code className="beta position-absolute">beta</code>
+                  <div className="screen1 text-secondary px-2 py-1 w-100 text-right">
                     {props.output[0] || '.'}
                   </div>
-                  <div className="screen px-2 py-1 w-100 text-right">
+                  <div className="screen2 text-black px-2 py-1 w-100 text-right">
                     <span>
                       <strong>{props.output[1] || '0'}</strong>
                       <strong className="text-secondary">
@@ -36,7 +37,7 @@ export const Housing: React.FC<TProps> = (props): JSX.Element => (
             <Row>
               <Col xs={3} className="p-0">
                 <div
-                  className="disabled pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
                   onClick={props.input}
                 >
                   (
@@ -44,7 +45,7 @@ export const Housing: React.FC<TProps> = (props): JSX.Element => (
               </Col>
               <Col xs={3} className="p-0">
                 <div
-                  className="disabled pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
                   onClick={props.input}
                 >
                   )
@@ -188,7 +189,7 @@ export const Housing: React.FC<TProps> = (props): JSX.Element => (
               </Col>
               <Col xs={3} className="p-0">
                 <div
-                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 darkest"
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 darkest text-light"
                   onClick={props.input}
                 >
                   =
@@ -231,16 +232,21 @@ export const Housing: React.FC<TProps> = (props): JSX.Element => (
       .darkest {
         background: #69656f;
       }
-      .screen {
+      .screen1,
+      .screen2 {
         font-family: 'Orbitron', sans-serif;
+      }
+      .screen1 {
+        font-size: 0.75rem;
       }
       .pad:hover {
         filter: brightness(105%);
         cursor: pointer;
       }
-      .disabled {
-        pointer-events: none;
-        opacity: 0.5;
+      .beta {
+        top: 0;
+        left: 0;
+        font-size: 0.75rem;
       }
     `}</style>
   </>
