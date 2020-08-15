@@ -31,19 +31,33 @@ export class BasicCalculator extends Component<TProps, TState> {
   }
 
   // variable for instance of calculator
-  private processor(params1: [string, string], params2: string) {
-    switch (params2) {
-      case '/':
-        return (parseFloat(params1[0]) / parseFloat(params1[1])).toString()
-      case '*':
-        return (parseFloat(params1[0]) * parseFloat(params1[1])).toString()
-      case '-':
-        return (parseFloat(params1[0]) - parseFloat(params1[1])).toString()
-      case '+':
-        return (parseFloat(params1[0]) + parseFloat(params1[1])).toString()
-      default:
-        return 'Error'
-    }
+  private processor(params: string) {
+    const args = params.split(' ')
+    let stack = []
+    let paren = false
+    let parenStack = []
+
+    args.map((e, i) => {
+      if (e.length > 0) {
+        if (e[0] === '(' || paren) {
+          paren = true
+          parenStack.push(e.replace('(', ''))
+        }
+        if (e[e.length - 1] === ')' && paren) {
+          paren = false
+          parenStack[parenStack.length - 1] = parenStack[
+            parenStack.length - 1
+          ].replace(')', '')
+          stack.push(eval(parenStack.toString().replace(/,/g, ' ')))
+          parenStack = []
+        }
+        if (e[e.length - 1] !== ')' && !paren) {
+          stack.push(e)
+        }
+      }
+    })
+    console.log(stack.toString().replace(/,/g, ' '))
+    return eval(stack.toString().replace(/,/g, ' '))
   }
 
   // recieves input from the calculator interface and passes it on to the processor
@@ -60,7 +74,9 @@ export class BasicCalculator extends Component<TProps, TState> {
           ? operands.includes(currentInput)
             ? currentInput
             : operators.includes(currentInput)
-            ? this.state.outputBottom + ' ' + currentInput
+            ? this.state.outputBottom + ' ' + currentInput + ' '
+            : currentInput === '%'
+            ? this.state.outputBottom + ' ' + '/ 100'
             : ''
           : '',
         parenthesis: false,
@@ -68,6 +84,12 @@ export class BasicCalculator extends Component<TProps, TState> {
       })
       return
     }
+    // operator as first input edge case
+    if (
+      ['%', '/', '*', '+'].includes(currentInput) &&
+      this.state.outputBottom.length < 1
+    )
+      return
     // decimal edge case
     if (
       this.state.outputBottom.match(/[0-9.]*$/gi)[0].includes('.') &&
@@ -77,7 +99,13 @@ export class BasicCalculator extends Component<TProps, TState> {
     // parenthesis edge case
     if (!this.state.parenthesis && currentInput === '(') {
       this.setState((prevState) => ({
-        outputBottom: prevState.outputBottom + ' ' + currentInput,
+        outputBottom:
+          this.state.outputBottom.length < 1
+            ? currentInput
+            : this.state.outputBottom[this.state.outputBottom.length - 1] ===
+              ' ' // edge case when followed by another paren
+            ? prevState.outputBottom + ' ' + currentInput
+            : prevState.outputBottom + ' ' + '*' + ' ' + currentInput,
         parenthesis: true,
       }))
     }
@@ -88,9 +116,14 @@ export class BasicCalculator extends Component<TProps, TState> {
       }))
     }
     // percetage case
-    if (currentInput === '%') {
+    if (
+      currentInput === '%' &&
+      !operators.includes(
+        this.state.outputBottom[this.state.outputBottom.length - 2]
+      )
+    ) {
       this.setState((prevState) => ({
-        outputBottom: prevState.outputBottom + '/100' + ' ',
+        outputBottom: prevState.outputBottom + '/ 100' + ' ',
       }))
     }
     // all other input cases
@@ -109,25 +142,20 @@ export class BasicCalculator extends Component<TProps, TState> {
         outputBottom: prevState.outputBottom + ' ' + currentInput + ' ',
       }))
     }
+    // handle return
     if (currentInput === '=') {
       this.setState({
         outputTop: this.state.parenthesis
-          ? this.state.outputBottom + ')'
-          : this.state.outputBottom,
-        outputBottom: this.state.parenthesis
-          ? eval(this.state.outputBottom + ')')
-          : eval(this.state.outputBottom),
+          ? this.state.outputBottom + ') ='
+          : this.state.outputBottom + '=',
+        outputBottom: this.state.parenthesis //edge case when paren exp not complete
+          ? this.processor(this.state.outputBottom + ')')
+          : this.processor(this.state.outputBottom),
         parenthesis: false,
         answerState: true,
       })
     }
   }
-
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
 
   render() {
     return (
