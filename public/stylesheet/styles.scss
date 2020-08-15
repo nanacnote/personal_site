@@ -2,6 +2,11 @@
 @import "~bootstrap/scss/bootstrap";
 
 @font-face {
+    font-family: 'Orbitron';
+    src: local('Orbitron'), url(/fonts/Orbitron/Orbitron-Regular.ttf) format('truetype');
+}
+
+@font-face {
     font-family: 'ZillaSlab';
     src: local('ZillaSlab'), url(/fonts/Zilla_Slab/ZillaSlab-Regular.ttf) format('truetype');
 }

@@ -1,199 +1,248 @@
 import { Container, Row, Col } from 'react-bootstrap'
 
-export const Housing = (): JSX.Element => (
-    <>
-        <div className="housing">
-            <Container className="border rounded bg-light">
-                <Row>
-                    <Container className="m-3">
-                        <Row>
-                        <Col xs={12} className="p-0">
-                                <div className="d-flex flex-column justify-content-center align-items-end border rounded m-1 bg-white">
-                                    <div className="h4 px-2 py-1">under</div>
-                                    <div className="h2 px-2 py-1">construction</div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Row>
-                <Row>
-                    <Container className="mx-3 mb-3">
-                        <Row>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        (
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        )
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        %
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        AC
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        7
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        8
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        9
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        /
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        4
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        5
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        6
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        *
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        1
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        2
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        3
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        -
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        0
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 light">
-                                
-                                        .
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 darkest">
-                                
-                                        =
-                                    
-                                </div>
-                            </Col>
-                            <Col xs={3} className="p-0">
-                                <div className="pad d-flex justify-content-center align-items-center rounded py-4 m-1 dark">
-                                
-                                        +
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Row>
-            </Container>
-        </div>
-        <style jsx>{`
-            .housing {
-                min-width: 500px;
-                color: #293249;
-                font-size: 1.25rem;
-            }
-            .light {
-                background: #f7efed;
-            }
-            .dark {
-                background: #ded2cf;
-            }
-            .darker {
-                background: #aca1a1;
-            }
-            .darkest {
-                background: #69656f;
-            }
-            .pad:hover {
-                filter: brightness(105%);
-            }
-        `}</style>
-    </>
+type TProps = {
+  input: (event: React.MouseEvent) => void
+  output: [string, string]
+  parenthesis: boolean
+}
+
+export const Housing: React.FC<TProps> = (props): JSX.Element => (
+  <>
+    <div className="housing">
+      <Container className="border rounded bg-light">
+        <Row>
+          <Container className="m-3 overflow-hidden">
+            <Row>
+              <Col xs={12} className="p-0">
+                <div className="d-flex flex-column justify-content-center m-1 align-items-end border rounded bg-white overflow-hidden">
+                  <div className="screen px-2 py-1 w-100 text-right">
+                    {props.output[0] || '.'}
+                  </div>
+                  <div className="screen px-2 py-1 w-100 text-right">
+                    <span>
+                      <strong>{props.output[1] || '0'}</strong>
+                      <strong className="text-secondary">
+                        {props.parenthesis ? ')' : null}
+                      </strong>
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Row>
+        <Row>
+          <Container className="mx-3 mb-3">
+            <Row>
+              <Col xs={3} className="p-0">
+                <div
+                  className="disabled pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  (
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="disabled pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  )
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  %
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  AC
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  7
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  8
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  9
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  /
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  4
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  5
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  6
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  *
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  1
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  2
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  3
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  -
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  0
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 light"
+                  onClick={props.input}
+                >
+                  .
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 darkest"
+                  onClick={props.input}
+                >
+                  =
+                </div>
+              </Col>
+              <Col xs={3} className="p-0">
+                <div
+                  className="pad d-flex justify-content-center align-items-center rounded py-2 m-1 dark"
+                  onClick={props.input}
+                >
+                  +
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Row>
+      </Container>
+    </div>
+    <style jsx>{`
+      .housing {
+        color: #293249;
+        font-size: 1.25rem;
+        width: 400px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .light {
+        background: #f7efed;
+      }
+      .dark {
+        background: #ded2cf;
+      }
+      .darker {
+        background: #aca1a1;
+      }
+      .darkest {
+        background: #69656f;
+      }
+      .screen {
+        font-family: 'Orbitron', sans-serif;
+      }
+      .pad:hover {
+        filter: brightness(105%);
+        cursor: pointer;
+      }
+      .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    `}</style>
+  </>
 )
 export default Housing
