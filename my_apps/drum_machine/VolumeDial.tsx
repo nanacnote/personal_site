@@ -47,8 +47,8 @@ export const VolumeDial: React.FC<{}> = (): JSX.Element => {
         .knob-surround {
           position: relative;
           background-color: grey;
-          width: 10vw;
-          height: 10vw;
+          width: min(100px, 10vw);
+          height: min(100px, 10vw);
           max-width: 150px;
           max-height: 150px;
           border-radius: 50%;

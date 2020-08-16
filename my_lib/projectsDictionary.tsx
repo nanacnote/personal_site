@@ -3,6 +3,7 @@ import {
   PureSnake,
   DrumMachine,
   BasicCalculator,
+  MarkdownViewer,
 } from '../my_apps'
 
 // all projects object
@@ -42,6 +43,15 @@ export const projectsDictionary = {
       imageLink: '',
       title:
         'Basio 112 | Basic mathematics calculator designed with CSS grid and uses object oriented JS to handle all logic',
+      size: 'default',
+    },
+    {
+      slug: 'MarkdownViewer',
+      name: 'Transformer v1.0',
+      component: <MarkdownViewer key="MarkdownViewer" />,
+      imageLink: '',
+      title:
+        'Transformer v1.0 | Mark JS powered markdown code parser the source and parsed code are displayed concurrently',
       size: 'default',
     },
   ],
