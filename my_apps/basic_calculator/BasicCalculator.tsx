@@ -15,6 +15,7 @@ type TState = {
   outputTop: string
   outputBottom: string
   parenthesis: boolean
+  answer: string
   answerState: boolean
 }
 
@@ -25,6 +26,7 @@ export class BasicCalculator extends Component<TProps, TState> {
       outputTop: '',
       outputBottom: '',
       parenthesis: false,
+      answer: '',
       answerState: false,
     }
     this.input = this.input.bind(this)
@@ -33,40 +35,76 @@ export class BasicCalculator extends Component<TProps, TState> {
   // variable for instance of calculator
   private processor(params: string) {
     const args = params.split(' ')
+    let ans = ''
     let stack = []
     let paren = false
     let parenStack = []
 
-    args.map((e, i) => {
-      if (e.length > 0) {
-        if (e[0] === '(' || paren) {
-          paren = true
-          parenStack.push(e.replace('(', ''))
+    try {
+      args.map((e) => {
+        if (e.length > 0) {
+          if (e === '(ANS' || e === 'ANS' || e === 'ANS)') {
+            e =
+              e === '(ANS'
+                ? '(' + this.state.answer
+                : e === 'ANS'
+                ? this.state.answer
+                : e === 'ANS)'
+                ? this.state.answer + ')'
+                : null
+          }
+          if (e === '^') {
+            e = '**'
+          }
+          if (e[0] === '(' || paren) {
+            paren = true
+            parenStack.push(e.replace('(', ''))
+          }
+          if (e[e.length - 1] === ')' && paren) {
+            paren = false
+            parenStack[parenStack.length - 1] = parenStack[
+              parenStack.length - 1
+            ].replace(')', '')
+            stack.push(eval(parenStack.toString().replace(/,/g, ' ')))
+            parenStack = []
+          }
+          if (e[e.length - 1] !== ')' && !paren) {
+            stack.push(e)
+          }
         }
-        if (e[e.length - 1] === ')' && paren) {
-          paren = false
-          parenStack[parenStack.length - 1] = parenStack[
-            parenStack.length - 1
-          ].replace(')', '')
-          stack.push(eval(parenStack.toString().replace(/,/g, ' ')))
-          parenStack = []
-        }
-        if (e[e.length - 1] !== ')' && !paren) {
-          stack.push(e)
-        }
-      }
-    })
-    console.log(stack.toString().replace(/,/g, ' '))
-    return eval(stack.toString().replace(/,/g, ' '))
+      })
+      let res: string = String(eval(stack.toString().replace(/,/g, ' ')))
+      // console.log(res)
+      ans = res.includes('.')
+        ? parseFloat(res).toFixed(7)
+        : parseFloat(res).toFixed(1)
+
+      return ans
+    } catch (error) {
+      return 'error'
+    }
   }
 
   // recieves input from the calculator interface and passes it on to the processor
   private input(event: React.MouseEvent) {
     const currentInput = event.currentTarget.textContent
-    const operands = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    const operators = ['/', '*', '-', '+']
+    const operands = [
+      'ANS',
+      '.',
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+    ]
+    const operators = ['^', '/', '*', '-', '+']
 
-    // all clear handler
+    // AC handler
     if (currentInput === 'AC' || this.state.answerState) {
       this.setState({
         outputTop: '',
@@ -84,9 +122,20 @@ export class BasicCalculator extends Component<TProps, TState> {
       })
       return
     }
+
+    // DEL handler
+    if (currentInput === 'DEL' && this.state.outputBottom.length > 0) {
+      this.setState({
+        outputBottom: this.state.outputBottom
+          .slice(0, this.state.outputBottom.length - 1)
+          .trim(),
+      })
+      return
+    }
+
     // operator as first input edge case
     if (
-      ['%', '/', '*', '+'].includes(currentInput) &&
+      operators.filter((e) => e !== '-').includes(currentInput) &&
       this.state.outputBottom.length < 1
     )
       return
@@ -102,8 +151,9 @@ export class BasicCalculator extends Component<TProps, TState> {
         outputBottom:
           this.state.outputBottom.length < 1
             ? currentInput
-            : this.state.outputBottom[this.state.outputBottom.length - 1] ===
-              ' ' // edge case when followed by another paren
+            : operators.includes(
+                this.state.outputBottom[this.state.outputBottom.length - 1]
+              )
             ? prevState.outputBottom + ' ' + currentInput
             : prevState.outputBottom + ' ' + '*' + ' ' + currentInput,
         parenthesis: true,
@@ -144,14 +194,17 @@ export class BasicCalculator extends Component<TProps, TState> {
     }
     // handle return
     if (currentInput === '=') {
+      const ans = this.state.parenthesis
+        ? this.processor(this.state.outputBottom + ')')
+        : this.processor(this.state.outputBottom)
+
       this.setState({
         outputTop: this.state.parenthesis
           ? this.state.outputBottom + ') ='
-          : this.state.outputBottom + '=',
-        outputBottom: this.state.parenthesis //edge case when paren exp not complete
-          ? this.processor(this.state.outputBottom + ')')
-          : this.processor(this.state.outputBottom),
+          : this.state.outputBottom + ' =',
+        outputBottom: ans,
         parenthesis: false,
+        answer: ans,
         answerState: true,
       })
     }
@@ -176,15 +229,39 @@ export class BasicCalculator extends Component<TProps, TState> {
                   <div>
                     <div className="mb-3">
                       <p>
-                        This project uses object oriented Javascript wrapped in
-                        a React class component to recreate the basic calculator
-                        application.
+                        An implementation of a basic mathematics calculator app,
+                        purely composed in a React JS component.
                       </p>
                       <p>
-                        All maths logic, input and output statements are
-                        captured in a single class object. The design uses CSS
-                        grid solely.
+                        The logic is handled by parsing the user input string to
+                        a custom function which uses a stacking algorithm to
+                        analyse and evaluate the input and returns an answer.
                       </p>
+                      <p>
+                        The design uses{' '}
+                        <a
+                          href="https://react-bootstrap.github.io/layout/grid/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Bootstrap's
+                        </a>{' '}
+                        grid system.
+                      </p>
+                      <div>
+                        <strong>Key</strong>
+                        <ul>
+                          <li>
+                            <span className="c-text-info">DEL</span> - clears
+                            last entry
+                          </li>
+                          <li>
+                            <span className="c-text-info">ANS</span> - holds
+                            value of last computation
+                          </li>
+                        </ul>
+                        <span>all others carry standard meaning</span>
+                      </div>
                     </div>
                     <div className="mb-3">
                       <a

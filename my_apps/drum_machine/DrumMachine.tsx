@@ -39,6 +39,11 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                       listner for adding pressure sensitve inputs on touch
                       devices.
                     </p>
+                    <p>
+                      <span className="bg-warning">
+                        switch silent mode off on mobile devices to hear audio
+                      </span>
+                    </p>
                   </div>
                   <div className="mb-3">
                     <div>

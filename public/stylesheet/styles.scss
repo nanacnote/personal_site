@@ -185,6 +185,15 @@ body {
         color: map.get($arg, "$text-primary");
     }
 
+    .c-border-info {
+        border-color: map.get($arg, "$text-info");
+        border-radius: 0.25rem;
+    }
+    .c-border-primary {
+        border-color: map.get($arg, "$text-primary");
+        border-radius: 0.25rem;
+    }
+
     .footer {
         text-align: center;
         .footer-socials {
