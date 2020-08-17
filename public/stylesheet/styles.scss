@@ -86,6 +86,9 @@ body {
             padding: 0;
             font: inherit;
             outline: inherit;
+            &[data-text-clickable]{
+                color: map.get($arg, "$text-clickable");
+            }
             &:focus {
                 .test-drive-name::before {
                     content: "";
@@ -111,6 +114,8 @@ body {
     .clickable-item {
         // always call position-relative on parent when used to animate links
         color: map.get($arg, "$text-clickable");
+        padding: 0 5px 0 5px;
+        border-radius: 0.25rem;
         &::before {
             content: "";
             position: absolute;
@@ -408,10 +413,17 @@ body {
         // main page
         .main-page-container{
             .main-text-row {
+                position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background-color: map.get($arg, "$bg-animation");
+                .skip-text-animation {
+                    position: absolute;
+                    visibility: hidden;
+                    bottom: 5%;
+                    left: 2.5%;
+                }
                 .main-text-1, .main-text-2, .main-text-3 {
                     text-align: center;
                     display: inline-flex;

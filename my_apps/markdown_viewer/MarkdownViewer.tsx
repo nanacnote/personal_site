@@ -84,12 +84,12 @@ export class MarkdownViewer extends Component<TProps, TState> {
                         rel="noreferrer"
                         data-no-decoration
                       >
-                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded">
+                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary border border-primary rounded">
                           Source Code <FaGithub />
                         </div>
                       </a>
                       <div
-                        className="py-1 my-2 position-relative clickable-item text-center text-info bg-white border border-info rounded"
+                        className="py-1 my-2 position-relative clickable-item text-center text-info border border-info rounded"
                         onClick={() =>
                           this.setState({
                             inputData: sampleMarkdown,
@@ -100,7 +100,7 @@ export class MarkdownViewer extends Component<TProps, TState> {
                         <FaInfoCircle />
                       </div>
                       <div
-                        className="py-1 my-2 position-relative clickable-item text-center text-danger bg-white border border-danger rounded"
+                        className="py-1 my-2 position-relative clickable-item text-center text-danger border border-danger rounded"
                         onClick={() =>
                           this.setState({
                             inputData: '',
@@ -172,11 +172,11 @@ export const sampleMarkdown = ` cheatsheet
 | Paragraph | Text | A text
 &nbsp;
 \`\`\`
-\{
-  \"firstName\"\: \"John\"\,
-  \"lastName\"\: \"Smith\"\,
-  \"age\"\: 25
-\}
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
 \`\`\`
 
 term
