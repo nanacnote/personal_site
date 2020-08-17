@@ -13,7 +13,7 @@ export default function volumeDialControls(param: any) {
   // set initial volume
   Howler.volume(0.19)
 
-  const moveKnob = (direction: 'up' | 'down', rotation: number = 2) => {
+  const moveKnob = (direction: 'up' | 'down', rotation = 2) => {
     if (direction == 'up') {
       if (angle + rotation <= maxangle) {
         angle = angle + rotation
@@ -38,7 +38,7 @@ export default function volumeDialControls(param: any) {
     })
 
     // highlight ticks
-    let activeTicks = Math.round(angle / 10) + 1
+    const activeTicks = Math.round(angle / 10) + 1
     $('.tick').removeClass('activetick')
     $('.tick').slice(0, activeTicks).addClass('activetick')
 

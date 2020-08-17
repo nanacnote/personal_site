@@ -159,13 +159,11 @@ export class NewtonsCradle extends Component<TProps, TState> {
                     </div>
                     <div className="mb-3">
                       <div
-                        className="py-1 position-relative clickable-item text-center text-primary bg-white border border-primary rounded"
+                        className="py-1 position-relative clickable-item text-center text-primary border border-primary rounded"
                         onClick={viewCodeHandler}
                       >
-                        <a href="#" data-no-decoration>
-                          {this.state.showHide} Source Code
-                          <FaQuestionCircle />
-                        </a>
+                        {this.state.showHide} Source Code
+                        <FaQuestionCircle />
                       </div>
                     </div>
                   </div>

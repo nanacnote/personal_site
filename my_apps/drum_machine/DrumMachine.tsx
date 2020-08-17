@@ -53,7 +53,7 @@ export const DrumMachine: React.FC<TProps> = (): JSX.Element => {
                         rel="noreferrer"
                         data-no-decoration
                       >
-                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded">
+                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary border border-primary rounded">
                           Source Code <FaGithub />
                         </div>
                       </a>

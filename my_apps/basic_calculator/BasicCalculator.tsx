@@ -36,7 +36,7 @@ export class BasicCalculator extends Component<TProps, TState> {
   private processor(params: string) {
     const args = params.split(' ')
     let ans = ''
-    let stack = []
+    const stack = []
     let paren = false
     let parenStack = []
 
@@ -73,7 +73,7 @@ export class BasicCalculator extends Component<TProps, TState> {
           }
         }
       })
-      let res: string = String(eval(stack.toString().replace(/,/g, ' ')))
+      const res = String(eval(stack.toString().replace(/,/g, ' ')))
       // console.log(res)
       ans = res.includes('.')
         ? parseFloat(res).toFixed(7)
@@ -270,7 +270,7 @@ export class BasicCalculator extends Component<TProps, TState> {
                         rel="noreferrer"
                         data-no-decoration
                       >
-                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded">
+                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary border border-primary rounded">
                           Source Code <FaGithub />
                         </div>
                       </a>

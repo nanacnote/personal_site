@@ -84,13 +84,13 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
                         rel="noreferrer"
                         data-no-decoration
                       >
-                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary bg-white border border-primary rounded">
+                        <div className="py-1 my-2 position-relative clickable-item text-center text-primary border border-primary rounded">
                           Source Code <FaGithub />
                         </div>
                       </a>
                     </div>
                     <div
-                      className={`h4 py-1 my-2 position-relative clickable-item text-center bg-white border rounded 
+                      className={`h4 py-1 my-2 position-relative clickable-item text-center border rounded 
                       ${
                         gameStateButton === 'Start' ||
                         gameStateButton === 'Resume'
@@ -108,7 +108,7 @@ export const PureSnake: React.FC<TProps> = (): JSX.Element => {
                       ) : null}
                     </div>
                     <div
-                      className={`h4 py-1 my-2 position-relative clickable-item text-center bg-white border rounded text-secondary border-secondary ${
+                      className={`h4 py-1 my-2 position-relative clickable-item text-center border rounded text-secondary border-secondary ${
                         gameStateButton === 'Start' ? 'd-none' : 'd-block'
                       }`}
                       onClick={restartHandler}
