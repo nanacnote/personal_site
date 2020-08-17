@@ -32,6 +32,17 @@ export class BasicCalculator extends Component<TProps, TState> {
     this.input = this.input.bind(this)
   }
 
+  // this function recursively removes unnecessary zeros at the end of a calculation
+  private recZero(params: string) {
+    console.log(params)
+    if (params[params.length - 1] === '0') {
+      const newStr = params.slice(0, params.length - 1)
+      return this.recZero(newStr)
+    } else {
+      return params
+    }
+  }
+
   // variable for instance of calculator
   private processor(params: string) {
     const args = params.split(' ')
@@ -74,10 +85,10 @@ export class BasicCalculator extends Component<TProps, TState> {
         }
       })
       const res = String(eval(stack.toString().replace(/,/g, ' ')))
-      // console.log(res)
       ans = res.includes('.')
-        ? parseFloat(res).toFixed(7)
-        : parseFloat(res).toFixed(1)
+        ? this.recZero(parseFloat(res).toFixed(7))
+        : // ? parseFloat(res).toFixed(7)
+          parseFloat(res).toFixed(1)
 
       return ans
     } catch (error) {
