@@ -1,7 +1,7 @@
 // const viewport = useBreakPoint()
 // this is a hook which listens to viewport changes and returns true for screens less than
-// 700px and false for screens greater than 700px
-// it also returns the value of the viewport after every adjustment
+// 768px and false for screens greater than 768px
+// it also returns the value of the viewport in number and boostrap standards after every adjustment
 
 import { useState, useEffect } from 'react'
 import debounce from 'lodash/debounce'
@@ -48,25 +48,31 @@ export function useBreakPoint() {
     undefined
   )
 
-  useEffect(() => {
+  // event listner function
+  const handleResize = () => {
     setbreakPoint(helperBoolean(window.innerWidth))
     setviewPortSizeStandard(helperStandard(window.innerWidth))
     setviewPortSize(window.innerWidth)
+  }
 
+  // lodash debounce function to optimise performance
+  const debounced = debounce(handleResize, 500)
+
+  useEffect(() => {
+    // checks the caller is a browser as opposed to nodejs
     if (typeof window !== 'object') {
       return
     }
 
-    const handleResize = () => {
-      setbreakPoint(helperBoolean(window.innerWidth))
-      setviewPortSizeStandard(helperStandard(window.innerWidth))
-      setviewPortSize(window.innerWidth)
-    }
+    // set state hooks
+    setbreakPoint(helperBoolean(window.innerWidth))
+    setviewPortSizeStandard(helperStandard(window.innerWidth))
+    setviewPortSize(window.innerWidth)
 
-    window.addEventListener('resize', debounce(handleResize, 500))
+    window.addEventListener('resize', debounced)
 
     return () => {
-      window.removeEventListener('resize', debounce(handleResize, 500))
+      window.removeEventListener('resize', debounced)
     }
   }, [])
 

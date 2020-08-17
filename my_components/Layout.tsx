@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { Container, Row, Col, Modal, Spinner } from 'react-bootstrap'
 import { Footer } from '.'
-import { gsap } from 'gsap'
 import {
   landingGSAP,
   tlLanding,

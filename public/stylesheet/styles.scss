@@ -421,8 +421,9 @@ body {
                 .skip-text-animation {
                     position: absolute;
                     visibility: hidden;
-                    bottom: 5%;
+                    top: 5%;
                     left: 2.5%;
+                    z-index: 100;
                 }
                 .main-text-1, .main-text-2, .main-text-3 {
                     text-align: center;

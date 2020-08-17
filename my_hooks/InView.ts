@@ -22,14 +22,19 @@ export function useInView(div: React.MutableRefObject<HTMLDivElement>) {
   //set the initial state of the div element
   const [inView, setinView] = useState<boolean>(false)
 
+  // eventlistner call back function to set state
+  const scrollHandler = () => {
+    setinView(helper(div.current))
+  }
+
+  // lodash debounce function to optimise performance
+  const debounced = debounce(scrollHandler, 500)
+
   useEffect(() => {
-    const scrollHandler = () => {
-      setinView(helper(div.current))
-    }
-    window.addEventListener('scroll', debounce(scrollHandler, 750))
+    window.addEventListener('scroll', debounced)
 
     return () => {
-      window.removeEventListener('scroll', debounce(scrollHandler, 750))
+      window.removeEventListener('scroll', debounced)
     }
   }, [])
 
