@@ -2,8 +2,8 @@
 @import "~bootstrap/scss/bootstrap";
 
 @font-face {
-    font-family: 'Orbitron';
-    src: local('Orbitron'), url(/fonts/Orbitron/Orbitron-Regular.ttf) format('truetype');
+    font-family: 'Digital';
+    src: local('Digital'), url(/fonts/Digital_7/Digital-7.ttf) format('truetype');
 }
 
 @font-face {
@@ -111,6 +111,27 @@ body {
             }
         }
     }
+
+    .digital-font {
+        font-family: 'Digital', Helvetica Neue, sans-serif;
+    }
+
+    .prevent-selection-double-tap {
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .clicker-lighten {
+        &:hover {
+            opacity: 0.75;
+            cursor: pointer;
+        }
+    }
+
     .clickable-item {
         // always call position-relative on parent when used to animate links
         color: map.get($arg, "$text-clickable");
@@ -193,10 +214,12 @@ body {
     .c-border-info {
         border-color: map.get($arg, "$text-info");
         border-radius: 0.25rem;
+        border-style: solid;
     }
     .c-border-primary {
         border-color: map.get($arg, "$text-primary");
         border-radius: 0.25rem;
+        border-style: solid;
     }
 
     .footer {
@@ -423,6 +446,13 @@ body {
                     visibility: hidden;
                     top: 5%;
                     left: 2.5%;
+                    z-index: 100;
+                }
+                .replay-text-animation {
+                    position: absolute;
+                    visibility: hidden;
+                    top: 5%;
+                    right: 2.5%;
                     z-index: 100;
                 }
                 .main-text-1, .main-text-2, .main-text-3 {

@@ -4,6 +4,7 @@ import {
   DrumMachine,
   BasicCalculator,
   MarkdownViewer,
+  PomodoroTimer,
 } from '../my_apps'
 
 // all projects object
@@ -52,6 +53,15 @@ export const projectsDictionary = {
       imageLink: '',
       title:
         'Transformer v1.0 | Mark JS powered markdown code parser the source and parsed code are displayed concurrently',
+      size: 'default',
+    },
+    {
+      slug: 'PomodoroTimer',
+      name: 'TicToc 25',
+      component: <PomodoroTimer key="PomodoroTimer" />,
+      imageLink: '',
+      title:
+        'TicToc 25 | The famous pomodoro time management system built into a react component',
       size: 'default',
     },
   ],

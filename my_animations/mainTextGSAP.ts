@@ -92,6 +92,7 @@ export const mainTextGSAP = (
       '-=0.25'
     )
     .set('.t-01', { display: 'none' })
+    .addLabel('replayTextAnimation')
     .set('.main-text-1', {
       width: '0%',
       height: '0%',
@@ -287,6 +288,7 @@ export const mainTextGSAP = (
     })
     .set('.test-drive-stage-intro', { display: 'inline' })
     .set('.skip-text-animation', { visibility: 'hidden' })
+    .set('.replay-text-animation', { visibility: 'visible' })
 }
 export default mainTextGSAP
 
