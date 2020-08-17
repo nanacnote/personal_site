@@ -22,7 +22,6 @@ export const TextField: React.FC<TProps> = (props): JSX.Element => (
             className="insertWrapper"
             dangerouslySetInnerHTML={{ __html: props.output }}
           />
-          {/* {props.output} */}
         </div>
       )}
     </div>
@@ -34,7 +33,6 @@ export const TextField: React.FC<TProps> = (props): JSX.Element => (
       .text-field {
         width: 100%;
         height: 550px;
-        border-style: solid;
         border-width: 2.5px;
       }
       textarea {

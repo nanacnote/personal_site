@@ -296,6 +296,7 @@ export class BasicCalculator extends Component<TProps, TState> {
                   input={this.input}
                   output={[this.state.outputTop, this.state.outputBottom]}
                   parenthesis={this.state.parenthesis}
+                  answerState={this.state.answerState}
                 />
               </div>
             </Col>
