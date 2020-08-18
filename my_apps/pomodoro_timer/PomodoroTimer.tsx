@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa'
 import { gsap } from 'gsap'
 import { Howl } from 'howler'
+import NoSleep from 'nosleep.js'
 
 /**
  * typings declaration for props on PomodoroTimer module
@@ -44,6 +45,8 @@ export class PomodoroTimer extends Component<TProps, TState> {
   private currentTimer: NodeJS.Timeout
   // variable to hold sound object
   private sound: Howl
+  // variable to hold nosleep object
+  private noSleep: NoSleep
 
   // handlers timer logic
   private startTimer = () => {
@@ -52,6 +55,8 @@ export class PomodoroTimer extends Component<TProps, TState> {
       this.setState({
         inactive: false,
       })
+      // trigger nosleep
+      this.noSleep.enable()
 
       //declare variables for min and sec
       let sec = +this.state.timer.slice(3, 5)
@@ -98,6 +103,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
               breakTime: false,
             })
             clearInterval(this.currentTimer)
+            this.noSleep.disable()
           }
         } else {
           this.setState({
@@ -115,6 +121,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
     this.sound = new Howl({
       src: ['/pomodoro_timer/alarm.wav'],
     })
+    this.noSleep = new NoSleep()
   }
 
   componentWillUnmount() {

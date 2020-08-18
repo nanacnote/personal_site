@@ -42,6 +42,7 @@
     "marked": "^1.1.1",
     "matter-js": "^0.14.2",
     "next": "^9.4.4",
+    "nosleep.js": "^0.11.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-countup": "^4.3.3",
