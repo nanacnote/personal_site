@@ -46,7 +46,7 @@ export const Projects = (): JSX.Element => {
                 <div className="text-center">
                   <p>Hmm! seeing this text is a rear event &#x1f914;.</p>
                   <p>
-                    You have navigate to an unlisted page directly &#x1f937;.
+                    You have navigated to an unlisted page directly &#x1f937;.
                   </p>
                   <p>
                     A user interaction is required to hydrate projects path

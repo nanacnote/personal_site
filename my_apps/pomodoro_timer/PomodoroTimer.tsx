@@ -8,6 +8,7 @@ import {
     FaArrowUp,
     FaArrowDown,
 } from 'react-icons/fa'
+import { gsap } from 'gsap'
 import { Howl } from 'howler'
 
 /**
@@ -23,6 +24,7 @@ type TState = {
     session: string
     timer: string
     inactive: boolean
+    breakTime: boolean
 }
 
 export class PomodoroTimer extends Component<TProps, TState> {
@@ -33,6 +35,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
             session: '25',
             timer: '25:00',
             inactive: true,
+            breakTime: false,
         }
         this.startTimer = this.startTimer.bind(this)
     }
@@ -55,7 +58,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
             let min = +this.state.timer.slice(0, 2)
 
             // determine if timer is in break time
-            let breakTime = 0
+            let breakTimeCounter = 0
 
             // instantiate second counter
             this.currentTimer = setInterval(() => {
@@ -68,17 +71,31 @@ export class PomodoroTimer extends Component<TProps, TState> {
                 if (min === 0 && sec === 0) {
                     this.setState({
                         timer: this.state.break + ':00',
+                        breakTime: true
                     })
                     sec = 0
                     min = +this.state.break
-                    breakTime += 1
+                    breakTimeCounter += 1
                     this.sound.play()
-                    if (breakTime === 2) {
+                    gsap.to('.wiggle', {
+                        duration: 0.1,
+                        x: '+=20',
+                        yoyo: true,
+                        repeat: 5,
+                    })
+                    gsap.to('.wiggle', {
+                        duration: 0.1,
+                        x: '-=20',
+                        yoyo: true,
+                        repeat: 5,
+                    })
+                    if (breakTimeCounter === 2) {
                         this.setState({
                             break: '05',
                             session: '25',
                             timer: '25:00',
                             inactive: true,
+                            breakTime: false,
                         })
                         clearInterval(this.currentTimer)
                     }
@@ -96,7 +113,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
 
     componentDidMount() {
         this.sound = new Howl({
-            src: ['/pomodoro_timer/alarm.wav']
+            src: ['/pomodoro_timer/alarm.wav'],
         })
     }
 
@@ -144,141 +161,145 @@ export class PomodoroTimer extends Component<TProps, TState> {
                             </div>
                         </Col>
                     </Row>
-                    <Row className="mt-3 mx-5 prevent-selection-double-tap">
+                    <Row className="mt-3 prevent-selection-double-tap">
                         <Container fluid>
                             <Row>
-                                <Col xs={12} sm={6}>
-                                    <div className="d-flex flex-column justify-content-center align-items-center">
-                                        <div className="h2">
-                                            <strong>Break&nbsp;Length</strong>
-                                        </div>
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div
-                                                className="clicker-lighten mx-1 h3"
-                                                onClick={() =>
-                                                    this.setState((prevState) =>
-                                                        prevState.inactive
-                                                            ? {
-                                                                break:
-                                                                    String(+this.state.break + 1) === '61'
-                                                                        ? '01'
-                                                                        : String(+this.state.break + 1).length < 2
-                                                                            ? '0' + String(+this.state.break + 1)
-                                                                            : String(+this.state.break + 1),
-                                                            }
-                                                            : null
-                                                    )
-                                                }
-                                            >
-                                                <FaArrowUp />
+                                <Container fluid>
+                                    <Row className="mx-4">
+                                        <Col xs={12} sm={6}>
+                                            <div className="d-flex flex-column justify-content-center align-items-center">
+                                                <div className="h2">
+                                                    <strong>Break&nbsp;Length</strong>
+                                                </div>
+                                                <div className="d-flex justify-content-center align-items-center">
+                                                    <div
+                                                        className="clicker-lighten mx-1 h3"
+                                                        onClick={() =>
+                                                            this.setState((prevState) =>
+                                                                prevState.inactive
+                                                                    ? {
+                                                                        break:
+                                                                            String(+this.state.break + 1) === '61'
+                                                                                ? '01'
+                                                                                : String(+this.state.break + 1).length < 2
+                                                                                    ? '0' + String(+this.state.break + 1)
+                                                                                    : String(+this.state.break + 1),
+                                                                    }
+                                                                    : null
+                                                            )
+                                                        }
+                                                    >
+                                                        <FaArrowUp />
+                                                    </div>
+                                                    <div
+                                                        className="mx-3 h1 text-center"
+                                                        style={{ width: '3rem' }}
+                                                    >
+                                                        <strong>{this.state.break}</strong>
+                                                    </div>
+                                                    <div
+                                                        className="clicker-lighten mx-1 h3"
+                                                        onClick={() =>
+                                                            this.setState((prevState) =>
+                                                                prevState.inactive
+                                                                    ? {
+                                                                        break:
+                                                                            String(+this.state.break - 1) === '0'
+                                                                                ? '60'
+                                                                                : String(+this.state.break - 1).length < 2
+                                                                                    ? '0' + String(+this.state.break - 1)
+                                                                                    : String(+this.state.break - 1),
+                                                                    }
+                                                                    : null
+                                                            )
+                                                        }
+                                                    >
+                                                        <FaArrowDown />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div
-                                                className="mx-3 h1 text-center"
-                                                style={{ width: '3rem' }}
-                                            >
-                                                <strong>{this.state.break}</strong>
+                                        </Col>
+                                        <Col xs={12} sm={6}>
+                                            <div className="d-flex flex-column justify-content-center align-items-center">
+                                                <div className="h2">
+                                                    <strong>Session&nbsp;Length</strong>
+                                                </div>
+                                                <div className="d-flex justify-content-center align-items-center">
+                                                    <div
+                                                        className="clicker-lighten mx-1 h3"
+                                                        onClick={() =>
+                                                            this.setState((prevState) =>
+                                                                prevState.inactive
+                                                                    ? {
+                                                                        session:
+                                                                            String(+this.state.session + 1) === '61'
+                                                                                ? '01'
+                                                                                : String(+this.state.session + 1).length <
+                                                                                    2
+                                                                                    ? '0' + String(+this.state.session + 1)
+                                                                                    : String(+this.state.session + 1),
+                                                                        timer:
+                                                                            String(+this.state.session + 1) === '61'
+                                                                                ? '01:00'
+                                                                                : String(+this.state.session + 1).length <
+                                                                                    2
+                                                                                    ? '0' +
+                                                                                    String(+this.state.session + 1) +
+                                                                                    ':00'
+                                                                                    : String(+this.state.session + 1) + ':00',
+                                                                    }
+                                                                    : null
+                                                            )
+                                                        }
+                                                    >
+                                                        <FaArrowUp />
+                                                    </div>
+                                                    <div
+                                                        className="mx-3 h1 text-center"
+                                                        style={{ width: '3rem' }}
+                                                    >
+                                                        <strong>{this.state.session}</strong>
+                                                    </div>
+                                                    <div
+                                                        className="clicker-lighten mx-1 h3"
+                                                        onClick={() =>
+                                                            this.setState((prevState) =>
+                                                                prevState.inactive
+                                                                    ? {
+                                                                        session:
+                                                                            String(+this.state.session - 1) === '0'
+                                                                                ? '60'
+                                                                                : String(+this.state.session - 1).length <
+                                                                                    2
+                                                                                    ? '0' + String(+this.state.session - 1)
+                                                                                    : String(+this.state.session - 1),
+                                                                        timer:
+                                                                            String(+this.state.session - 1) === '0'
+                                                                                ? '60:00'
+                                                                                : String(+this.state.session - 1).length <
+                                                                                    2
+                                                                                    ? '0' +
+                                                                                    String(+this.state.session - 1) +
+                                                                                    ':00'
+                                                                                    : String(+this.state.session - 1) + ':00',
+                                                                    }
+                                                                    : null
+                                                            )
+                                                        }
+                                                    >
+                                                        <FaArrowDown />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div
-                                                className="clicker-lighten mx-1 h3"
-                                                onClick={() =>
-                                                    this.setState((prevState) =>
-                                                        prevState.inactive
-                                                            ? {
-                                                                break:
-                                                                    String(+this.state.break - 1) === '0'
-                                                                        ? '60'
-                                                                        : String(+this.state.break - 1).length < 2
-                                                                            ? '0' + String(+this.state.break - 1)
-                                                                            : String(+this.state.break - 1),
-                                                            }
-                                                            : null
-                                                    )
-                                                }
-                                            >
-                                                <FaArrowDown />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Col>
-                                <Col xs={12} sm={6}>
-                                    <div className="d-flex flex-column justify-content-center align-items-center">
-                                        <div className="h2">
-                                            <strong>Session&nbsp;Length</strong>
-                                        </div>
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div
-                                                className="clicker-lighten mx-1 h3"
-                                                onClick={() =>
-                                                    this.setState((prevState) =>
-                                                        prevState.inactive
-                                                            ? {
-                                                                session:
-                                                                    String(+this.state.session + 1) === '61'
-                                                                        ? '01'
-                                                                        : String(+this.state.session + 1).length <
-                                                                            2
-                                                                            ? '0' + String(+this.state.session + 1)
-                                                                            : String(+this.state.session + 1),
-                                                                timer:
-                                                                    String(+this.state.session + 1) === '61'
-                                                                        ? '01:00'
-                                                                        : String(+this.state.session + 1).length <
-                                                                            2
-                                                                            ? '0' +
-                                                                            String(+this.state.session + 1) +
-                                                                            ':00'
-                                                                            : String(+this.state.session + 1) + ':00',
-                                                            }
-                                                            : null
-                                                    )
-                                                }
-                                            >
-                                                <FaArrowUp />
-                                            </div>
-                                            <div
-                                                className="mx-3 h1 text-center"
-                                                style={{ width: '3rem' }}
-                                            >
-                                                <strong>{this.state.session}</strong>
-                                            </div>
-                                            <div
-                                                className="clicker-lighten mx-1 h3"
-                                                onClick={() =>
-                                                    this.setState((prevState) =>
-                                                        prevState.inactive
-                                                            ? {
-                                                                session:
-                                                                    String(+this.state.session - 1) === '0'
-                                                                        ? '60'
-                                                                        : String(+this.state.session - 1).length <
-                                                                            2
-                                                                            ? '0' + String(+this.state.session - 1)
-                                                                            : String(+this.state.session - 1),
-                                                                timer:
-                                                                    String(+this.state.session - 1) === '0'
-                                                                        ? '60:00'
-                                                                        : String(+this.state.session - 1).length <
-                                                                            2
-                                                                            ? '0' +
-                                                                            String(+this.state.session - 1) +
-                                                                            ':00'
-                                                                            : String(+this.state.session - 1) + ':00',
-                                                            }
-                                                            : null
-                                                    )
-                                                }
-                                            >
-                                                <FaArrowDown />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Col>
+                                        </Col>
+                                    </Row>
+                                </Container>
                             </Row>
                             <Row>
                                 <Col>
                                     <div className="d-flex justify-content-center align-items-center my-3">
                                         <div
-                                            className="c-border-info digital-font d-flex justify-content-center align-items-center p-4"
+                                            className="wiggle c-border-info d-flex justify-content-center align-items-center p-4"
                                             style={{
                                                 width: '275px',
                                                 height: '150px',
@@ -288,8 +309,8 @@ export class PomodoroTimer extends Component<TProps, TState> {
                                             }}
                                         >
                                             <div
-                                                className={`d-flex w-100 text-center justify-content-center align-items-center ${
-                                                    +this.state.timer.slice(0, 2) < 6 ? 'text-danger' : ''
+                                                className={`d-flex w-100 text-center justify-content-center align-items-center digital-font ${
+                                                    +this.state.timer.slice(0, 2) < 5 ? 'text-danger' : ''
                                                     }`}
                                             >
                                                 <div className="w-100">
@@ -309,6 +330,12 @@ export class PomodoroTimer extends Component<TProps, TState> {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div
+                                            className="position-absolute h4"
+                                            style={{ bottom: '10%', opacity: 0.5 }}
+                                        >
+                                            <strong>{this.state.breakTime ? 'Break' : 'Session'}</strong>
+                                        </div>
                                     </div>
                                 </Col>
                             </Row>
@@ -317,6 +344,11 @@ export class PomodoroTimer extends Component<TProps, TState> {
                                     <div className="d-flex justify-content-center align-items-center">
                                         <div
                                             className="clicker-lighten mx-1 h2"
+                                            style={{
+                                                opacity: ` ${
+                                                    this.state.inactive ? 1 : 0.25
+                                                    }`
+                                            }}
                                             onClick={this.startTimer}
                                         >
                                             <FaRegPlayCircle />
