@@ -10,7 +10,6 @@ import {
 } from 'react-icons/fa'
 import { gsap } from 'gsap'
 import { Howl } from 'howler'
-import NoSleep from 'nosleep.js'
 
 /**
  * typings declaration for props on PomodoroTimer module
@@ -45,8 +44,6 @@ export class PomodoroTimer extends Component<TProps, TState> {
   private currentTimer: NodeJS.Timeout
   // variable to hold sound object
   private sound: Howl
-  // variable to hold nosleep object
-  private noSleep: NoSleep
 
   // handlers timer logic
   private startTimer = () => {
@@ -55,8 +52,6 @@ export class PomodoroTimer extends Component<TProps, TState> {
       this.setState({
         inactive: false,
       })
-      // trigger nosleep
-      this.noSleep.enable()
 
       //declare variables for min and sec
       let sec = +this.state.timer.slice(3, 5)
@@ -103,7 +98,6 @@ export class PomodoroTimer extends Component<TProps, TState> {
               breakTime: false,
             })
             clearInterval(this.currentTimer)
-            this.noSleep.disable()
           }
         } else {
           this.setState({
@@ -121,7 +115,6 @@ export class PomodoroTimer extends Component<TProps, TState> {
     this.sound = new Howl({
       src: ['/pomodoro_timer/alarm.wav'],
     })
-    this.noSleep = new NoSleep()
   }
 
   componentWillUnmount() {
@@ -185,14 +178,14 @@ export class PomodoroTimer extends Component<TProps, TState> {
                               this.setState((prevState) =>
                                 prevState.inactive
                                   ? {
-                                      break:
-                                        String(+this.state.break + 1) === '61'
-                                          ? '01'
-                                          : String(+this.state.break + 1)
-                                              .length < 2
+                                    break:
+                                      String(+this.state.break + 1) === '61'
+                                        ? '01'
+                                        : String(+this.state.break + 1)
+                                          .length < 2
                                           ? '0' + String(+this.state.break + 1)
                                           : String(+this.state.break + 1),
-                                    }
+                                  }
                                   : null
                               )
                             }
@@ -211,14 +204,14 @@ export class PomodoroTimer extends Component<TProps, TState> {
                               this.setState((prevState) =>
                                 prevState.inactive
                                   ? {
-                                      break:
-                                        String(+this.state.break - 1) === '0'
-                                          ? '60'
-                                          : String(+this.state.break - 1)
-                                              .length < 2
+                                    break:
+                                      String(+this.state.break - 1) === '0'
+                                        ? '60'
+                                        : String(+this.state.break - 1)
+                                          .length < 2
                                           ? '0' + String(+this.state.break - 1)
                                           : String(+this.state.break - 1),
-                                    }
+                                  }
                                   : null
                               )
                             }
@@ -240,25 +233,25 @@ export class PomodoroTimer extends Component<TProps, TState> {
                               this.setState((prevState) =>
                                 prevState.inactive
                                   ? {
-                                      session:
-                                        String(+this.state.session + 1) === '61'
-                                          ? '01'
-                                          : String(+this.state.session + 1)
-                                              .length < 2
+                                    session:
+                                      String(+this.state.session + 1) === '61'
+                                        ? '01'
+                                        : String(+this.state.session + 1)
+                                          .length < 2
                                           ? '0' +
-                                            String(+this.state.session + 1)
+                                          String(+this.state.session + 1)
                                           : String(+this.state.session + 1),
-                                      timer:
-                                        String(+this.state.session + 1) === '61'
-                                          ? '01:00'
-                                          : String(+this.state.session + 1)
-                                              .length < 2
+                                    timer:
+                                      String(+this.state.session + 1) === '61'
+                                        ? '01:00'
+                                        : String(+this.state.session + 1)
+                                          .length < 2
                                           ? '0' +
-                                            String(+this.state.session + 1) +
-                                            ':00'
+                                          String(+this.state.session + 1) +
+                                          ':00'
                                           : String(+this.state.session + 1) +
-                                            ':00',
-                                    }
+                                          ':00',
+                                  }
                                   : null
                               )
                             }
@@ -277,25 +270,25 @@ export class PomodoroTimer extends Component<TProps, TState> {
                               this.setState((prevState) =>
                                 prevState.inactive
                                   ? {
-                                      session:
-                                        String(+this.state.session - 1) === '0'
-                                          ? '60'
-                                          : String(+this.state.session - 1)
-                                              .length < 2
+                                    session:
+                                      String(+this.state.session - 1) === '0'
+                                        ? '60'
+                                        : String(+this.state.session - 1)
+                                          .length < 2
                                           ? '0' +
-                                            String(+this.state.session - 1)
+                                          String(+this.state.session - 1)
                                           : String(+this.state.session - 1),
-                                      timer:
-                                        String(+this.state.session - 1) === '0'
-                                          ? '60:00'
-                                          : String(+this.state.session - 1)
-                                              .length < 2
+                                    timer:
+                                      String(+this.state.session - 1) === '0'
+                                        ? '60:00'
+                                        : String(+this.state.session - 1)
+                                          .length < 2
                                           ? '0' +
-                                            String(+this.state.session - 1) +
-                                            ':00'
+                                          String(+this.state.session - 1) +
+                                          ':00'
                                           : String(+this.state.session - 1) +
-                                            ':00',
-                                    }
+                                          ':00',
+                                  }
                                   : null
                               )
                             }
@@ -324,7 +317,7 @@ export class PomodoroTimer extends Component<TProps, TState> {
                       <div
                         className={`d-flex w-100 text-center justify-content-center align-items-center digital-font ${
                           +this.state.timer.slice(0, 2) < 5 ? 'text-danger' : ''
-                        }`}
+                          }`}
                       >
                         <div className="w-100">
                           <strong>{this.state.timer[0]}</strong>
