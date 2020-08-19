@@ -43,17 +43,12 @@ export const Projects = (): JSX.Element => {
               ]?.map((e) => {
                 return e.slug === slug ? e.component : undefined
               }) || (
-                <div className="text-center">
-                  <p>Hmm! seeing this text is a rear event &#x1f914;.</p>
-                  <p>
-                    You have navigated to an unlisted page directly &#x1f937;.
-                  </p>
-                  <p>
-                    A user interaction is required to hydrate projects path
-                    slugs &#x1f4a7;.
-                  </p>
-                </div>
-              )}
+                  <div className="text-center">
+                    <p>Hmm! seeing this text is a rare event &#x1f914;.</p>
+                    <p>You have navigated to an unlisted page directly &#x1f937;.</p>
+                    <p>A user interaction is required to hydrate projects pathslugs &#x1f4a7;.</p>
+                  </div>
+                )}
             </div>
             <div className="mb-5 border rounded">
               <Container fluid>
