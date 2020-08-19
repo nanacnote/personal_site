@@ -178,120 +178,120 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
           </Container>
         </div>
       ) : (
-        <Container fluid>
-          <Row className="layout-page-container">
-            <Col xs={12} md={3} className="p-0">
-              {context.currentViewport ? (
-                context.siderState ? (
-                  <>
-                    <div className="siderShowHide">
-                      <button
-                        onClick={() =>
-                          context.setSiderState(!context.siderState)
-                        }
-                      >
-                        {siderShowHideIcon}
-                      </button>
-                    </div>
-                    {siderMarkup}
-                  </>
-                ) : (
-                  <div className="siderShowHide">
-                    <button
-                      onClick={() => context.setSiderState(!context.siderState)}
-                    >
-                      <FaAlignJustify />
-                    </button>
-                  </div>
-                )
-              ) : (
-                <>{siderMarkup}</>
-              )}
-            </Col>
-
-            <Col className="layout-page-right">
-              <Container fluid className="layout-page-right-top">
-                <Row className="mb-5">
-                  <Col>
-                    <div className="theme-col">
-                      <div className="theme-col-items theme-col-header">
-                        <span>try some themes</span>
-                      </div>
-                      <div className="theme-col-items theme-col-link">
-                        <span
-                          className="clickable-item position-relative"
-                          onClick={themeChanger}
-                        >
-                          <a href="#" data-no-decoration data-inherit-color>
-                            Light
-                          </a>
-                        </span>
-                        <span>&nbsp;| </span>
-                        <span
-                          className="clickable-item position-relative"
-                          onClick={themeChanger}
-                        >
-                          <a href="#" data-no-decoration data-inherit-color>
-                            Dark
-                          </a>
-                        </span>
-                        <span>&nbsp;| </span>
-                        <span
-                          className="clickable-item position-relative"
-                          onClick={themeChanger}
-                        >
-                          <a href="#" data-no-decoration data-inherit-color>
-                            Dull
-                          </a>
-                        </span>
-                        <span>&nbsp;| </span>
-                        <span
-                          className="clickable-item position-relative"
-                          onClick={themeChanger}
-                        >
-                          <a href="#" data-no-decoration data-inherit-color>
-                            Happy
-                          </a>
-                        </span>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="current-col">
-                      <div className="current-col-items current-col-header">
-                        <span>currently working on</span>
-                      </div>
-                      <div className="current-col-items current-col-link">
-                        <span
-                          className="clickable-item position-relative"
+          <Container fluid>
+            <Row className="layout-page-container">
+              <Col xs={12} md={3} className="p-0">
+                {context.currentViewport ? (
+                  context.siderState ? (
+                    <>
+                      <div className="siderShowHide">
+                        <button
                           onClick={() =>
-                            modalIframeHandler(props.currentProject)
+                            context.setSiderState(!context.siderState)
                           }
                         >
-                          <a href="#" data-no-decoration data-inherit-color>
-                            {props.currentProject.header}
-                          </a>
-                        </span>
+                          {siderShowHideIcon}
+                        </button>
                       </div>
-                    </div>
-                  </Col>
-                </Row>
+                      {siderMarkup}
+                    </>
+                  ) : (
+                      <div className="siderShowHide">
+                        <button
+                          onClick={() => context.setSiderState(!context.siderState)}
+                        >
+                          <FaAlignJustify />
+                        </button>
+                      </div>
+                    )
+                ) : (
+                    <>{siderMarkup}</>
+                  )}
+              </Col>
 
-                <Row className="mb-5">
-                  <div className="grad-hr border-0 rounded"></div>
-                </Row>
-              </Container>
+              <Col className="layout-page-right">
+                <Container fluid className="layout-page-right-top">
+                  <Row className="mb-5">
+                    <Col>
+                      <div className="theme-col">
+                        <div className="theme-col-items theme-col-header">
+                          <span>try some themes</span>
+                        </div>
+                        <div className="theme-col-items theme-col-link">
+                          <span
+                            className="clickable-item position-relative"
+                            onClick={themeChanger}
+                          >
+                            <a href="#" data-no-decoration data-inherit-color>
+                              Light
+                          </a>
+                          </span>
+                          <span>&nbsp;| </span>
+                          <span
+                            className="clickable-item position-relative"
+                            onClick={themeChanger}
+                          >
+                            <a href="#" data-no-decoration data-inherit-color>
+                              Dark
+                          </a>
+                          </span>
+                          <span>&nbsp;| </span>
+                          <span
+                            className="clickable-item position-relative"
+                            onClick={themeChanger}
+                          >
+                            <a href="#" data-no-decoration data-inherit-color>
+                              Dull
+                          </a>
+                          </span>
+                          <span>&nbsp;| </span>
+                          <span
+                            className="clickable-item position-relative"
+                            onClick={themeChanger}
+                          >
+                            <a href="#" data-no-decoration data-inherit-color>
+                              Happy
+                          </a>
+                          </span>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="current-col">
+                        <div className="current-col-items current-col-header">
+                          <span>currently working on</span>
+                        </div>
+                        <div className="current-col-items current-col-link">
+                          <span
+                            className="clickable-item position-relative"
+                            onClick={() =>
+                              modalIframeHandler(props.currentProject)
+                            }
+                          >
+                            <a href="#" data-no-decoration data-inherit-color>
+                              {props.currentProject.header}
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
 
-              {props.children}
+                  <Row className="mb-5">
+                    <div className="grad-hr border-0 rounded"></div>
+                  </Row>
+                </Container>
 
-              {/* container for footer of page */}
-              <Container fluid>
-                <Footer />
-              </Container>
-            </Col>
-          </Row>
-        </Container>
-      )}
+                {props.children}
+
+                {/* container for footer of page */}
+                <Container fluid>
+                  <Footer />
+                </Container>
+              </Col>
+            </Row>
+          </Container>
+        )}
       {/* modal for showing iframe when currently working on is clicked */}
       <Container fluid className="iframe-modal">
         <Modal

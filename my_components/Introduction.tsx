@@ -68,18 +68,18 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
     el?.map((e) => {
       e !== targetEl
         ? gsap.to((e as HTMLElement).parentElement, {
-            duration: 0.25,
-            opacity: 0,
-            height: 0,
-          })
+          duration: 0.25,
+          opacity: 0,
+          height: 0,
+        })
         : gsap
-            .timeline()
-            .set((e as HTMLElement).previousSibling, { display: 'flex' })
-            .fromTo(
-              (e as HTMLElement).previousSibling,
-              { opacity: 0 },
-              { duration: 0.25, opacity: 1 }
-            )
+          .timeline()
+          .set((e as HTMLElement).previousSibling, { display: 'flex' })
+          .fromTo(
+            (e as HTMLElement).previousSibling,
+            { opacity: 0 },
+            { duration: 0.25, opacity: 1 }
+          )
     })
   }
 
@@ -221,10 +221,10 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                       <div
                         className={`px-2
                                 ${
-                                  context.currentViewport
-                                    ? 'd-flex flex-column'
-                                    : 'd-flex'
-                                }
+                          context.currentViewport
+                            ? 'd-flex flex-column'
+                            : 'd-flex'
+                          }
                               `}
                       >
                         {[...projectsDictionary['Web Development']]
@@ -336,7 +336,7 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                         <strong>Vistors</strong>
                       </h6>
                       <span className="c-text-info h3">
-                        <CountUp end={65} delay={6} />
+                        <CountUp end={70} delay={6} />
                       </span>
                     </div>
                     <div className="main-numbers-wrapper">
@@ -365,12 +365,12 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                       <div
                         className={`d-flex ${
                           I % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                        } w-100 pb-3`}
+                          } w-100 pb-3`}
                       >
                         <div
                           className={`d-none d-lg-block ${
                             I % 2 === 0 ? 'mr-2' : 'ml-2'
-                          }`}
+                            }`}
                         >
                           <img
                             className="border-0 rounded"
@@ -477,12 +477,12 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                                       {currentViewportStandard === 'xs'
                                         ? `• ${e?.title?.slice(0, 15)} ...`
                                         : currentViewportStandard === 'sm'
-                                        ? `• ${e?.title?.slice(0, 25)} ...`
-                                        : currentViewportStandard === 'md'
-                                        ? `• ${e?.title?.slice(0, 40)} ...`
-                                        : currentViewportStandard === 'lg'
-                                        ? `• ${e?.title?.slice(0, 55)} ...`
-                                        : null}
+                                          ? `• ${e?.title?.slice(0, 25)} ...`
+                                          : currentViewportStandard === 'md'
+                                            ? `• ${e?.title?.slice(0, 40)} ...`
+                                            : currentViewportStandard === 'lg'
+                                              ? `• ${e?.title?.slice(0, 55)} ...`
+                                              : null}
                                     </a>
                                   </Link>
                                 </div>

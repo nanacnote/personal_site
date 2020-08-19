@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { MyContext } from '.'
 import { useBreakPoint } from '../my_hooks'
+import { MyContext } from '.'
 
 export default function MyProvider(props: any) {
+
   //instantiate useBreakPoint hook
   const [currentViewport] = useBreakPoint()
 
