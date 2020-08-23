@@ -37,6 +37,13 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: #f5f5f5;
     color: #434343;
+    ::-webkit-scrollbar {
+        width: 7.5px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #434343;
+    }
 }
 
 * {
@@ -45,6 +52,14 @@ body {
 }
 
 @mixin themed ($arg) {
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: map.get($arg, "$text-primary");
+    }
+
     code {
         background: map.get($arg, "$bg-light");
         border-radius: 5px;
