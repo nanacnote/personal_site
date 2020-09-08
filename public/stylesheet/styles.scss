@@ -281,6 +281,7 @@ body {
             justify-content: center;
             .clip-window {
                 // border: solid 1px red; 
+                border-radius: 0.25rem;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
