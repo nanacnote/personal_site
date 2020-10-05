@@ -1,14 +1,8 @@
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import { Layout, Introduction } from '../my_components'
 
 export const Main = ({ post }): JSX.Element => (
   <div className="main-page">
-    <Head>
-      <title>Owusu K. | Fullstack Web Developer | Norwich - UK</title>
-      <link rel="icon" href="/favicon/favicon.ico" />
-    </Head>
-
     <main>
       <Layout siderAnimation>
         <Introduction post={post} />

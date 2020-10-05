@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Layout } from '../../my_components'
@@ -13,11 +12,6 @@ export const Projects = (): JSX.Element => {
 
   return (
     <div className="project-page">
-      <Head>
-        <title>Owusu K. | Fullstack Web Developer | Norwich - UK</title>
-        <link rel="icon" href="/favicon/favicon.ico" />
-      </Head>
-
       <main>
         <div className="project-container">
           <Layout>
@@ -43,12 +37,26 @@ export const Projects = (): JSX.Element => {
               ]?.map((e) => {
                 return e.slug === slug ? e.component : undefined
               }) || (
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <div className="pb-4">
+                    <img
+                      src="/pics/404.png"
+                      alt="404 error illustration"
+                      style={{ width: '200px' }}
+                    />
+                  </div>
                   <div className="text-center">
                     <p>Hmm! seeing this text is a rare event &#x1f914;.</p>
-                    <p>You have navigated to an unlisted page directly &#x1f937;.</p>
-                    <p>A user interaction is required to hydrate projects pathslugs &#x1f4a7;.</p>
+                    <p>
+                      You have navigated to an unlisted page directly &#x1f937;.
+                    </p>
+                    <p>
+                      A user interaction is required to hydrate projects
+                      pathslugs &#x1f4a7;.
+                    </p>
                   </div>
-                )}
+                </div>
+              )}
             </div>
             <div className="mb-5 border rounded">
               <Container fluid>
