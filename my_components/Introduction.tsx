@@ -68,18 +68,18 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
     el?.map((e) => {
       e !== targetEl
         ? gsap.to((e as HTMLElement).parentElement, {
-          duration: 0.25,
-          opacity: 0,
-          height: 0,
-        })
+            duration: 0.25,
+            opacity: 0,
+            height: 0,
+          })
         : gsap
-          .timeline()
-          .set((e as HTMLElement).previousSibling, { display: 'flex' })
-          .fromTo(
-            (e as HTMLElement).previousSibling,
-            { opacity: 0 },
-            { duration: 0.25, opacity: 1 }
-          )
+            .timeline()
+            .set((e as HTMLElement).previousSibling, { display: 'flex' })
+            .fromTo(
+              (e as HTMLElement).previousSibling,
+              { opacity: 0 },
+              { duration: 0.25, opacity: 1 }
+            )
     })
   }
 
@@ -221,10 +221,10 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                       <div
                         className={`px-2
                                 ${
-                          context.currentViewport
-                            ? 'd-flex flex-column'
-                            : 'd-flex'
-                          }
+                                  context.currentViewport
+                                    ? 'd-flex flex-column'
+                                    : 'd-flex'
+                                }
                               `}
                       >
                         {[...projectsDictionary['Web Development']]
@@ -280,7 +280,7 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                   <Row className="main-languages-col">
                     <div className="main-languages-text">
                       <div className="main-languages-text-head">
-                        <h3>The "Big Idea"</h3>
+                        <h3>The &quot;Big Idea`&quot;`</h3>
                       </div>
                       <div className="main-languages-text-body">
                         <span>
@@ -295,17 +295,49 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                         </span>
                       </div>
                     </div>
-                    <div className="main-languages-wrapper">
-                      <img src="/svg/21.svg" alt="typescript" />
-                    </div>
-                    <div className="main-languages-wrapper">
-                      <img src="/svg/30.svg" alt="javascript" />
-                    </div>
-                    <div className="main-languages-wrapper">
-                      <img src="/svg/28.svg" alt="python" />
-                    </div>
-                    <div className="main-languages-wrapper">
-                      <img src="/svg/33.svg" alt="r-lang" />
+                    <div className="d-flex flex-wrap w-100">
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/21.svg"
+                          alt="typescript"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/30.svg"
+                          alt="javascript"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/28.svg"
+                          alt="python"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/33.svg"
+                          alt="r-lang"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/19.svg"
+                          alt="java"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
+                      <div className="main-languages-wrapper">
+                        <img
+                          src="/svg/34.svg"
+                          alt="dart"
+                          style={{ maxWidth: '75%', height: '100%' }}
+                        />
+                      </div>
                     </div>
                   </Row>
                 </Col>
@@ -365,12 +397,12 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                       <div
                         className={`d-flex ${
                           I % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                          } w-100 pb-3`}
+                        } w-100 pb-3`}
                       >
                         <div
                           className={`d-none d-lg-block ${
                             I % 2 === 0 ? 'mr-2' : 'ml-2'
-                            }`}
+                          }`}
                         >
                           <img
                             className="border-0 rounded"
@@ -477,12 +509,12 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                                       {currentViewportStandard === 'xs'
                                         ? `• ${e?.title?.slice(0, 15)} ...`
                                         : currentViewportStandard === 'sm'
-                                          ? `• ${e?.title?.slice(0, 25)} ...`
-                                          : currentViewportStandard === 'md'
-                                            ? `• ${e?.title?.slice(0, 40)} ...`
-                                            : currentViewportStandard === 'lg'
-                                              ? `• ${e?.title?.slice(0, 55)} ...`
-                                              : null}
+                                        ? `• ${e?.title?.slice(0, 25)} ...`
+                                        : currentViewportStandard === 'md'
+                                        ? `• ${e?.title?.slice(0, 40)} ...`
+                                        : currentViewportStandard === 'lg'
+                                        ? `• ${e?.title?.slice(0, 55)} ...`
+                                        : null}
                                     </a>
                                   </Link>
                                 </div>

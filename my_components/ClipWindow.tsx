@@ -48,6 +48,7 @@ export const ClipWindow = (): JSX.Element => {
     'html5',
     'css3',
     'r lang',
+    'dart',
   ]
 
   useEffect(() => {

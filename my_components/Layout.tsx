@@ -9,7 +9,7 @@ import {
   noSiderGSAP,
   tlNoSider,
 } from '../my_animations'
-import { MyContext } from '.'
+import { MyContext, BannerDesign } from '.'
 import { currentProject } from '../my_lib'
 import {
   FaTimes,
@@ -136,10 +136,28 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
     }
   }, [context.landingStatus, context.siderState, context.currentViewport])
 
+  //banner html
+  const bannerMarkup = (
+    <div
+      style={{
+        position: 'fixed',
+        zIndex: 200,
+        // height: '50px',
+        // width: '175px',
+        top: '50px',
+        left: `${context.currentViewport ? '5%' : '20%'}`,
+        background: 'transparent',
+      }}
+    >
+      <BannerDesign />
+    </div>
+  )
+
   //sider html
   const siderMarkup = (
     <div className="sider">
       <div className="sider-container">
+        <div className="banner" />
         {siderLinks.map((e, i) => (
           <div key={i}>
             <div className="sider-section">
@@ -178,120 +196,121 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
           </Container>
         </div>
       ) : (
-          <Container fluid>
-            <Row className="layout-page-container">
-              <Col xs={12} md={3} className="p-0">
-                {context.currentViewport ? (
-                  context.siderState ? (
-                    <>
-                      <div className="siderShowHide">
-                        <button
+        <Container fluid>
+          <Row className="layout-page-container">
+            {bannerMarkup}
+            <Col xs={12} md={3} className="p-0">
+              {context.currentViewport ? (
+                context.siderState ? (
+                  <>
+                    <div className="siderShowHide">
+                      <button
+                        onClick={() =>
+                          context.setSiderState(!context.siderState)
+                        }
+                      >
+                        {siderShowHideIcon}
+                      </button>
+                    </div>
+                    {siderMarkup}
+                  </>
+                ) : (
+                  <div className="siderShowHide">
+                    <button
+                      onClick={() => context.setSiderState(!context.siderState)}
+                    >
+                      <FaAlignJustify />
+                    </button>
+                  </div>
+                )
+              ) : (
+                <>{siderMarkup}</>
+              )}
+            </Col>
+            <Col className="layout-page-right">
+              <Container fluid className="layout-page-right-top">
+                {!context.siderState || !context.currentViewport ? (
+                  <div className="banner" />
+                ) : null}
+                <Row className="mb-5">
+                  <Col>
+                    <div className="theme-col">
+                      <div className="theme-col-items theme-col-header">
+                        <span>try some themes</span>
+                      </div>
+                      <div className="theme-col-items theme-col-link">
+                        <span
+                          className="clickable-item position-relative"
+                          onClick={themeChanger}
+                        >
+                          <a href="#" data-no-decoration data-inherit-color>
+                            Light
+                          </a>
+                        </span>
+                        <span>&nbsp;| </span>
+                        <span
+                          className="clickable-item position-relative"
+                          onClick={themeChanger}
+                        >
+                          <a href="#" data-no-decoration data-inherit-color>
+                            Dark
+                          </a>
+                        </span>
+                        <span>&nbsp;| </span>
+                        <span
+                          className="clickable-item position-relative"
+                          onClick={themeChanger}
+                        >
+                          <a href="#" data-no-decoration data-inherit-color>
+                            Dull
+                          </a>
+                        </span>
+                        <span>&nbsp;| </span>
+                        <span
+                          className="clickable-item position-relative"
+                          onClick={themeChanger}
+                        >
+                          <a href="#" data-no-decoration data-inherit-color>
+                            Happy
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="current-col">
+                      <div className="current-col-items current-col-header">
+                        <span>currently working on</span>
+                      </div>
+                      <div className="current-col-items current-col-link">
+                        <span
+                          className="clickable-item position-relative"
                           onClick={() =>
-                            context.setSiderState(!context.siderState)
+                            modalIframeHandler(props.currentProject)
                           }
                         >
-                          {siderShowHideIcon}
-                        </button>
-                      </div>
-                      {siderMarkup}
-                    </>
-                  ) : (
-                      <div className="siderShowHide">
-                        <button
-                          onClick={() => context.setSiderState(!context.siderState)}
-                        >
-                          <FaAlignJustify />
-                        </button>
-                      </div>
-                    )
-                ) : (
-                    <>{siderMarkup}</>
-                  )}
-              </Col>
-
-              <Col className="layout-page-right">
-                <Container fluid className="layout-page-right-top">
-                  <Row className="mb-5">
-                    <Col>
-                      <div className="theme-col">
-                        <div className="theme-col-items theme-col-header">
-                          <span>try some themes</span>
-                        </div>
-                        <div className="theme-col-items theme-col-link">
-                          <span
-                            className="clickable-item position-relative"
-                            onClick={themeChanger}
-                          >
-                            <a href="#" data-no-decoration data-inherit-color>
-                              Light
+                          <a href="#" data-no-decoration data-inherit-color>
+                            {props.currentProject.header}
                           </a>
-                          </span>
-                          <span>&nbsp;| </span>
-                          <span
-                            className="clickable-item position-relative"
-                            onClick={themeChanger}
-                          >
-                            <a href="#" data-no-decoration data-inherit-color>
-                              Dark
-                          </a>
-                          </span>
-                          <span>&nbsp;| </span>
-                          <span
-                            className="clickable-item position-relative"
-                            onClick={themeChanger}
-                          >
-                            <a href="#" data-no-decoration data-inherit-color>
-                              Dull
-                          </a>
-                          </span>
-                          <span>&nbsp;| </span>
-                          <span
-                            className="clickable-item position-relative"
-                            onClick={themeChanger}
-                          >
-                            <a href="#" data-no-decoration data-inherit-color>
-                              Happy
-                          </a>
-                          </span>
-                        </div>
+                        </span>
                       </div>
-                    </Col>
-                    <Col>
-                      <div className="current-col">
-                        <div className="current-col-items current-col-header">
-                          <span>currently working on</span>
-                        </div>
-                        <div className="current-col-items current-col-link">
-                          <span
-                            className="clickable-item position-relative"
-                            onClick={() =>
-                              modalIframeHandler(props.currentProject)
-                            }
-                          >
-                            <a href="#" data-no-decoration data-inherit-color>
-                              {props.currentProject.header}
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
+                    </div>
+                  </Col>
+                </Row>
 
-                  <Row className="mb-5">
-                    <div className="grad-hr border-0 rounded"></div>
-                  </Row>
-                </Container>
-
-                {props.children}
-
-                {/* container for footer of page */}
-                <Container fluid>
-                  <Footer />
-                </Container>
-              </Col>
-            </Row>
-          </Container>
-        )}
+                <Row className="mb-5">
+                  <div className="grad-hr border-0 rounded"></div>
+                </Row>
+              </Container>
+              {props.children}
+              {/* container for footer of page */}
+              <Container fluid>
+                <Footer />
+              </Container>
+            </Col>
+          </Row>
+        </Container>
+      )}
       {/* modal for showing iframe when currently working on is clicked */}
       <Container fluid className="iframe-modal">
         <Modal
