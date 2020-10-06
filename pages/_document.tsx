@@ -11,12 +11,6 @@ class MyDocument extends Document {
       <Html>
         <Head />
         <body className="theme-provider theme-light">
-          <div
-            className="d-flex flex-justify-center position-absolute"
-            style={{ right: 0, zIndex: 500 }}
-          >
-            <span className="h2 px-5">&#x1f6a7;</span>
-          </div>
           <Main />
           <NextScript />
         </body>

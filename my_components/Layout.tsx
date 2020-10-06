@@ -157,7 +157,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
   const siderMarkup = (
     <div className="sider">
       <div className="sider-container">
-        <div className="banner" />
+        <div className="banner-container" />
         {siderLinks.map((e, i) => (
           <div key={i}>
             <div className="sider-section">
@@ -230,7 +230,7 @@ export const Layout: React.FC<TProps> = (props): JSX.Element => {
             <Col className="layout-page-right">
               <Container fluid className="layout-page-right-top">
                 {!context.siderState || !context.currentViewport ? (
-                  <div className="banner" />
+                  <div className="banner-container" />
                 ) : null}
                 <Row className="mb-5">
                   <Col>

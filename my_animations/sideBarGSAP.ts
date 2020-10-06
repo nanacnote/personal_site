@@ -58,8 +58,19 @@ export const siderGSAP = () => {
       stagger: 0.025,
       ease: 'elastic.out(1,0.30)',
     })
+    .set('.stamp', { visibility: 'visible' }, '-=0.5')
+    .from(
+      '.stamp',
+      {
+        duration: 0.5,
+        opacity: 0,
+        transformOrigin: '50% 50%',
+        transform: 'rotate(-2deg) scale(5)',
+      },
+      '-=0.5'
+    )
     .to('.grad-hr', { duration: 0.5, width: '100%' }, '-=1')
-    .set('.current-col, .theme-col', { visibility: 'visible' })
+    .set('.current-col, .theme-col', { visibility: 'visible' }, '-=0.5')
     .fromTo(
       '.current-col-items, .theme-col-items',
       { opacity: 0, yPercent: -50 },
