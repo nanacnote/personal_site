@@ -1,20 +1,29 @@
-import { useScrollDirection } from '../my_hooks'
+import { useBreakPoint, useScrollDirection } from '../my_hooks'
 
 export const BannerDesign = (): JSX.Element => {
-  const scrollDirection = useScrollDirection(50)
+  const scrollUnit = useScrollDirection(50).unit
+  const [, breakPoint] = useBreakPoint()
 
   return (
     <>
-      <div className="scene stamp banner-design-background position-relative">
+      <div className="scene stamp banner-design-background">
         <div className="ticket" data-content="admin"></div>
         <div className="ticket" data-content="api doc"></div>
-        {/* underconstruction icon */}
-        <div className="position-absolute" style={{ left: '100%' }}>
-          <div className="h2 px-5">&#x1f6a7;</div>
-          {scrollDirection.unit}
+        {/* under construction icon */}
+        <div
+          className="construction position-absolute"
+          style={{ left: '100%' }}
+        >
+          <div className="px-5">
+            <img
+              src="pics/construction.png"
+              alt="under construction badge"
+              style={{ width: '75px' }}
+            />
+          </div>
         </div>
       </div>
-
+      {/* styling for background is relegated to the main scss style sheet under the class banner-design-background to allow for changes with themes */}
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css?family=Libre+Barcode+39+Text');
         *,
@@ -22,6 +31,16 @@ export const BannerDesign = (): JSX.Element => {
         *::after {
           box-sizing: border-box;
         }
+
+        .construction {
+          transition: all 500ms ease-in-out;
+        }
+
+        .construction:hover {
+          transform: scale(1.25);
+          transition: all 750ms ease-in-out;
+        }
+
         .stamp {
           visibility: hidden;
         }
@@ -29,7 +48,6 @@ export const BannerDesign = (): JSX.Element => {
         .scene {
           display: -webkit-box;
           display: flex;
-          flex-wrap: wrap;
           -webkit-box-pack: center;
           justify-content: center;
           -webkit-box-align: center;
@@ -37,7 +55,17 @@ export const BannerDesign = (): JSX.Element => {
           width: 100%;
           padding: 1rem;
           border-radius: 0.25rem;
-          // background: yellow;
+          opacity: ${1 - (scrollUnit < 25 ? scrollUnit : 23) / 25};
+          transform: ${breakPoint === 'sm' || breakPoint === 'xs'
+            ? 'scale(0.75)'
+            : 'scale(1)'};
+          margin: ${breakPoint === 'sm' || breakPoint === 'xs'
+            ? '0 -10%'
+            : 'auto'};
+        }
+        .scene:hover {
+          opacity: 0.9;
+          transition: all 750ms ease-in-out;
         }
 
         .scene .ticket {
@@ -65,12 +93,9 @@ export const BannerDesign = (): JSX.Element => {
         .scene .ticket::before {
           width: 10px;
           height: 10px;
-          // background: yellow;
           border-radius: 50%;
           top: 10%;
           left: -3.05%;
-          // box-shadow: 0px 30px 0 0 yellow, 200px 0px 0 0 yellow,
-          //   200px 30px 0 0 yellow;
         }
         .scene .ticket::after {
           content: attr(data-content);
@@ -88,16 +113,7 @@ export const BannerDesign = (): JSX.Element => {
 
         @media only screen and (max-width: 454px) {
           .scene {
-            background: transparent;
-            margin: -5%;
-          }
-          .scene .ticket {
-            border-right: 2px dotted rgba(273, 216, 230, 0.75);
-          }
-          .scene .ticket::before {
-            background: transparent;
-            box-shadow: 0px 30px 0 0 transparent, 200px 0px 0 0 transparent,
-              200px 30px 0 0 transparent;
+            // margin: 0 -7.5%;
           }
         }
       `}</style>

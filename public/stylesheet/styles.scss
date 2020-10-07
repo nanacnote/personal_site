@@ -259,8 +259,8 @@ body {
         height: auto;
     }
 
-    // dynamic background color for banner
     .banner-design-background {
+        // dynamic background color for banner
         background: map.get($arg, "$text-info");
         .ticket::before {
             background: map.get($arg, "$text-info");
