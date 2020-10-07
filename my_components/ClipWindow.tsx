@@ -226,7 +226,7 @@ export const ClipWindow = (): JSX.Element => {
         </div>
 
         <div className="clip-window-svg">
-          {numRangeArray(34).map((e) => (
+          {numRangeArray(35).map((e) => (
             <img
               key={e}
               className={`svg-logo-${e} svg-logo`}
