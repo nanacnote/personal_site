@@ -64,8 +64,9 @@ export const siderGSAP = () => {
       {
         duration: 0.5,
         opacity: 0,
-        transformOrigin: '50% 50%',
-        transform: 'rotate(-2deg) scale(5)',
+        rotate: '-2deg',
+        scale: 5,
+        clearProps: 'opacity,rotate,scale',
       },
       '-=0.5'
     )
@@ -87,6 +88,7 @@ export const noSiderGSAP = () => {
   tlNoSider = gsap
     .timeline()
     .set('.sider-container', { opacity: 1 })
+    .set('.stamp', { visibility: 'visible' })
     .set('.grad-hr', { width: '100%' })
     .set('.current-col, .theme-col', { visibility: 'visible' })
 }
