@@ -214,6 +214,12 @@ body {
         }
     }
 
+    .truncate-string {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .c-text-info {
         color: map.get($arg, "$text-info");
     }

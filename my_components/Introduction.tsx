@@ -503,10 +503,10 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                                   >
                                     <a
                                       href="#"
-                                      // data-no-decoration
+                                      data-no-decoration
                                       data-inherit-color
                                     >
-                                      {currentViewportStandard === 'xs'
+                                      {/* {currentViewportStandard === 'xs'
                                         ? `• ${e?.title?.slice(0, 15)} ...`
                                         : currentViewportStandard === 'sm'
                                         ? `• ${e?.title?.slice(0, 25)} ...`
@@ -514,7 +514,16 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                                         ? `• ${e?.title?.slice(0, 40)} ...`
                                         : currentViewportStandard === 'lg'
                                         ? `• ${e?.title?.slice(0, 55)} ...`
-                                        : null}
+                                        : null} */}
+                                      <div className="truncate-string py-2 position-relative">
+                                        <span className="h5 clickable-item">
+                                          {'• ' + e?.title?.split('|')[0]}
+                                        </span>
+                                        {/* <span className="">{'|'}</span> */}
+                                        <span>
+                                          {'|' + e?.title?.split('|')[1]}
+                                        </span>
+                                      </div>
                                     </a>
                                   </Link>
                                 </div>
