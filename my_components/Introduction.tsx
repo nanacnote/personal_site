@@ -400,9 +400,13 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                         } w-100 pb-3`}
                       >
                         <div
-                          className={`d-none d-lg-block ${
+                          className={`d-none d-lg-block d-flex justify-content-end ${
                             I % 2 === 0 ? 'mr-2' : 'ml-2'
                           }`}
+                          // style={{
+                          //   width: '400px',
+                          //   height: '100%',
+                          // }}
                         >
                           <img
                             className="border-0 rounded"
