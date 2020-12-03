@@ -153,6 +153,9 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
     // get visitors location on component mount
     getVistorLocation()
 
+    // get visitors count
+    getVistorCount()
+
     // trigger gsap text animation
     !context.landingStatus ? mainTextGSAP(setshowBottomRight, true) : null
 
