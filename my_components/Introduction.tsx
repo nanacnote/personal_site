@@ -43,6 +43,8 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
   const [showBottomRight, setshowBottomRight] = useState(false)
   // stores visitor location
   const [vistorLocation, setvistorLocation] = useState<string>('loading...')
+  // stores visitor location
+  const [vistorCount, setvistorCount] = useState<number>(0)
 
   // function to get visitors location and ISP
   const getVistorLocation = async () => {
@@ -53,6 +55,18 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
       })
       .catch(() => {
         setvistorLocation('Request failed')
+      })
+  }
+
+  // function to get visitors count
+  const getVisitorCount = async () => {
+    await fetch('/api/admin?function=getVisitorCount')
+      .then((res) => res.json())
+      .then((data) => {
+        setvistorCount(+data.total)
+      })
+      .catch(() => {
+        setvistorCount(0)
       })
   }
 
@@ -150,8 +164,13 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
 
   // gsap text video
   useEffect(() => {
-    // get visitors location on component mount
-    getVistorLocation()
+    setTimeout(() => {
+      // get visitors location on component mount
+      getVistorLocation()
+
+      // get visitors count
+      getVisitorCount()
+    }, 10000)
 
     // trigger gsap text animation
     !context.landingStatus ? mainTextGSAP(setshowBottomRight, true) : null
@@ -368,7 +387,7 @@ export const Introduction: React.FC<TProps> = (props): JSX.Element => {
                         <strong>Vistors</strong>
                       </h6>
                       <span className="c-text-info h3">
-                        <CountUp end={70} delay={6} />
+                        <CountUp end={vistorCount} delay={6} />
                       </span>
                     </div>
                     <div className="main-numbers-wrapper">
